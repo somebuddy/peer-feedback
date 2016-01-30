@@ -1,0 +1,108 @@
+@import 'mixins';
+
+.hamburger-button {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.5s ease;
+  }
+
+  & > * {
+    margin: 0 0.75em;
+  }
+
+  > .lines {
+    position: relative;
+    margin-top: calc(1.5em - 1px);
+    margin-bottom: calc(1.5em - 2px);
+    opacity: 0.5;
+
+    &, &:after, &:before {
+      @include size(1.5em, 3px);
+      border-radius: 2px;
+      transition: all .5s ease;
+    }
+
+    &:after, &:before {
+      content: '';
+      @include absolute($left: 0, $right: 0);
+    }
+
+    &:after {
+      top: 6px;
+    }
+
+    &:before {
+      top: -6px;
+    }
+  }
+}
+
+.hamburger-button:hover > .lines,
+*:hover > .hamburger-button > .lines {
+  opacity: 1;
+  transform: rotate(-90deg) scale(0.6);
+  transition: all .35s ease;
+
+  &:after, &:before {
+    transform-origin: 2px center;
+    width: 1em;
+    transition: all .35s ease;
+  }
+
+  &:after {
+    transform: rotate(35deg);
+    top: 1px;
+  }
+
+  &:before {
+    transform: rotate(-35deg);
+    top: -1px;
+  }
+}
+
+*:not(.collapsed) > .hamburger-button > .lines {
+  opacity: 1;
+  transform: rotate(90deg) scale(0.6);
+  transition: all .35s ease;
+
+  &:after, &:before {
+    transform-origin: 2px center;
+    width: 1em;
+    transition: all .35s ease;
+  }
+
+  &:after {
+    transform: rotate(35deg);
+    top: 1px;
+  }
+
+  &:before {
+    transform: rotate(-35deg);
+    top: -1px;
+  }
+}
+
+@mixin hamburger-button-colorize($cls: null, $color: black) {
+  $selector: if($cls, #{".hamburger-button." + $cls}, ".hamburger-button");
+  #{$selector} {
+    color: transparentize($color, 0.5);
+
+    &:hover {
+      color: $color;
+    }
+
+    > .lines {
+      &, &:after, &:before {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@include hamburger-button-colorize;
+@include hamburger-button-colorize(white, white);

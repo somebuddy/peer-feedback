@@ -1,0 +1,10 @@
+.board {
+    margin: 0 1rem;
+    
+    display: flex;
+    flex-flow: row wrap;
+    
+    align-content: flex-start;
+    align-items: stretch;
+    justify-content: center;
+}
