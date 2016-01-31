@@ -1,48 +1,99 @@
 $line-height: 1.5rem !default;
 $board-space: 1px;
 
+
+.page > header {
+
+  section.submit {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: .75rem 1rem;
+
+    border-top: 1px solid rgba(255,255,255,.15);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+
+    .submit-date {
+      flex: 1 1 auto;
+      font-size: 1.25rem;
+      line-height: $line-height;
+      font-weight: 300;
+    }
+  }
+}
+
 .board.requirements {
   max-width: 60rem;
-  width: 95%;
-  padding: 1.5rem 1rem;
+  padding: 0 1rem 1.5rem;
   margin: 3rem auto;
-  
+
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+
   min-height: 30rem;
-  
+
   // border: 1px solid transparent;
   // border-radius: 6px;
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   // background: rgba(255,255,255,.985);
+
+  > header {
+    color: white;
+    margin-bottom: .75rem;
+  }
 }
 
 .widget.requirement {
-  flex: 1 1 100%;
   min-height: $line-height * 2;
 
   margin: 0 $board-space $board-space 0;
   background: white;
   padding: .75rem 1rem;
-  
+
   display: inline-flex;
   flex-direction: row;
   align-content: stretch;
   align-items: stretch;
   position: relative;
-  
+
   border-radius: 2px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
+  > .row-id {
+    flex: 0 0 4rem;
+    margin: -.75rem 1rem -.75rem -1rem;
+    padding: .75rem 1rem;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,.15);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &.group-1 > .row-id { background: transparentize(#2196F3, 0.2); }
+  &.group-2 > .row-id { background: transparentize(#FFA000, 0.2); }
+  &.group-3 > .row-id { background: transparentize(#FF5722, 0.2); }
+  &.group-4 > .row-id { background: transparentize(#D32F2F, 0.2); }
+
   > .title {
     white-space: normal;
     min-height: $line-height*2;
+    vertical-align: middle;
     flex: 1 1 auto;
     font-size: 1rem;
     line-height: $line-height;
     overflow: hidden;
     margin-right: 1rem;
   }
-  
+
   > .score {
     flex: 0 0 auto;
     display: flex;
@@ -51,25 +102,25 @@ $board-space: 1px;
     align-items: center;
     justify-content: center;
     opacity: .6;
-    
+
     background: rgba(0,0,0,.05);
-    
+
     margin: -.75rem -1rem;
     padding: .75rem 1rem;
-    
+
     > .label {
       color: black;
       font-weight: 400;
     }
-    
+
     > .value {
       font-weight: 300;
       transform: scaleY(1.25);
     }
   }
-  
+
   transition: all .5s ease;
-  
+
   &:hover {
     // margin-top: 4px;
     // margin-bottom: 4px;

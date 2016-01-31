@@ -1,11 +1,24 @@
 /*global angular, ProjectAssignments, moment, Router*/
 
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('llll');
+});
+
+
 Template.registerHelper('timeLeft', function(date) {
   return moment(date).fromNow();
 });
 
 Template.registerHelper('dueCSSClass', function(date) {
   return moment().isSameOrAfter(date) ? 'overdue' : '';
+});
+
+Template.registerHelper('routeName', function() {
+  return Router.current().route.getName();
+});
+
+Template.registerHelper('sum', function(a, b) {
+  return a + b;
 });
 
 Template.assignments_list.helpers({
@@ -16,8 +29,8 @@ Template.assignments_list.helpers({
 
 Template.assignments_list.events({
   'click .widget.assignment': function (event) {
-    console.log(this);
-    Router.go('/assignment/' + this._id);
+    var current = Router.current().route.path();
+    Router.go(current + '/' + this._id);
   }
 });
 

@@ -20,7 +20,7 @@
 <template name="navbar">
   <nav class="navbar">
     <div class="container-fluid">
-      <a class="brand" href="#">
+      <a class="brand" href="/">
         <div class="logo logo-reviews">
             <span class="glyphicon glyphicon-education"></span>
         </div>
@@ -43,7 +43,7 @@
           <li><a href="/reviews">Reviews</a></li>
           <li><a href="#">Sign in</a></li>
           <li><a href="#">Sign up</a></li>
-          <li><a href="https://github.com/somebuddy/peer-feedback" target="_blank"><img src="images/github.png"></a></li>
+          <li><a href="https://github.com/somebuddy/peer-feedback" target="_blank"><img src="/images/github.png"></a></li>
         </ul>
       </div>
     </div>
@@ -59,18 +59,29 @@
 </template>
 
 <template name="assignment_details_header">
-  <header class="text-center">
-    <h1>{{ title }}</h1>
-    <h4>{{ description }}</h4>
-    <div class="button primary">Submit your work...</div>
+  <header>
+    <a class="button" href="/">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Back to list
+    </a>
+    <h1 class="text-center">{{ title }}</h1>
+    <section class="description">
+      <h4 class="text-center">{{ description }}</h4>
+    </section>
+    <section class="submit">
+      <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
+      <div class="button primary">Submit your work...</div>
+    </section>
   </header>
 </template>
 
 <template name="reviews_header">
   <header class="text-center">
     <h1>Make a review</h1>
-    <h4>Look at others works. Evaluate them. Because judging is funny.</h4>
-    <div class="button">Read more...</div>
+    <section class="description">
+      <h4>Look at others works. Evaluate them. Because judging is funny.</h4>
+      <div class="button">Read more...</div>
+    </section>
   </header>
 </template>
 
@@ -81,7 +92,7 @@
       <div class="main">
         <div class="title">{{ title }}</div>
       </div>
-      <a class="menu" href="/assignment/{{ _id }}">
+      <a class="menu" href="{{ _id }}" style="display: none;">
         <span class="glyphicon glyphicon-option-vertical"></span>
       </a>
       <div class="secondary description">
@@ -122,8 +133,12 @@
 
 <template name="requirements_list">
   <div class="board requirements">
+    <header>
+      <h4>Requirements</h4>
+    </header>
     {{#each this}}
-      <div class="widget requirement">
+      <div class="widget requirement group-{{ this.task }}">
+        <div class="row-id">{{sum @index 1 }}</div>
         <div class="title">{{ title }}</div>
         <div class="score">
           <span class="label">Points: </span>
