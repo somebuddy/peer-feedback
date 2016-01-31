@@ -57,3 +57,19 @@ Router.route('/reviews/:_id', function() {
     }
   });
 });
+
+Router.route('/make-review/:_id', function() {
+  this.render('navbar', { to: 'navbar' });
+  this.render('assignment_make_review_header', {
+    to: 'header',
+    data: function () {
+      return ProjectAssignments.findOne({_id:this.params._id});
+    }
+  });
+  this.render('review_checklist', {
+    to: 'content',
+    data: function () {
+      return Requirements.find({assignment:this.params._id});
+    }
+  });
+});

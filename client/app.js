@@ -49,5 +49,25 @@ Template.submit_work.events({
 Template.assignment_details_header.events({
   'click .submit-button': function (event) {
     $('.modal-wrapper').addClass('show');
-  }
+  },
+  'click .review-button': function (event) {
+    Router.go('/make-review/' + this._id);
+  },
+});
+
+Template.registerHelper('getMark', function(req) {
+  console.log(req);
+  return req === 1 ? 'no' : (req === 2? 'yes' : '');
+});
+
+Template.review_checklist.events({
+  'click .check-switcher .yes': function (event) {
+    this.result = 2;
+  },
+  'click .check-switcher .no': function (event) {
+    this.result = 1;
+  },
+  'click .submit-review': function (event) {
+    return false;
+  },
 });

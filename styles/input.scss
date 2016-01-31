@@ -34,6 +34,7 @@ $line-height: 1.5rem !default;
     outline: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     position: relative;
+    background: rgba(255,255,255,.1);
     
     & + .input-underline {
       flex: 1 1 100%;
