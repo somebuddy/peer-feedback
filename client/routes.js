@@ -1,4 +1,4 @@
-/*global Router, ProjectAssignments, Requirements */
+/*global Router, ProjectAssignments, Requirements, Works */
 
 Router.configure({
   layoutTemplate: 'page'
@@ -60,10 +60,12 @@ Router.route('/reviews/:_id', function() {
 
 Router.route('/make-review/:_id', function() {
   var review = {
-    work: {},
+    works: Works.find({assignment:this.params._id}).fetch(),
     assignment: ProjectAssignments.findOne({_id:this.params._id}),
     requirements: Requirements.find({assignment:this.params._id}).fetch()
   };
+
+  console.log(review.works);
 
   this.render('navbar', { to: 'navbar' });
   this.render('assignment_make_review_header', {

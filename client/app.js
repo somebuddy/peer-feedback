@@ -1,4 +1,4 @@
-/*global angular, ProjectAssignments, moment, Router, lodash*/
+/*global angular, ProjectAssignments, Works, moment, Router, lodash*/
 
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('llll');
@@ -38,12 +38,26 @@ Template.submit_work.events({
   'click .close-button': function (event) {
     $(event.currentTarget).closest('.modal-wrapper').removeClass('show');
   },
-  'click .modal': function (event) {
-    return false;
+  'submit form': function (event) {
+    console.log(this);
+    event.preventDefault();
+
+    var work = {
+      assignment: this._id,
+      userName: event.target.user_name.value,
+      sourceUrl: event.target.source_url.value,
+      previewUrl: event.target.preview_url.value,
+      comments: event.target.comments.value,
+      createdAt: new Date(),
+    };
+    Works.insert(work);
+    $(event.target).closest('.modal-wrapper').removeClass('show');
   },
   'click .modal-wrapper': function (event) {
-    $(event.currentTarget).closest('.modal-wrapper').removeClass('show');
-  }
+    if ($(event.target).is($('.modal-wrapper'))) {
+      $(event.target).removeClass('show');
+    }
+  },
 });
 
 Template.assignment_details_header.events({
@@ -61,6 +75,7 @@ Template.registerHelper('getMark', function(req) {
 
 Template.review_checklist.events({
   'submit .check-list': function (event) {
+    event.preventDefault();
     // Check if all selected
     if (!lodash(this.requirements).every('result')) {
       alert('Please make a choice for every requirement');
