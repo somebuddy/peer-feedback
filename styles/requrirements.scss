@@ -23,6 +23,20 @@ $board-space: 1px;
       font-weight: 300;
     }
   }
+
+  section.work {
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: .75rem 1rem;
+    border-top: 1px solid rgba(255,255,255,.15);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+
+    a, a:hover {
+      color: white;
+    }
+  }
 }
 
 .board.requirements {

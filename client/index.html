@@ -193,13 +193,15 @@
       <span class="glyphicon glyphicon-chevron-left"></span>
       Assignments list
     </a>
-    <h1 class="text-center">{{ title }}</h1>
+    <h1 class="text-center">{{ assignment.title }}</h1>
     <section class="description">
-      <h4 class="text-center">{{ description }}</h4>
+      <h4 class="text-center">{{ assignment.description }}</h4>
     </section>
-    <section class="submit">
-      <div class="user"></div>
-      <div class="submit-date">submited <strong>{{formatDate dueDate }}</strong></div>
+    <section class="work">
+      <div class="user">User: {{ work.userName }} </div>
+      <div class="submit-date">submited at <strong>{{formatDate work.createdAt }}</strong></div>
+      <div class="sourceUrl">Source code: <a href="{{ work.sourceUrl }}">{{ work.sourceUrl }}</a></div>
+      <div class="sourceUrl">Preview: <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a></div>
     </section>
   </header>
 </template>

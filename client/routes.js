@@ -1,4 +1,4 @@
-/*global Router, ProjectAssignments, Requirements, Works */
+/*global Router, ProjectAssignments, Requirements, Works, lodash */
 
 Router.configure({
   layoutTemplate: 'page'
@@ -59,19 +59,20 @@ Router.route('/reviews/:_id', function() {
 });
 
 Router.route('/make-review/:_id', function() {
+  // selecting random work
+  var work = lodash.sample(Works.find({assignment:this.params._id}, {fields: {_id:1}}).fetch())._id;
+
   var review = {
-    works: Works.find({assignment:this.params._id}).fetch(),
+    work: Works.findOne({_id: work}),
     assignment: ProjectAssignments.findOne({_id:this.params._id}),
     requirements: Requirements.find({assignment:this.params._id}).fetch()
   };
-
-  console.log(review.works);
 
   this.render('navbar', { to: 'navbar' });
   this.render('assignment_make_review_header', {
     to: 'header',
     data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
+      return review;
     }
   });
   this.render('review_checklist', {
