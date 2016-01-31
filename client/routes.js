@@ -28,6 +28,12 @@ Router.route('/assignments/:_id', function() {
       return Requirements.find({assignment:this.params._id});
     }
   });
+  this.render('submit_work', {
+    to: 'modal',
+    data: function () {
+      return ProjectAssignments.findOne({_id:this.params._id});
+    }
+  })
 });
 
 Router.route('/reviews', function() {

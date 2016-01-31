@@ -1,0 +1,96 @@
+@import 'mixins';
+
+$line-height: 1.5rem !default;
+
+.modal-wrapper {
+  @include fixed(0, 0, 0, 0);
+  background: rgba(0, 0, 0, .6);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.modal-wrapper.show {
+  display: block;
+}
+
+.modal {
+  width: 40rem;
+  max-width: 100%;
+  margin: 6rem auto 3rem;
+  background: white;
+  
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 4px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  
+  > header, > footer {
+    flex: 0 0 auto;
+    padding: 1.5rem 1rem;
+    background-color: #FFA000;
+    color: white;
+    
+    display: flex;
+    align-content: center;
+    align-items: center;
+    
+    > .title {
+      margin-right: auto;
+    }
+    
+    > .close-button {
+      width: 1.5rem;
+      height: 1.5rem;
+      position: relative;
+      opacity: .6;
+      transition: all .3s ease;
+      cursor: pointer;
+      
+      &:before, &:after {
+        content: '';
+        @include absolute(0, 50%, 0);
+        width: 2px;
+        background: white;
+      }
+      
+      &:before {
+        transform: translateX(50%) rotate(45deg);
+      }
+      
+      &:after {
+        transform: translateX(50%) rotate(-45deg);
+      }
+      
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  
+  > header {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: $line-height;
+  }
+  
+  > .content {
+    padding: 1.5rem 1rem;
+    flex: 1 1 auto;
+  }
+  
+  > footer {
+    padding: .75rem 1rem;
+    justify-content: flex-end;
+    
+    > * {
+      margin-left: 1rem;
+    }
+  }
+  
+  textarea[name="comments"] {
+    min-height: $line-height * 4;
+  }
+}

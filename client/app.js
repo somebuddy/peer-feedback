@@ -34,3 +34,20 @@ Template.assignments_list.events({
   }
 });
 
+Template.submit_work.events({
+  'click .close-button': function (event) {
+    $(event.currentTarget).closest('.modal-wrapper').removeClass('show');
+  },
+  'click .modal': function (event) {
+    return false;
+  },
+  'click .modal-wrapper': function (event) {
+    $(event.currentTarget).closest('.modal-wrapper').removeClass('show');
+  }
+});
+
+Template.assignment_details_header.events({
+  'click .submit-button': function (event) {
+    $('.modal-wrapper').addClass('show');
+  }
+});

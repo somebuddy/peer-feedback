@@ -14,6 +14,7 @@
     {{> yield "aside-left" }}
     {{> yield "aside-right" }}
     {{> yield "footer" }}
+    {{> yield "modal" }}
   </div>
 </template>
 
@@ -70,7 +71,8 @@
     </section>
     <section class="submit">
       <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
-      <div class="button primary">Submit your work...</div>
+      <div class="button primary submit-button">Submit your work...</div>
+      <div class="button success review-button">Review works</div>
     </section>
   </header>
 </template>
@@ -146,5 +148,46 @@
         </div>
       </div>
     {{/each}}
+  </div>
+</template>
+
+<template name="submit_work">
+  <div class="modal-wrapper">
+    <div class="modal">
+      <header>
+        <div class="title">Submit your work</div>
+        <div class="close-button"></div>
+      </header>
+      <section class="content">
+        <div class="input-widget">
+          <label for="user_name">User name</label>
+          <input type="text" id="user_name" name="user_name" required>
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="source_url">Source URL</label>
+          <input type="url" id="source_url" name="source_url" required>
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="preview_url">Preview URL <small>( optional )</small></label>
+          <input type="url" id="preview_url" name="preview_url">
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="comments">Comments <small>( optional )</small></label>
+          <textarea id="comments" name="comments"></textarea>
+          <div class="input-underline"></div>
+        </div>
+      </section>
+      <footer>
+        <small>
+          Submiting isn't working yet :(
+        </small>
+        <a class="btn btn-default" disabled>
+          Submit
+        </a>
+      </footer>
+    </div>
   </div>
 </template>
