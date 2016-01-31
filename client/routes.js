@@ -59,6 +59,12 @@ Router.route('/reviews/:_id', function() {
 });
 
 Router.route('/make-review/:_id', function() {
+  var review = {
+    work: {},
+    assignment: ProjectAssignments.findOne({_id:this.params._id}),
+    requirements: Requirements.find({assignment:this.params._id}).fetch()
+  };
+
   this.render('navbar', { to: 'navbar' });
   this.render('assignment_make_review_header', {
     to: 'header',
@@ -69,7 +75,7 @@ Router.route('/make-review/:_id', function() {
   this.render('review_checklist', {
     to: 'content',
     data: function () {
-      return Requirements.find({assignment:this.params._id});
+      return review;
     }
   });
 });

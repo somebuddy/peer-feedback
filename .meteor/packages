@@ -25,3 +25,6 @@ twbs:bootstrap
 fourseven:scss
 momentjs:moment
 barbatus:stars-rating
+
+erasaur:meteor-lodash
+reactive-var

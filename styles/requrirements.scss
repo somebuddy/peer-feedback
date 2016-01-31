@@ -175,7 +175,7 @@ $board-space: 1px;
       }
     }
 
-    > .yes:hover {
+    > .yes:hover, &.yes > .yes {
       color: #388E3C;
 
       &:before {
@@ -184,7 +184,7 @@ $board-space: 1px;
       }
     }
 
-    > .no:hover {
+    > .no:hover, &.no > .no {
       color: #F44336;
 
       &:before {

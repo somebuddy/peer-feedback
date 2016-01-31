@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-    
+
       <div class="collapse navbar-collapse pull-right" id="main_navbar">
         <ul class="nav navbar-nav">
           <li><a href="/">Assignments</a></li>
@@ -210,20 +210,13 @@
 </template>
 
 <template name="review_checklist">
-  <div class="board requirements">
+  <form class="board requirements check-list">
     <header>
       <h4>Checklist</h4>
       <small>Look at the list of requirements and check whether they are met or not</small>
     </header>
-    {{#each this}}
-      <div class="widget requirement group-{{ this.task }}">
-        <div class="row-id">{{sum @index 1 }}</div>
-        <div class="title">{{ title }}</div>
-        <div class="check-switcher {{getMark this}}">
-          <div class="yes">Done</div>
-          <div class="no">Not done</div>
-        </div>
-      </div>
+    {{#each requirements}}
+      {{> check_requirement requirement=this num=@index }}
     {{/each}}
     <section>
       <div class="input-widget">
@@ -233,7 +226,19 @@
       </div>
     </section>
     <footer>
-      <div class="button success submit-review">Submit review</div>
+      <button class="button success submit-review">Submit review</button>
     </footer>
+  </form>
+</template>
+
+<template name="check_requirement">
+  <div class="widget requirement group-{{ requirement.task }}">
+    <div class="row-id">{{sum num 1 }}</div>
+    <div class="title">{{ requirement.title }}</div>
+    <div class="title">{{ requirement.result }}</div>
+    <div class="check-switcher {{getMark checkResult}}">
+      <div class="yes">Done</div>
+      <div class="no">Not done</div>
+    </div>
   </div>
 </template>
