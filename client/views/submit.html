@@ -1,0 +1,66 @@
+<template name="submit_modals">
+  {{> submitted_works_list }}
+  {{> submit_work }}
+</template>
+
+
+<template name="submitted_works_list">
+  <div class="modal-wrapper" id="previous-works-modal">
+    <div class="modal">
+      <header>
+        <div class="title">Previously submitted works</div>
+        <div class="close-button"></div>
+      </header>
+      <section class="content">
+        {{#each list }}
+          <div class="widget work">
+            <div class="submit-date">{{formatDate createdAt }}</div>
+            {{#with (workReviewResult this) }}
+              {{#if count}}
+                <div class="score">Score: {{ avg }}</div>
+              {{else}}
+                <div class="score">Evaluating...</div>
+              {{/if}}
+            {{/with}}
+          </div>
+        {{/each}}
+      </section>
+    </div>
+  </div>
+</template>
+
+<template name="submit_work">
+  <div class="modal-wrapper" id="submit-work-modal">
+    <form class="modal work-form">
+      <header>
+        <div class="title">Submit your work</div>
+        <div class="close-button"></div>
+      </header>
+      <section class="content">
+        <div class="input-widget">
+          <label for="user_name">User name</label>
+          <input type="text" id="user_name" name="user_name" required>
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="source_url">Source URL</label>
+          <input type="url" id="source_url" name="source_url" required>
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="preview_url">Preview URL <small>( optional )</small></label>
+          <input type="url" id="preview_url" name="preview_url">
+          <div class="input-underline"></div>
+        </div>
+        <div class="input-widget">
+          <label for="comments">Comments <small>( optional )</small></label>
+          <textarea id="comments" name="comments"></textarea>
+          <div class="input-underline"></div>
+        </div>
+      </section>
+      <footer>
+        <button class="button primary submit-work-button">Submit</button>
+      </footer>
+    </form>
+  </div>
+</template>

@@ -1,0 +1,36 @@
+$line-height: 1.5rem;
+$board-space: -1px;
+
+#previous-works-modal > .modal > .content {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.widget.work {
+  min-height: $line-height * 2;
+
+  margin: 0 $board-space $board-space 0;
+  background: white;
+  padding: .75rem 1rem;
+
+  display: inline-flex;
+  flex-direction: row;
+  align-content: stretch;
+  align-items: stretch;
+  position: relative;
+
+  border-radius: 2px;
+  border-top: 1px solid rgba(0,0,0,.05);
+  border-bottom: 1px solid rgba(0,0,0,.05);
+
+  > .submit-date {
+    white-space: normal;
+    vertical-align: middle;
+    flex: 1 1 auto;
+    font-size: 1rem;
+    line-height: $line-height;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+}

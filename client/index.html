@@ -114,39 +114,3 @@
     {{/each}}
   </div>
 </template>
-
-<template name="submit_work">
-  <div class="modal-wrapper">
-    <form class="modal work-form">
-      <header>
-        <div class="title">Submit your work</div>
-        <div class="close-button"></div>
-      </header>
-      <section class="content">
-        <div class="input-widget">
-          <label for="user_name">User name</label>
-          <input type="text" id="user_name" name="user_name" required>
-          <div class="input-underline"></div>
-        </div>
-        <div class="input-widget">
-          <label for="source_url">Source URL</label>
-          <input type="url" id="source_url" name="source_url" required>
-          <div class="input-underline"></div>
-        </div>
-        <div class="input-widget">
-          <label for="preview_url">Preview URL <small>( optional )</small></label>
-          <input type="url" id="preview_url" name="preview_url">
-          <div class="input-underline"></div>
-        </div>
-        <div class="input-widget">
-          <label for="comments">Comments <small>( optional )</small></label>
-          <textarea id="comments" name="comments"></textarea>
-          <div class="input-underline"></div>
-        </div>
-      </section>
-      <footer>
-        <button class="button primary submit-work-button">Submit</button>
-      </footer>
-    </form>
-  </div>
-</template>
