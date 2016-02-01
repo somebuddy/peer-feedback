@@ -60,25 +60,32 @@ Router.route('/reviews/:_id', function() {
 
 Router.route('/make-review/:_id', function() {
   // selecting random work
-  var work = lodash.sample(Works.find({assignment:this.params._id}, {fields: {_id:1}}).fetch())._id;
 
   var review = {
-    work: Works.findOne({_id: work}),
     assignment: ProjectAssignments.findOne({_id:this.params._id}),
     requirements: Requirements.find({assignment:this.params._id}).fetch()
   };
 
+  var works = Works.find({assignment:this.params._id}, {fields: {_id:1}}).fetch();
+
+  if (works.length > 0) {
+    review.work = Works.findOne({ _id: lodash.sample(works)._id });
+  }
+
   this.render('navbar', { to: 'navbar' });
+
   this.render('assignment_make_review_header', {
     to: 'header',
     data: function () {
       return review;
     }
   });
-  this.render('review_checklist', {
+
+  this.render('make_review_content', {
     to: 'content',
     data: function () {
       return review;
     }
   });
+
 });
