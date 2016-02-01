@@ -1,4 +1,4 @@
-/*global angular, ProjectAssignments, Works, moment, Router, lodash*/
+/*global angular, ProjectAssignments, Works, Reviews, moment, Router, lodash*/
 
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('llll');
@@ -96,7 +96,7 @@ Template.review_checklist.events({
     };
 
     // Save to database
-    console.log('Review done: ', review);
+    Reviews.insert(review);
   }
 });
 
