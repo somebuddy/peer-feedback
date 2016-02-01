@@ -20,11 +20,13 @@ autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
 iron:router
+reactive-var
 
 twbs:bootstrap
 fourseven:scss
-momentjs:moment
+fortawesome:fontawesome
 barbatus:stars-rating
 
 erasaur:meteor-lodash
-reactive-var
+momentjs:moment
+

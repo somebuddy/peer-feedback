@@ -22,6 +22,38 @@ $board-space: 1px;
       line-height: $line-height;
       font-weight: 300;
     }
+
+    .history-button {
+      height: 1.5rem;
+      width: 1.5rem;
+      line-height: 1em;
+      position: relative;
+
+      &:before {
+        @include absolute(0,0,0,0);
+        content: "\f1da";
+        font-family: FontAwesome;
+        font-size: 1.5rem;
+        line-height: 1em;
+        z-index: 1;
+      }
+
+      > .box-badge {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        @include absolute(0, 0);
+        transform: translate(25%, -25%);
+        width: 1rem;
+        height: 1rem;
+        font-size: .75rem;
+        z-index: 2;
+        border-radius: 50%;
+        background-color: #4CAF50;
+        color: white;
+      }
+    }
   }
 
   section.work {

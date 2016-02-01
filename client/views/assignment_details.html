@@ -1,0 +1,52 @@
+<template name="assignment_details_header">
+  <header>
+    <a class="button" href="/">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Back to list
+    </a>
+    <h1 class="text-center">{{ title }}</h1>
+    <section class="description">
+      <h4 class="text-center">{{ description }}</h4>
+    </section>
+    {{> assignment_submits }}
+  </header>
+</template>
+
+<template name="assignment_submits">
+  <section class="submit">
+    <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
+    {{#if submittionCount }}
+      <div class="button transparent history-button">
+        <div class="box-badge">{{ submittionCount }}</div>
+      </div>
+      <div class="button primary submit-button">Resubmit...</div>
+    {{else}}
+      <div class="button primary submit-button">Submit your work...</div>
+    {{/if}}
+    {{#if canReview }}
+      <div class="button success review-button">Review works</div>
+    {{/if}}
+  </section>
+</template>
+
+<template name="requirements_list">
+  <div class="board requirements">
+    <header>
+      <h4>Requirements</h4>
+    </header>
+    {{#each this}}
+      {{> assignment_requirement num=@index requirement=this }}
+    {{/each}}
+  </div>
+</template>
+
+<template name="assignment_requirement">
+  <div class="widget requirement group-{{ requirement.task }}">
+    <div class="row-id">{{sum num 1 }}</div>
+    <div class="title">{{ requirement.title }}</div>
+    <div class="score">
+      <span class="label">Points: </span>
+      <span class="value">{{ requirement.score }}</span>
+    </div>
+  </div>
+</template>

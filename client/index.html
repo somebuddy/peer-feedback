@@ -59,24 +59,6 @@
   </header>
 </template>
 
-<template name="assignment_details_header">
-  <header>
-    <a class="button" href="/">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      Back to list
-    </a>
-    <h1 class="text-center">{{ title }}</h1>
-    <section class="description">
-      <h4 class="text-center">{{ description }}</h4>
-    </section>
-    <section class="submit">
-      <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
-      <div class="button primary submit-button">Submit your work...</div>
-      <div class="button success review-button">Review works</div>
-    </section>
-  </header>
-</template>
-
 <template name="reviews_header">
   <header class="text-center">
     <h1>Make a review</h1>
@@ -129,24 +111,6 @@
         </div>
       </div>
     </article>
-    {{/each}}
-  </div>
-</template>
-
-<template name="requirements_list">
-  <div class="board requirements">
-    <header>
-      <h4>Requirements</h4>
-    </header>
-    {{#each this}}
-      <div class="widget requirement group-{{ this.task }}">
-        <div class="row-id">{{sum @index 1 }}</div>
-        <div class="title">{{ title }}</div>
-        <div class="score">
-          <span class="label">Points: </span>
-          <span class="value">{{ score }}</span>
-        </div>
-      </div>
     {{/each}}
   </div>
 </template>
