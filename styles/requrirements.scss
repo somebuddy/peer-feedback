@@ -100,7 +100,7 @@ $board-space: 1px;
   padding: .75rem 1rem;
 
   display: inline-flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
   align-content: stretch;
   align-items: stretch;
   position: relative;
@@ -166,6 +166,108 @@ $board-space: 1px;
     }
   }
 
+  .comment-field {
+    display: none;
+    @include absolute(0, 0);
+    padding: 2rem;
+    background: rgba(255, 255, 255, .05);
+    z-index: 10;
+
+    > .input-widget {
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(0,0,0,.05);
+      border-radius: 4px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      min-width: 300px;
+      max-width: 70%;
+      margin-left: auto;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .comment-button,
+  .check-switcher > .yes,
+  .check-switcher > .no {
+    margin-left: 1rem;
+    position: relative;
+    padding-left: 2.5rem;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    font-size: .875rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .5);
+    opacity: .6;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:before, &:after {
+      @include absolute(50%, auto, auto, 0);
+      transform: translateY(-50%);
+      height: 2rem;
+      width: 2rem;
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+
+      background: rgba(0, 0, 0, .1);
+      color: rgba(0, 0, 0, .2);
+      border-radius: 50%;
+      font-family: 'Glyphicons Halflings';
+
+      transition: all .3s ease;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .comment-button {
+    z-index: 1;
+
+    &:before, &:after { font-family: FontAwesome; }
+
+    &:before {
+      background: rgba(0, 0, 0, .05);
+      color: rgba(0, 0, 0, .25);
+      opacity: .8;
+    }
+
+    &:after {
+      opacity: 0;
+      color: white;
+      background: rgba(0, 0, 0, .5);
+      transform: translateY(-50%) scale(0.01);
+    }
+
+    &:before { content: "\f0e5"; }
+    &:after { content: "\f067"; }
+
+    &:hover {
+      .comment-field {
+        display: block;
+      }
+
+      &:before {
+        transform: translateY(-50%) scale(0.01);
+      }
+
+      &:after {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+    }
+  }
+
   > .check-switcher {
     flex: 0 0 auto;
     display: flex;
@@ -175,51 +277,6 @@ $board-space: 1px;
     justify-content: center;
     margin: -.75rem -1rem;
     padding: .75rem 1rem;
-
-    > .yes, > .no {
-      margin-left: 1rem;
-      position: relative;
-      padding-left: 2.5rem;
-      display: flex;
-      align-content: center;
-      align-items: center;
-      justify-content: center;
-      font-size: .875rem;
-      font-weight: 600;
-      color: rgba(0, 0, 0, .5);
-      opacity: .6;
-      cursor: pointer;
-      transition: all .3s ease;
-
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-
-      &:before {
-        content: "";
-        @include absolute(50%, auto, auto, 0);
-        transform: translateY(-50%);
-        height: 2rem;
-        width: 2rem;
-        display: flex;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-
-        background: rgba(0, 0, 0, .1);
-        color: rgba(0, 0, 0, .2);
-        border-radius: 50%;
-        font-family: 'Glyphicons Halflings';
-
-        transition: all .3s ease;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
 
     > .yes:hover, &.yes > .yes {
       color: #388E3C;
