@@ -1,4 +1,4 @@
-/*global Works, lodash */
+/*global Works, lodash, Requirements */
 
 Meteor.publish('work-review-next', function(assignment, currentWork) {
   console.log(this.connection.httpHeaders['x-forwarded-for']);
@@ -20,4 +20,8 @@ Meteor.publish('work-review-next', function(assignment, currentWork) {
   console.log('Now reviewed: ', work_id);
 
   this.ready();
+});
+
+Meteor.publish('requirements', function(assignment) {
+  return Requirements.find({assignment: assignment});
 });
