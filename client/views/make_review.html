@@ -10,68 +10,57 @@
       <h4 class="text-center">{{ assignment.description }}</h4>
     </section>
     {{#if work}}
-      {{> work_details work=work }}
+      <section class="work">
+        <div class="user">User name: {{ work.userName }} </div>
+        <div class="submit-date">submited at <strong>{{formatDate work.createdAt }}</strong></div>
+        <div class="sourceUrl">
+          <label>Source code: </label>
+          <a href="{{ work.sourceUrl }}">{{ work.sourceUrl }}</a>
+        </div>
+        {{#if work.previewUrl }}
+          <div class="sourceUrl"><label>Preview: </label>
+            <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
+          </div>
+        {{/if}}
+      </section>
     {{ else }}
-      {{> no_works }}
+      <section class="work">
+        <h3 class="text-center">Here is no works yet</h3>
+      </section>
     {{/if}}
   </header>
 </template>
 
-<template name="work_details">
-  <section class="work">
-    <div class="user">User name: {{ work.userName }} </div>
-    <div class="submit-date">submited at <strong>{{formatDate work.createdAt }}</strong></div>
-    <div class="sourceUrl">
-      <label>Source code: </label>
-      <a href="{{ work.sourceUrl }}">{{ work.sourceUrl }}</a>
-    </div>
-    {{#if work.previewUrl }}
-      <div class="sourceUrl"><label>Preview: </label>
-        <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
-      </div>
-    {{/if}}
-  </section>
-</template>
-
-<template name="no_works">
-  <section class="work">
-    <h3 class="text-center">Here is no works yet</h3>
-  </section>
-</template>
-
 <template name="make_review_content">
   {{#if work}}
-    {{> review_checklist }}
+    <form class="board requirements check-list">
+      <header>
+        <h4>Checklist</h4>
+        <small>Look at the list of requirements and check whether they are met or not</small>
+      </header>
+      {{#each review.results }}
+        {{> check_requirement requirement=this num=@index }}
+      {{/each}}
+      <section>
+        <div class="input-widget">
+          <label for="feedback">Feedback <small>( optional )</small></label>
+          <textarea id="feedback" name="feedback" rows=5>
+            {{ review.feedback }}
+          </textarea>
+          <div class="input-underline"></div>
+        </div>
+      </section>
+      <footer>
+        <button class="button success submit-review">Submit review</button>
+      </footer>
+    </form>
   {{/if}}
-</template>
-
-<template name="review_checklist">
-  <form class="board requirements check-list">
-    <header>
-      <h4>Checklist</h4>
-      <small>Look at the list of requirements and check whether they are met or not</small>
-    </header>
-    {{#each requirements}}
-      {{> check_requirement requirement=this num=@index }}
-    {{/each}}
-    <section>
-      <div class="input-widget">
-        <label for="feedback">Feedback <small>( optional )</small></label>
-        <textarea id="feedback" name="feedback" rows=5></textarea>
-        <div class="input-underline"></div>
-      </div>
-    </section>
-    <footer>
-      <button class="button success submit-review">Submit review</button>
-    </footer>
-  </form>
 </template>
 
 <template name="check_requirement">
   <div class="widget requirement group-{{ requirement.task }}">
     <div class="row-id">{{sum num 1 }}</div>
     <div class="title">{{ requirement.title }}</div>
-    <div class="title">{{ requirement.result }}</div>
     <div class="check-switcher {{getMark checkResult}}">
       <div class="yes">Done</div>
       <div class="no">Not done</div>

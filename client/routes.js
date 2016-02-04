@@ -58,34 +58,12 @@ Router.route('/reviews/:_id', function() {
   });
 });
 
-Router.route('/make-review/:_id', function() {
-  // selecting random work
-
-  var review = {
-    assignment: ProjectAssignments.findOne({_id:this.params._id}),
-    requirements: Requirements.find({assignment:this.params._id}).fetch()
-  };
-
-  var works = Works.find({assignment:this.params._id}, {fields: {_id:1}}).fetch();
-
-  if (works.length > 0) {
-    review.work = Works.findOne({ _id: lodash.sample(works)._id });
+Router.route('/make-review/:_id', {
+  action: function() {
+    // selecting random work
+    console.log('Router rendering');
+    this.render('navbar', { to: 'navbar' });
+    this.render('assignment_make_review_header', { to: 'header' });
+    this.render('make_review_content', { to: 'content' });
   }
-
-  this.render('navbar', { to: 'navbar' });
-
-  this.render('assignment_make_review_header', {
-    to: 'header',
-    data: function () {
-      return review;
-    }
-  });
-
-  this.render('make_review_content', {
-    to: 'content',
-    data: function () {
-      return review;
-    }
-  });
-
 });
