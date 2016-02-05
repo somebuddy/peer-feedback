@@ -61,18 +61,23 @@
   <div class="widget requirement group-{{ requirement.task }}">
     <div class="row-id">{{sum num 1 }}</div>
     <div class="title">{{ requirement.title }}</div>
-    <div class="comment-button">
-      <div class="comment-field">
-        <div class="input-widget">
-          <label for="feedback">Comment for requirement <small>( optional )</small></label>
-          <textarea id="feedback" name="feedback" rows=3></textarea>
-          <div class="input-underline"></div>
-        </div>
-      </div>
-    </div>
+    {{> requirement_comment requirement=requirement }}
     <div class="check-switcher {{getMark checkResult}}">
       <div class="yes">Done</div>
       <div class="no">Not done</div>
+    </div>
+  </div>
+</template>
+
+<template name="requirement_comment">
+  <div class="comment-button {{ stateClass }}">
+    <div class="comment-field">
+      <div class="input-widget">
+        <div class="reset-button"></div>
+        <label for="feedback">Comment for requirement <small>( optional )</small></label>
+        <textarea id="feedback" name="feedback" rows=3></textarea>
+        <div class="input-underline"></div>
+      </div>
     </div>
   </div>
 </template>

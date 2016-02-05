@@ -92,6 +92,7 @@ Template.make_review_content.events({
     review.totalScore = lodash.reduce(review.results, function(total, req) {
       return total + (req.result ? req.result.value || 0 : 0) * req.score;
     }, 0);
+    console.log('Review completed: ', review);
 
     // Save to database
     Reviews.insert(review, function(error, result) {
@@ -140,3 +141,34 @@ Template.check_requirement.events({
     template.state.set( 0 );
   }
 });
+
+/* Requirement comment field */
+
+Template.requirement_comment.onCreated(function () {
+  this.commentDep = new Tracker.Dependency;
+});
+
+Template.requirement_comment.helpers({
+  'stateClass': function () {
+    Template.instance().commentDep.depend();
+    var result = Template.instance().data.requirement.result;
+    if (result && result.comment && result.comment.length) {
+      console.log(result.comment);
+      return 'completed';
+    }
+    return '';
+  }
+});
+
+Template.requirement_comment.events({
+  'click .reset-button': function (event, template) {
+    template.find('#feedback').value = '';
+    this.requirement.result.comment = undefined;
+    template.commentDep.changed();
+  },
+  'keyup #feedback': function(event, template) {
+    this.requirement.result = this.requirement.result || {};
+    this.requirement.result.comment = event.currentTarget.value;
+    template.commentDep.changed();
+  }
+})

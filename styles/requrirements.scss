@@ -169,28 +169,46 @@ $board-space: 1px;
   .comment-field {
     display: none;
     @include absolute(0, 0);
-    padding: 2rem;
+    padding: 3rem 2.5rem;
     background: rgba(255, 255, 255, .05);
     z-index: 10;
 
     > .input-widget {
       background: rgba(255, 255, 255, 1);
-      border: 1px solid rgba(0,0,0,.05);
-      border-radius: 4px;
+      border: 2px solid rgba(0,0,0,.1);
+      border-radius: 6px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       min-width: 300px;
-      max-width: 70%;
+      width: 50vw;
+      max-width: 90%;
       margin-left: auto;
       padding: 0.75rem 1rem;
+
+      > label {
+        font-size: .75rem;
+        line-height: $line-height;
+        font-weight: 500;
+        padding: 0 0 .75rem;
+        color: #1976D2;
+      }
+
+      > textarea {
+        font-size: 1rem;
+        line-height: $line-height;
+        font-weight: 400;
+      }
     }
   }
 
   .comment-button,
+  .reset-button,
   .check-switcher > .yes,
   .check-switcher > .no {
     margin-left: 1rem;
     position: relative;
     padding-left: 2.5rem;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
     display: flex;
     align-content: center;
     align-items: center;
@@ -231,40 +249,84 @@ $board-space: 1px;
     }
   }
 
-  .comment-button {
-    z-index: 1;
-
-    &:before, &:after { font-family: FontAwesome; }
+  .reset-button {
+    @include absolute(0, 1rem);
+    transform: translateY(-50%);
+    opacity: 1;
 
     &:before {
-      background: rgba(0, 0, 0, .05);
-      color: rgba(0, 0, 0, .25);
-      opacity: .8;
+      content: "\f0e2";
+      background: #afafaf;
+      font-family: FontAwesome;
+      color: white;
+      opacity: 1;
+      transform: translateY(-50%) scale(1) rotate(0deg);
     }
+
+    &:hover:before {
+      background: #F44336;
+      transform: translateY(-50%) scale(1.2) rotate(-360deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
+    }
+  }
+
+  .comment-button {
+    z-index: 1;
+    align-self: center;
+
+    &:before, &:after {
+      font-family: FontAwesome;
+      transition: all .4s ease;
+    }
+
+    // default comment (inital state)
+    &:before {
+      content: "\f0e5";
+      background: rgba(0, 0, 0, .08);
+      color: rgba(0, 0, 0, .4);
+    }
+
+    // plus icon (hovered initial state)
+    &:after {
+      content: "\f067";
+      background: #CDDC39;
+      color: white;
+      padding: 3px 0 0 0;
+    }
+
+    // with earlier added comment
+    &.completed:before {
+      content: "\f0e5";
+      color: white;
+      background: rgba(0, 0, 0, .5);
+    }
+
+    // edit comment (hovered state for existed comment)
+    &.completed:after {
+      content: "\f044";
+      background: #FFA000;
+      color: white;
+      padding: 3px 0 0 4px;
+    }
+
+    // Transition settings (changing states)
+    &:before { opacity: .8; }
+    &:hover:before { transform: translateY(-50%) scale(0.01); }
 
     &:after {
       opacity: 0;
-      color: white;
-      background: rgba(0, 0, 0, .5);
       transform: translateY(-50%) scale(0.01);
     }
 
-    &:before { content: "\f0e5"; }
-    &:after { content: "\f067"; }
+    &:hover:after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
 
-    &:hover {
-      .comment-field {
-        display: block;
-      }
-
-      &:before {
-        transform: translateY(-50%) scale(0.01);
-      }
-
-      &:after {
-        opacity: 1;
-        transform: translateY(-50%) scale(1);
-      }
+    &:hover .comment-field,
+    &.edit .comment-field {
+      display: block;
     }
   }
 
