@@ -161,6 +161,10 @@ Template.requirement_comment.helpers({
 });
 
 Template.requirement_comment.events({
+  'click .comment-button': function(event, template) {
+    $(event.target).toggleClass('edit');
+    $(template.find('.comment-field')).toggleClass('opened');
+  },
   'click .reset-button': function (event, template) {
     template.find('#feedback').value = '';
     this.requirement.result.comment = undefined;

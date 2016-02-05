@@ -166,40 +166,6 @@ $board-space: 1px;
     }
   }
 
-  .comment-field {
-    display: none;
-    @include absolute(0, 0);
-    padding: 3rem 2.5rem;
-    background: rgba(255, 255, 255, .05);
-    z-index: 10;
-
-    > .input-widget {
-      background: rgba(255, 255, 255, 1);
-      border: 2px solid rgba(0,0,0,.1);
-      border-radius: 6px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-      min-width: 300px;
-      width: 50vw;
-      max-width: 90%;
-      margin-left: auto;
-      padding: 0.75rem 1rem;
-
-      > label {
-        font-size: .75rem;
-        line-height: $line-height;
-        font-weight: 500;
-        padding: 0 0 .75rem;
-        color: #1976D2;
-      }
-
-      > textarea {
-        font-size: 1rem;
-        line-height: $line-height;
-        font-weight: 400;
-      }
-    }
-  }
-
   .comment-button,
   .reset-button,
   .check-switcher > .yes,
@@ -218,7 +184,6 @@ $board-space: 1px;
     color: rgba(0, 0, 0, .5);
     opacity: .6;
     cursor: pointer;
-    transition: all .3s ease;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -249,84 +214,14 @@ $board-space: 1px;
     }
   }
 
-  .reset-button {
-    @include absolute(0, 1rem);
-    transform: translateY(-50%);
-    opacity: 1;
-
-    &:before {
-      content: "\f0e2";
-      background: #afafaf;
-      font-family: FontAwesome;
-      color: white;
-      opacity: 1;
-      transform: translateY(-50%) scale(1) rotate(0deg);
-    }
-
-    &:hover:before {
-      background: #F44336;
-      transform: translateY(-50%) scale(1.2) rotate(-360deg);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
-    }
-  }
-
   .comment-button {
     z-index: 1;
     align-self: center;
+    transition: z-index 1s step-end;
 
-    &:before, &:after {
-      font-family: FontAwesome;
-      transition: all .4s ease;
-    }
-
-    // default comment (inital state)
-    &:before {
-      content: "\f0e5";
-      background: rgba(0, 0, 0, .08);
-      color: rgba(0, 0, 0, .4);
-    }
-
-    // plus icon (hovered initial state)
-    &:after {
-      content: "\f067";
-      background: #CDDC39;
-      color: white;
-      padding: 3px 0 0 0;
-    }
-
-    // with earlier added comment
-    &.completed:before {
-      content: "\f0e5";
-      color: white;
-      background: rgba(0, 0, 0, .5);
-    }
-
-    // edit comment (hovered state for existed comment)
-    &.completed:after {
-      content: "\f044";
-      background: #FFA000;
-      color: white;
-      padding: 3px 0 0 4px;
-    }
-
-    // Transition settings (changing states)
-    &:before { opacity: .8; }
-    &:hover:before { transform: translateY(-50%) scale(0.01); }
-
-    &:after {
-      opacity: 0;
-      transform: translateY(-50%) scale(0.01);
-    }
-
-    &:hover:after {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-
-    &:hover .comment-field,
-    &.edit .comment-field {
-      display: block;
+    &.edit {
+      z-index: 11;
+      transition: z-index 1s step-start;
     }
   }
 
@@ -371,4 +266,187 @@ $board-space: 1px;
     border-color: transparentize(#008EBF, .4);
     // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
+}
+
+/* Elements for requirement commenting
+  - comment button (with states)
+  - comment field
+  - reset comment field button
+*/
+
+.widget.requirement .comment-button {
+  opacity: 1;
+
+  &:before, &:after {
+    font-family: FontAwesome;
+    transition: all .4s ease;
+  }
+
+  // default state: empty -> add
+  &:before {
+    content: "\f0e5";
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .4);
+
+    opacity: .8;
+    transform: translateY(-50%) scale(1);
+  }
+
+  &:after {
+    content: "\f067";
+    background: #CDDC39;
+    color: white;
+    padding: 3px 0 0 0;
+
+    opacity: 0;
+    transform: translateY(-50%) scale(0.01);
+  }
+
+  // Hover transtions
+  &:hover:before {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.01);
+  }
+
+  &:hover:after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+
+
+  &.completed {
+    &:before {
+      content: "\f0e5";
+      background: rgba(0, 0, 0, .5);
+      color: white;
+
+      opacity: .8;
+      transform: translateY(-50%) scale(1);
+    }
+
+    &:after {
+      content: "\f044";
+      background: #FFA000;
+      color: white;
+      padding: 3px 0 0 4px;
+
+      opacity: 0;
+      transform: translateY(-50%) scale(0.01);
+    }
+
+    // Hover transtions
+    &:hover:before {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.01);
+    }
+
+    &:hover:after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+
+  // edit state: check
+  &.edit, &.completed.edit {
+    &:before, &:after {
+      content: "\f00c";
+      background: lighten(#388E3C, 20%);
+      color: white;
+      padding: 2px 0 0 1px;
+    }
+
+    &:before {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.01);
+    }
+
+    &:after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    &:hover:before {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    &:hover:after {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.01);
+    }
+  }
+}
+
+.widget.requirement .comment-field {
+  @include absolute(50%);
+  background: rgba(255, 255, 255, .05);
+  z-index: 0;
+  opacity: 0;
+  transform: translateX(-100%) scale(.01);
+  transform-origin: top right;
+  transition: opacity .5s ease .2s, transform .5s ease, z-index .3s step-end;
+
+  > .input-widget {
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    min-width: 300px;
+    width: 50vw;
+    max-width: 90%;
+    margin-left: auto;
+    padding: 0.75rem 1rem;
+
+    > label {
+      font-size: .75rem;
+      line-height: $line-height;
+      font-weight: 500;
+      padding: 0 0 .75rem;
+      color: #1976D2;
+    }
+
+    > textarea {
+      font-size: 1rem;
+      line-height: $line-height;
+      font-weight: 400;
+    }
+  }
+
+  &.opened {
+    z-index: 10;
+    opacity: 1;
+    transform: translateX(-100%) scale(1);
+    transition: opacity .5s ease, transform .5s ease .2s, z-index .7s step-start;
+  }
+}
+
+.widget.requirement .reset-button {
+  @include absolute(50%);
+  transform: translateY(-50%) scale(0.01);
+  margin-left: -6rem;
+  z-index: 11;
+  opacity: 0;
+  transition: opacity .3s ease, transform .3s ease;
+
+  &:before {
+    content: "\f0e2";
+    background: #afafaf;
+    font-family: FontAwesome;
+    color: white;
+    opacity: 1;
+    transform: translateY(-50%) scale(1) rotate(0deg);
+  }
+
+  &:hover:before {
+    background: #F44336;
+    transform: translateY(-50%) scale(1.2) rotate(-360deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
+  }
+}
+
+.widget.requirement .comment-button.edit + .reset-button {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  transition: opacity .2s ease, transform .4s ease .1s;
 }
