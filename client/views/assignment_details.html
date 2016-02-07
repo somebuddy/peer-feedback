@@ -14,19 +14,51 @@
 
 <template name="assignment_submits">
   <section class="submit">
-    <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
-    {{#if submittionCount }}
-      <div class="button transparent history-button">
-        <div class="box-badge">{{ submittionCount }}</div>
+    {{#if lastWork }}
+      <div class="title">
+        <small>Last work:</small>
+        <br />
+        submitted at <strong>{{formatDate lastWork.createdAt }}</strong>
       </div>
-      <div class="button primary submit-button">Resubmit...</div>
+      {{> workReviewState work=lastWork }}
+      <div class="splitter"></div>
+
+      <div class="actions">
+        <div class="button submit-button">Resubmit...</div>
+        {{#if canReview }}
+          <div class="button success review-button">Review works</div>
+        {{/if}}
+      </div>
+      <div class="expand-history" style="display: none;">
+        <div class="hint">Earlier submitted works</div>
+        <div class="icon"></div>
+      </div>
     {{else}}
+      <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
       <div class="button primary submit-button">Submit your work...</div>
     {{/if}}
-    {{#if canReview }}
-      <div class="button success review-button">Review works</div>
-    {{/if}}
   </section>
+</template>
+
+<template name="workReviewState">
+  {{#if isReady }}
+    {{#with workReviewSummary }}
+      <div class="ready-state">
+        <div class="title">earned</div>
+        <div class="value earned">{{ score }}</div>
+        <div class="value total">of {{ total }}</div>
+        <div class="report-button">
+          <i class="icon fa fa-bars"></i>
+          <div class="hint">view<br/>report</div>
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    <div class="evaluating-state">
+      <div class="icon glyphicon glyphicon-hourglass"></div>
+      <div class="hint">Evaluating...</div>
+    </div>
+  {{/if}}
 </template>
 
 <template name="requirements_list">
