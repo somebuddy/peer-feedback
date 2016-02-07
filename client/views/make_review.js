@@ -153,7 +153,6 @@ Template.requirement_comment.helpers({
     Template.instance().commentDep.depend();
     var result = Template.instance().data.requirement.result;
     if (result && result.comment && result.comment.length) {
-      console.log(result.comment);
       return 'completed';
     }
     return '';
@@ -170,7 +169,7 @@ Template.requirement_comment.events({
     this.requirement.result.comment = undefined;
     template.commentDep.changed();
   },
-  'keyup #feedback': function(event, template) {
+  'keyup #comment': function(event, template) {
     this.requirement.result = this.requirement.result || {};
     this.requirement.result.comment = event.currentTarget.value;
     template.commentDep.changed();
