@@ -64,9 +64,16 @@ Router.route('/make-review/:_id', {
   },
   action: function() {
     // selecting random work
-    console.log('Router rendering');
     this.render('navbar', { to: 'navbar' });
     this.render('assignment_make_review_header', { to: 'header' });
     this.render('make_review_content', { to: 'content' });
   }
 });
+
+Router.route('/work/:id/summary', {
+  action: function () {
+    this.render('navbar', { to: 'navbar' });
+    this.render('work_sammary_header', { to: 'header' });
+    this.render('work_summary_content', { to: 'content' });
+  }
+})

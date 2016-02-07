@@ -42,8 +42,8 @@
 
 <template name="workReviewState">
   {{#if isReady }}
-    {{#with workReviewSummary }}
-      <div class="ready-state">
+    <div class="ready-state">
+      {{#with workReviewSummary }}
         <div class="title">earned</div>
         <div class="value earned">{{ score }}</div>
         <div class="value total">of {{ total }}</div>
@@ -51,8 +51,8 @@
           <i class="icon fa fa-bars"></i>
           <div class="hint">view<br/>report</div>
         </div>
-      </div>
-    {{/with}}
+      {{/with}}
+    </div>
   {{else}}
     <div class="evaluating-state">
       <div class="icon glyphicon glyphicon-hourglass"></div>

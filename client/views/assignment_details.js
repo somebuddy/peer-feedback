@@ -53,4 +53,11 @@ Template.workReviewState.helpers({
       total: total
     };
   }
-})
+});
+
+Template.workReviewState.events({
+  'click .ready-state': function () {
+    Router.go('/work/' + this.work._id + '/summary');
+  }
+});
+
