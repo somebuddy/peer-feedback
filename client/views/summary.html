@@ -1,11 +1,52 @@
 <template name="work_sammary_header">
   <header>
-    <h2>Here's work results</h2>
+    <h1 class="text-center">{{ title }}</h1>
+    <section class="description">
+      <h4 class="text-center">{{ description }}</h4>
+    </section>
   </header>
 </template>
 
 <template name="work_summary_content">
-  <section class="board requirements">
-    <h3>Work reviews details</h3>
+  <section class="board report">
+    <section class="summary">
+      <header>
+        <h3>Summary</h3>
+      </header>
+      <section class="scores">
+        {{#each reviews}}
+          <div class="value">
+            <div class="score">{{reviewScore this}}</div>
+            <div class="user">{{ userName }}</div>
+          </div>
+        {{/each}}
+      </section>
+      <section class="comments">
+        {{#each reviews}}
+          {{#if this.feedback }}
+            <div class="comment">
+              <div class="user">{{ this.userName }}</div>
+              <div class="text">{{ this.feedback }}</div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </section>
+    </section>
+    <section class="details">
+      <header>
+        <h3>Details</h3>
+      </header>
+      {{#each requirements}}
+        <div class="widget requirement group-{{ task }}">
+          1
+          <div class="row-id">{{sum @index 1 }}</div>
+          <div class="title">{{ title }}</div>
+          <div class="score">
+            <span class="label">Points: </span>
+            <span class="value">{{ score }}</span>
+          </div>
+        </div>
+      {{/each}}
+    </section>
   </section>
 </template>

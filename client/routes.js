@@ -73,7 +73,19 @@ Router.route('/make-review/:_id', {
 Router.route('/work/:id/summary', {
   action: function () {
     this.render('navbar', { to: 'navbar' });
-    this.render('work_sammary_header', { to: 'header' });
-    this.render('work_summary_content', { to: 'content' });
+    this.render('work_sammary_header', {
+      to: 'header',
+      data: function () {
+        var work = Works.findOne({_id: this.params.id});
+        var work_id = work ? work.assignment : null;
+        return ProjectAssignments.findOne({_id: work_id});
+      }
+    });
+    this.render('work_summary_content', {
+      to: 'content',
+      data: function () {
+        return Works.findOne({_id: this.params.id});
+      }
+    });
   }
 })

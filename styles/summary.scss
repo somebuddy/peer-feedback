@@ -1,0 +1,28 @@
+.board.report {
+  display: flex;
+  flex-flow: column nowrap;
+
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+  > section > header {
+    color: rgba(0, 0, 0, .7);
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  > section.summary {
+    margin-bottom: 1.5rem;
+  }
+
+  > section.details {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+  }
+}
