@@ -22,27 +22,38 @@
       </div>
       <section class="reviews">
         {{#each reviews}}
-        <section class="review summary {{reviewFeedbackStyle this}}">
+        <article class="review summary {{reviewFeedbackStyle this}}">
           <div class="user">Anonymous User</div>
           <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
           <div class="feedback">{{ this.feedback }}</div>
-        </section>
+        </article>
         {{/each}}
       </section>
     </section>
     <section class="details">
       <header>
-        <h3>Details</h3>
+        <h4>Details</h4>
       </header>
-      {{#each requirements}}
-        <div class="widget requirement group-{{ task }}">
-          <div class="row-id">{{sum @index 1 }}</div>
-          <div class="title">{{ title }}</div>
-          <div class="score">
-            <span class="label">AVG: </span>
-            <span class="value">{{ score }}</span>
+      {{#each requirementsSummary}}
+        <article class="requirement summary">
+          <header class="widget requirement group-{{ task }}">
+            <div class="row-id">{{sum @index 1 }}</div>
+            <div class="title">{{ title }}</div>
+            <div class="score {{requirementScoreRate this}}">
+              <span class="label">Earned: </span>
+              <span class="value">{{ result }}</span>
+            </div>
+          </header>
+          <div class="reviews requirement">
+            {{#each this.reviews}}
+            <article class="review summary {{reviewFeedbackStyle this}}">
+              <div class="user">Anonymous User</div>
+              <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
+              <div class="feedback">{{ this.feedback }}</div>
+            </article>
+            {{/each}}
           </div>
-        </div>
+        </article>
       {{/each}}
     </section>
   </section>
