@@ -13,22 +13,20 @@
       <header>
         <h3>Summary</h3>
       </header>
-      <section class="scores">
+      <div class="work summary">
+        <div class="title">{{ title }}</div>
+        <div class="score">
+          <span class="label">Your points:</span>
+          <span class="value">{{ score }}</span>
+        </div>
+      </div>
+      <section class="reviews">
         {{#each reviews}}
-          <div class="value">
-            <div class="score">{{reviewScore this}}</div>
-            <div class="user">{{ userName }}</div>
-          </div>
-        {{/each}}
-      </section>
-      <section class="comments">
-        {{#each reviews}}
-          {{#if this.feedback }}
-            <div class="comment">
-              <div class="user">{{ this.userName }}</div>
-              <div class="text">{{ this.feedback }}</div>
-            </div>
-          {{/if}}
+        <section class="review summary {{reviewFeedbackStyle this}}">
+          <div class="user">Anonymous User</div>
+          <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
+          <div class="feedback">{{ this.feedback }}</div>
+        </section>
         {{/each}}
       </section>
     </section>
@@ -38,11 +36,10 @@
       </header>
       {{#each requirements}}
         <div class="widget requirement group-{{ task }}">
-          1
           <div class="row-id">{{sum @index 1 }}</div>
           <div class="title">{{ title }}</div>
           <div class="score">
-            <span class="label">Points: </span>
+            <span class="label">AVG: </span>
             <span class="value">{{ score }}</span>
           </div>
         </div>
