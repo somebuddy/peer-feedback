@@ -14,12 +14,20 @@
         <h3>Summary</h3>
       </header>
       <div class="work summary">
-        <div class="title">{{ title }}</div>
-        <div class="score">
-          <span class="label">Your points:</span>
-          <span class="value">{{ score }}</span>
+        <div class="details">
+          <div><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
+          <div><a href="{{ previewUrl }}">{{ previewUrl }}</a></div>
+          <div>submitted at <strong>{{formatDate createdAt }}</strong> by user <strong>{{ userName }}</strong></div>
         </div>
+        {{#with workScore }}
+        <div class="score {{ workScoreRate }}" >
+          <span class="label">Earned points:</span>
+          <span class="value">{{ this.result }}</span>
+          <span class="label">of {{ this.total }}</span>
+        </div>
+        {{/with}}
       </div>
+      <h3>Reviews</h3>
       <section class="reviews">
         {{#each reviews}}
         <article class="review summary {{reviewFeedbackStyle this}}">

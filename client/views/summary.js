@@ -28,11 +28,37 @@ function getAssignmentScore(assignment) {
   return lodash.sumBy(reqs, 'score');
 }
 
+function aggregateRequirements(work) {
+  var reqs = Requirements.find({assignment: work.assignment}).fetch();
+  var revs = Reviews.find({work: work._id}).fetch();
+  return lodash.map(reqs, function (rq) {
+    rq.reviews = lodash.map(revs, function(rv) {
+      return getRequirementReview(rv, rq._id);
+    });
+
+    var earnd = lodash.filter(rq.reviews, 'result').length;
+    var tot = rq.reviews.length;
+    rq.result = earnd > 0.5 * tot ? rq.score : 0;
+
+    return rq;
+  });
+}
+
 Template.work_summary_content.helpers({
-  'summary': function () {
-    var reviews = Reviews.find({work: this._id}).fetch();
+  'workScore': function () {
+    var reviews = aggregateRequirements(this);
+
+    return {
+      result: lodash.sumBy(reviews, 'result'),
+      total: getAssignmentScore(this.assignment),
+    };
+  },
+  'workScoreRate': function () {
+    var r = (this.result || 0) / (this.total || 1);
+    return r >= 0.8 ? 'high' : 'low';
   },
   'reviews': function () {
+    console.log(this);
     return Reviews.find({work: this._id});
   },
   'reviewScore': function (review) {
@@ -54,18 +80,6 @@ Template.work_summary_content.helpers({
     return r && (r.result > 0) ? 'high' : 'low';
   },
   'requirementsSummary': function () {
-    var reqs = Requirements.find({assignment: this.assignment}).fetch();
-    var revs = Reviews.find({work: this._id}).fetch();
-    return lodash.map(reqs, function (rq) {
-      rq.reviews = lodash.map(revs, function(rv) {
-        return getRequirementReview(rv, rq._id);
-      });
-
-      var earnd = lodash.filter(rq.reviews, 'result').length;
-      var tot = rq.reviews.length;
-      rq.result = earnd > 0.5 * tot ? rq.score : 0;
-
-      return rq;
-    });
+    return aggregateRequirements(this);
   }
 })

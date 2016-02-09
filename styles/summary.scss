@@ -34,6 +34,51 @@ $line-height: 1.5rem;
   > section.details {
   }
 
+  .work.summary {
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    .details {
+      flex: 1 1 auto;
+    }
+
+    .score {
+      flex: 0 0 auto;
+      padding: 0.75rem 1rem;
+      @include flex-center;
+      flex-flow: column nowrap;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, .3);
+      color: white;
+
+      .label {
+        color: inherit;
+        text-align: center;
+      }
+
+      .value {
+        @include flex-center;
+        font-size: 3.75rem;
+      }
+
+      &.high {
+        background: #47bc00;
+        color: white;
+        background: transparent;
+        color: #47bc00;
+      }
+
+      &.low {
+        background: #FFCCBC;
+        background: #fe230a;
+        color: white;
+        background: transparent;
+        color: #fe230a;
+      }
+    }
+  }
+
   .reviews {
     display: flex;
     flex-flow: row wrap;
