@@ -9,6 +9,7 @@ Router.route('/', function() {
 });
 
 Router.route('/assignments', function() {
+  this.subscribe('assignmentList').wait();
   this.render('navbar', { to: 'navbar' });
   this.render('assignments_header', { to: 'header' });
   this.render('assignments_list', { to: 'content' });
