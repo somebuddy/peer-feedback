@@ -5,6 +5,10 @@ Meteor.publish('assignmentList', function() {
   return ProjectAssignments.find({});
 });
 
+Meteor.publish('assignment', function(id) {
+  return ProjectAssignments.find({_id: id});
+});
+
 Meteor.publish('requirements', function(assignment) {
   return Requirements.find({assignment: assignment});
 });

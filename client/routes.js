@@ -16,6 +16,7 @@ Router.route('/assignments', function() {
 });
 
 Router.route('/assignments/:_id', function() {
+  this.subscribe('assignment', this.params._id);
   this.render('navbar', { to: 'navbar' });
   this.render('assignment_details_header', {
     to: 'header',
@@ -44,6 +45,7 @@ Router.route('/reviews', function() {
 });
 
 Router.route('/reviews/:_id', function() {
+  this.subscribe('assignment', this.params._id);
   this.render('navbar', { to: 'navbar' });
   this.render('assignment_details_header', {
     to: 'header',
