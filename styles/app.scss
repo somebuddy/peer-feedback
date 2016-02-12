@@ -17,4 +17,9 @@ body {
   font-size: 100%;
 }
 
-@import 'page';
+@import 'layout/page';
+
+// App specific styles
+.page {
+  background-color: rgba(255,170,0,.05);
+}

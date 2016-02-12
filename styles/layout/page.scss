@@ -1,0 +1,54 @@
+@import 'mixins';
+
+$line-height: 1.5rem !default;
+$col-width: 1rem;
+$content-max-width: 60rem;
+
+.page {
+  @include size(100%, 100%);
+  overflow-y: auto;
+  position: relative;
+
+  > header {
+    padding: 3*$line-height $col-width;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+    > .description {
+      max-width: $content-max-width + 2 * $col-width;
+      margin: 0 auto;
+      padding: ($line-height / 2) $col-width;
+      font-weight: 300;
+    }
+  }
+
+  > .content {
+    max-width: $content-max-width + 2 * $col-width;
+    margin: 0 auto;
+    padding: $line-height $col-width;
+
+    &.wide {
+      max-width: 100%;
+    }
+  }
+
+  /* Other device changes */
+
+  // Hight device - fixed navbar
+  @media (min-height: 60rem) {
+    > nav {
+      @include fixed(0, 0, auto, 0);
+      z-index: 1000;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    > header {
+      padding-top: 4*$line-height;
+    }
+  }
+
+  @media (min-width: ($content-max-width * 1.5)) {
+    > header {
+      padding-top: $line-height;
+    }
+  }
+}
