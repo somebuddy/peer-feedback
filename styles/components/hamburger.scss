@@ -1,15 +1,9 @@
-@import 'mixins';
+@import '../layout/mixins';
 
+/* Hamburger icon */
 .hamburger-button {
   display: inline-flex;
-  align-items: center;
-  position: relative;
-  padding: 0;
   cursor: pointer;
-
-  &:hover {
-    transition: all 0.5s ease;
-  }
 
   & > * {
     margin: 0 0.75em;
@@ -42,6 +36,7 @@
   }
 }
 
+/* Hover arrow */
 .hamburger-button:hover > .lines,
 *:hover > .hamburger-button > .lines {
   opacity: 1;
@@ -65,6 +60,7 @@
   }
 }
 
+/* Expanded state arrow */
 *:not(.collapsed) > .hamburger-button > .lines {
   opacity: 1;
   transform: rotate(90deg) scale(0.6);

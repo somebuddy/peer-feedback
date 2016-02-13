@@ -1,0 +1,39 @@
+@import '../layout/mixins';
+@import '../layout/flex';
+
+$secondary-opacity: .6 !default;
+$main-opacity: 1 !default;
+$line-height: 1rem !default;
+$vertical-line-width: 1rem !default;
+
+/* Brand element */
+
+.brand {
+  @include flex-inline();
+  opacity: $secondary-opacity;
+  margin: ($line-height / 2) $vertical-line-width;
+  transition: opacity .5s ease;
+
+  > .icon, > .logo {
+    @include flex-center;
+    @include size(3rem, 3rem);
+    margin-right: 1rem;
+  }
+
+  > .name {
+    @include flex-center;
+    text-transform: lowercase;
+  }
+
+  &:hover, &:active, &:focus {
+    opacity: $main-opacity;
+  }
+}
+
+a.brand {
+  &, &:hover, &:active, &:focus {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+  }
+}

@@ -1,3 +1,10 @@
+@mixin flex-inline {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  align-items: center;
+}
+
 @mixin flex-center {
   display: flex;
   flex-flow: row nowrap;
