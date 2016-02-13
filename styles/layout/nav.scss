@@ -1,29 +1,40 @@
+@import 'mixins';
+@import 'flex';
+
 $line-height: 1.5rem !default;
 $secondary-opacity: 0.6 !default;
 $nav-height: 4.5rem;
 
 .page > nav {
-  background-color: #00B5EC;
-  color: white;
   margin-bottom: 0;
+  border-radius: 0;
 
   > .container-fluid {
     min-height: $nav-height;
     display: flex;
     flex-flow: row wrap;
-    align-content: stretch;
-    align-items: stretch;
   }
 
+  /* brand icon and text */
   .brand {
+    display: inline-flex;
     line-height: $nav-height;
     margin-right: auto;
+
+    > .logo {
+      margin-right: 1rem;
+    }
   }
 
+  a.brand {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Menu */
   .navbar-collapse {
     padding: 0;
     flex: 1 1 100%;
-    background-color: #00B5EC;
     z-index: 1000;
 
     border-bottom: 1px solid transparentize(white, .8);
@@ -32,23 +43,19 @@ $nav-height: 4.5rem;
 
   .nav.navbar-nav {
     margin: 0;
-    padding: 0 1rem;
+    padding: 1.5rem 1rem;
 
     background-color: rgba(0,0,0,0.3);
   }
 
+  /* Menu items */
   .nav.navbar-nav li a {
-    color: white;
-    opacity: $secondary-opacity;
+    @include flex-center;
     padding: 0 1rem;
     line-height: $line-height;
     min-height: $line-height * 2;
-    display: flex;
-    flex-flow: row nowrap;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    vertical-align: middle;
+    color: white;
+    opacity: $secondary-opacity;
     transition: opacity .3s ease;
 
     &:hover, &:active, &:focus {
@@ -61,7 +68,6 @@ $nav-height: 4.5rem;
   .nav.navbar-nav li.active a {
     opacity: 1;
     font-weight: 600;
-    color: white;
     border-left: 1px solid white;
     background: transparentize(white, 0.9);
     text-shadow: 1px 1px rgba(0,0,0,0.3);
@@ -85,21 +91,11 @@ $nav-height: 4.5rem;
 
     .nav.navbar-nav li a {
       min-height: $nav-height;
-      justify-content: center;
     }
 
     .nav.navbar-nav li.active a {
       border-left: none;
       border-bottom: 1px solid white;
     }
-  }
-
-  @media (min-height: 60rem) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 }

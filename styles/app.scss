@@ -20,6 +20,13 @@ body {
 @import 'layout/page';
 
 // App specific styles
-.page {
+.page.assignments {
   background-color: rgba(255,170,0,.05);
+
+  > nav,
+  > nav .navbar-collapse,
+  > header {
+    background-color: #404D5E;
+    color: white;
+  }
 }
