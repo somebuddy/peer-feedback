@@ -1,0 +1,47 @@
+@import '../resets/mixins';
+@import '../layout/flex';
+@import '../layout/mixins';
+
+$line-height: 1.5rem !default;
+$secondary-opacity: 0.6 !default;
+$main-opacity: 1 !default;
+
+.button {
+  @include flex-inline-center;
+  border-radius: 4px;
+  border: 1px solid transparent;
+
+  font-size: .875rem;
+  line-height: $line-height;
+  text-transform: capitalize;
+  font-variant: small-caps;
+
+  padding: .25rem .75rem;
+  margin: .5rem .5rem;
+
+  cursor: pointer;
+
+  opacity: $secondary-opacity;
+  transition: opacity .3s ease;
+
+  &:hover {
+    opacity: $main-opacity;
+  }
+}
+
+@include reset-link(button);
+
+@mixin colorize-button($cls: null, $color: white, $bkg: transparentize(white, 0.8), $border: transparentize(white, 0.8)) {
+  $selector: if($cls, ".button." + #{$cls}, ".button");
+  #{$selector} {
+    color: $color;
+    background: $bkg;
+    border-color: $border;
+  }
+}
+
+@include colorize-button;
+@include colorize-button(primary, $bkg: #2196F3);
+@include colorize-button(success, $bkg: #4CAF50);
+@include colorize-button(danger, $bkg: transparentize(#F44336, .1));
+@include colorize-button(transparent, $bkg: transparent);

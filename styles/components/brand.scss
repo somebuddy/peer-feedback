@@ -1,5 +1,6 @@
 @import '../layout/mixins';
 @import '../layout/flex';
+@import '../resets/mixins';
 
 $secondary-opacity: .6 !default;
 $main-opacity: 1 !default;
@@ -30,10 +31,4 @@ $vertical-line-width: 1rem !default;
   }
 }
 
-a.brand {
-  &, &:hover, &:active, &:focus {
-    color: inherit;
-    text-decoration: none;
-    outline: none;
-  }
-}
+@include reset-link(brand);

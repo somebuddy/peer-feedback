@@ -1,0 +1,9 @@
+@mixin reset-link($cls) {
+  a.#{$cls} {
+    &, &:hover, &:active, &:focus {
+      color: inherit;
+      text-decoration: none;
+      outline: none;
+    }
+  }
+}
