@@ -1,4 +1,4 @@
-@import 'mixins';
+@import 'layout/mixins';
 
 $line-height: 1.5rem !default;
 $board-space: 1px;
@@ -21,20 +21,6 @@ $board-space: 1px;
 }
 
 .board.requirements {
-  max-width: 60rem;
-  padding: 0 1rem 1.5rem;
-  margin: 3rem auto;
-
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-
-  min-height: 30rem;
-
-  // border: 1px solid transparent;
-  // border-radius: 6px;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  // background: rgba(255,255,255,.985);
-
   > header {
     color: white;
     margin-bottom: .75rem;

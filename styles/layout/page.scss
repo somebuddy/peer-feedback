@@ -3,6 +3,7 @@
 $line-height: 1.5rem !default;
 $col-width: 1rem;
 $content-max-width: 60rem;
+$overlap-value: $line-height * 6;
 
 .page {
   @include size(100%, 100%);
@@ -28,6 +29,16 @@ $content-max-width: 60rem;
 
     &.wide {
       max-width: 100%;
+    }
+  }
+
+  &.overlap-header {
+    > header {
+      padding-bottom: $overlap-value + $line-height;
+
+      + .content {
+        margin-top: -$overlap-value;
+      }
     }
   }
 

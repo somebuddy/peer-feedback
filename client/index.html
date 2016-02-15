@@ -7,7 +7,7 @@
 </body>
 
 <template name="page">
-  <div class="page assignments">
+  <div class="page assignments overlap-header">
     {{> yield "navbar" }}
     {{> yield "header" }}
     {{> yield "content" }}
@@ -70,47 +70,49 @@
 </template>
 
 <template name="assignments_list">
-  <div class="board assignments">
-    {{#each assignments}}
-    <article class="widget assignment {{ dueCSSClass dueDate }} ">
-      <div class="main">
-        <div class="title">{{ title }}</div>
-      </div>
-      <a class="menu" href="{{ _id }}" style="display: none;">
-        <span class="glyphicon glyphicon-option-vertical"></span>
-      </a>
-      <div class="secondary description">
-          {{ description }}
-      </div>
-      <div class="tags secondary">
-        {{#each tags}}
-        <div class="tag">{{ this }}</div>
-        {{/each}}
-      </div>
-      <div class="main" style="display: none">
-        <div class="level">
-          {{>starsRating rating=level star="\\e074" }}
-        </div>
-        <div class="rating">
-          {{>starsRating rating=rating star="\\e006"}}
-        </div>
-      </div>
-      <div class="state">
+  <div class="content wide">
+    <div class="board grid assignments">
+      {{#each assignments}}
+      <article class="box widget assignment {{ dueCSSClass dueDate }} ">
         <div class="main">
-          <div class="left">
-            <div class="score">
-              <strong>Points:</strong> {{ score }}
-            </div>
-          </div>
-          {{#if dueDate }}
-          <div class="right due-date">
-            <!--<strong>due</strong> {{ timeLeft dueDate }}-->
-            due <strong>{{ timeLeft dueDate }}</strong>
-          </div>
-          {{/if}}
+          <div class="title">{{ title }}</div>
         </div>
-      </div>
-    </article>
-    {{/each}}
+        <a class="menu" href="{{ _id }}" style="display: none;">
+          <span class="glyphicon glyphicon-option-vertical"></span>
+        </a>
+        <div class="secondary description">
+            {{ description }}
+        </div>
+        <div class="tags secondary">
+          {{#each tags}}
+          <div class="tag">{{ this }}</div>
+          {{/each}}
+        </div>
+        <div class="main" style="display: none">
+          <div class="level">
+            {{>starsRating rating=level star="\\e074" }}
+          </div>
+          <div class="rating">
+            {{>starsRating rating=rating star="\\e006"}}
+          </div>
+        </div>
+        <div class="state">
+          <div class="main">
+            <div class="left">
+              <div class="score">
+                <strong>Points:</strong> {{ score }}
+              </div>
+            </div>
+            {{#if dueDate }}
+            <div class="right due-date">
+              <!--<strong>due</strong> {{ timeLeft dueDate }}-->
+              due <strong>{{ timeLeft dueDate }}</strong>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+      </article>
+      {{/each}}
+    </div>
   </div>
 </template>

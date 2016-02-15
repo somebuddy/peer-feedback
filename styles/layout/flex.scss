@@ -17,3 +17,20 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin flex-rows {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+}

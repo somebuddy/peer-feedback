@@ -1,15 +1,15 @@
-@import 'mixins';
+@import 'layout/mixins';
 
 $line-height: 1.5rem !default;
 
 .input-widget {
   margin: 0 0 1rem;
-  
+
   display: flex;
   flex-flow: row wrap;
-  
+
   position: relative;
-  
+
   > label {
     flex: 1 1 100%;
     font-size: .75rem;
@@ -18,16 +18,16 @@ $line-height: 1.5rem !default;
     padding-bottom: .25rem;
     margin: 0;
     font-weight: 400;
-    
+
     &:focus {
       color: red;
     }
   }
-  
+
   &:focus {
     background: green;
   }
-  
+
   > input, > textarea {
     flex: 1 1 100%;
     border: none;
@@ -35,11 +35,11 @@ $line-height: 1.5rem !default;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     position: relative;
     background: rgba(255,255,255,.1);
-    
+
     & + .input-underline {
       flex: 1 1 100%;
       position: relative;
-      
+
       &:after {
         content: '';
         @include absolute(auto, auto, 0, 0);
@@ -47,10 +47,10 @@ $line-height: 1.5rem !default;
         border-bottom: 2px solid transparentize(#1976D2, .4);
       }
     }
-    
+
     &:hover, &:focus {
       outline: none;
-      
+
       & + .input-underline:after {
         transition: all .5s ease;
         width: 100%;

@@ -1,11 +1,9 @@
-@import 'mixins';
+@import 'layout/mixins';
+@import 'layout/flex';
 
 $line-height: 1.5rem;
 
 .board.report {
-  display: flex;
-  flex-flow: column nowrap;
-
   background: white;
   padding: 1.5rem 2rem;
   border-radius: 4px;

@@ -3,16 +3,6 @@ $widget-width: 22.5rem;
 $line-height: 1.5rem !default;
 $board-space: .5rem;
 
-.page.assignments {
-    > header {
-      padding-bottom: $widget-height + $line-height*2;
-    }
-
-    > .board {
-        margin-top: -$widget-height;
-    }
-}
-
 .widget.assignment {
   flex: 0 0 $widget-width;
   width: $widget-width;
