@@ -23,6 +23,7 @@ $screen-space: 1rem;
   max-width: $max-width;
 
   > .box {
+    @include flex-row;
     max-width: $max-width;
   }
 }
@@ -79,11 +80,4 @@ $screen-space: 1rem;
 
 .board.grid {
   @include board-grid;
-}
-
-.box {
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: 4px;
-  background: white;
 }

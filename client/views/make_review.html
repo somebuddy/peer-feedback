@@ -34,7 +34,7 @@
 <template name="make_review_content">
   <div class="content">
   {{#if work}}
-    <form class="board requirements check-list">
+    <form class="requirements list check-list">
       <header>
         <h4>Checklist</h4>
         <small>Look at the list of requirements and check whether they are met or not</small>
@@ -60,7 +60,7 @@
 </template>
 
 <template name="check_requirement">
-  <div class="widget requirement group-{{ requirement.task }}">
+  <div class="box widget requirement group-{{ requirement.task }}">
     <div class="row-id">{{sum num 1 }}</div>
     <div class="title">{{ requirement.title }}</div>
     {{> requirement_comment requirement=requirement }}

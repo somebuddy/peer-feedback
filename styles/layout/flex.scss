@@ -10,6 +10,13 @@
   justify-content: center;
 }
 
+@mixin flex-inline-column {
+  display: inline-flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+}
+
 @mixin flex-center {
   display: flex;
   flex-flow: row nowrap;
@@ -18,13 +25,17 @@
   justify-content: center;
 }
 
-@mixin flex-rows {
+@mixin flex-row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row nowrap;
   align-content: stretch;
   align-items: stretch;
   justify-content: flex-start;
+}
+
+@mixin flex-rows {
+  @include flex-row;
+  flex-wrap: wrap;
 }
 
 @mixin flex-column {
