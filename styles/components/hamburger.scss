@@ -1,22 +1,29 @@
 @import '../layout/mixins';
 
+$main-opacity: 1 !default;
+$secondary-opacity: .6 !default;
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+$hamburger-line-width: 3px;
+
 /* Hamburger icon */
 .hamburger-button {
   display: inline-flex;
   cursor: pointer;
 
   & > * {
-    margin: 0 0.75em;
+    margin: 0 ($line-height / 2);
   }
 
   > .lines {
     position: relative;
-    margin-top: calc(1.5em - 1px);
-    margin-bottom: calc(1.5em - 2px);
-    opacity: 0.5;
+    margin-top: $line-height;
+    margin-bottom: calc(#{$line-height} - #{$hamburger-line-width});
+    opacity: $secondary-opacity;
 
     &, &:after, &:before {
-      @include size(1.5em, 3px);
+      @include size($line-height, $hamburger-line-width);
       border-radius: 2px;
       transition: all .5s ease;
     }
@@ -27,11 +34,11 @@
     }
 
     &:after {
-      top: 6px;
+      top: $hamburger-line-width * 2;
     }
 
     &:before {
-      top: -6px;
+      top: - $hamburger-line-width * 2;
     }
   }
 }

@@ -2,17 +2,17 @@
 @import '../layout/flex';
 @import '../resets/mixins';
 
-$secondary-opacity: .6 !default;
 $main-opacity: 1 !default;
-$line-height: 1rem !default;
-$vertical-line-width: 1rem !default;
+$secondary-opacity: .6 !default;
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
 
 /* Brand element */
 
 .brand {
   @include flex-inline();
   opacity: $secondary-opacity;
-  margin: ($line-height / 2) $vertical-line-width;
+  margin: ($line-height / 2) $column-width;
   transition: opacity .5s ease;
 
   > .icon, > .logo {
