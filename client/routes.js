@@ -8,34 +8,52 @@ Router.route('/', function() {
   Router.go('/assignments');
 });
 
-Router.route('/assignments', function() {
-  this.subscribe('assignmentList').wait();
-  this.render('navbar', { to: 'navbar' });
-  this.render('assignments_header', { to: 'header' });
-  this.render('assignments_list', { to: 'content' });
+Router.route('/assignments', {
+  waitOn: function () {
+    return [
+      Meteor.subscribe('assignmentList'),
+    ];
+  },
+  yieldRegions: {
+    'navbar': { to: 'navbar' },
+    'assignments_header': {to: 'header'},
+    'assignments_list': {to: 'content'}
+  },
+  action: function () {
+    this.render();
+  }
 });
 
-Router.route('/assignments/:_id', function() {
-  this.subscribe('assignment', this.params._id);
-  this.render('navbar', { to: 'navbar' });
-  this.render('assignment_details_header', {
-    to: 'header',
-    data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
-    }
-  });
-  this.render('requirements_list', {
-    to: 'content',
-    data: function () {
-      return Requirements.find({assignment:this.params._id});
-    }
-  });
-  this.render('submit_modals', {
-    to: 'modal',
-    data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
-    }
-  })
+Router.route('/assignments/:_id', {
+  waitOn: function () {
+    return [
+      Meteor.subscribe('assignment', this.params._id),
+      Meteor.subscribe('requirements', this.params._id)
+    ];
+  },
+  yieldRegions: {
+    'navbar': { to: 'navbar' },
+  },
+  action: function() {
+    this.render('assignment_details_header', {
+      to: 'header',
+      data: function () {
+        return ProjectAssignments.findOne({_id:this.params._id});
+      }
+    });
+    this.render('requirements_list', {
+      to: 'content',
+      data: function () {
+        return Requirements.find({assignment:this.params._id});
+      }
+    });
+    this.render('submit_modals', {
+      to: 'modal',
+      data: function () {
+        return ProjectAssignments.findOne({_id:this.params._id});
+      }
+    })
+  }
 });
 
 Router.route('/reviews', function() {
