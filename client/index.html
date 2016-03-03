@@ -3,8 +3,7 @@
   <meta charset="utf-8">
 </head>
 
-<body>
-</body>
+<body></body>
 
 <template name="page">
   <div class="page assignments overlap-header">
@@ -16,40 +15,6 @@
     {{> yield "footer" }}
     {{> yield "modal" }}
   </div>
-</template>
-
-<template name="navbar">
-  <nav class="navbar">
-    <div class="container-fluid">
-      <a class="brand" href="/">
-        <div class="logo logo-reviews">
-            <span class="glyphicon glyphicon-education"></span>
-        </div>
-        <span class="name">Peer Reviews</span>
-      </a>
-
-      <div class="user">{{> loginButtons }}</div>
-
-      <div class="navbar-header">
-        <div class="navbar-toggle collapsed"
-          data-toggle="collapse"
-          data-target="#main_navbar"
-          aria-expanded="false">
-          <div class="hamburger-button white">
-            <div class="lines"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="collapse navbar-collapse pull-right" id="main_navbar">
-        <ul class="nav navbar-nav">
-          <li><a href="/">Assignments</a></li>
-          <li><a href="/reviews">Reviews</a></li>
-          <li><a href="https://github.com/somebuddy/peer-feedback" target="_blank"><img src="/images/github.png"></a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 </template>
 
 <template name="assignments_header">
@@ -68,52 +33,4 @@
       <div class="button white">Read more...</div>
     </section>
   </header>
-</template>
-
-<template name="assignments_list">
-  <div class="content wide">
-    <div class="assignments grid">
-      {{#each assignments}}
-      <article class="box widget assignment {{ dueCSSClass dueDate }} ">
-        <div class="main">
-          <div class="title">{{ title }}</div>
-        </div>
-        <a class="menu" href="{{ _id }}" style="display: none;">
-          <span class="glyphicon glyphicon-option-vertical"></span>
-        </a>
-        <div class="secondary description">
-            {{ description }}
-        </div>
-        <div class="tags secondary">
-          {{#each tags}}
-          <div class="tag">{{ this }}</div>
-          {{/each}}
-        </div>
-        <div class="main" style="display: none">
-          <div class="level">
-            {{>starsRating rating=level star="\\e074" }}
-          </div>
-          <div class="rating">
-            {{>starsRating rating=rating star="\\e006"}}
-          </div>
-        </div>
-        <div class="state">
-          <div class="main">
-            <div class="left">
-              <div class="score">
-                <strong>Points:</strong> {{ score }}
-              </div>
-            </div>
-            {{#if dueDate }}
-            <div class="right due-date">
-              <!--<strong>due</strong> {{ timeLeft dueDate }}-->
-              due <strong>{{ timeLeft dueDate }}</strong>
-            </div>
-            {{/if}}
-          </div>
-        </div>
-      </article>
-      {{/each}}
-    </div>
-  </div>
 </template>

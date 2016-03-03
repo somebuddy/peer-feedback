@@ -1,0 +1,33 @@
+<template name="navbar">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="brand" href="/">
+        <div class="logo logo-reviews">
+            <span class="glyphicon glyphicon-education"></span>
+        </div>
+        <span class="name">Peer Reviews</span>
+      </a>
+
+      <div class="user">{{> loginButtons }}</div>
+
+      <div class="navbar-header">
+        <div class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target="#main_navbar"
+          aria-expanded="false">
+          <div class="hamburger-button white">
+            <div class="lines"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse navbar-collapse pull-right" id="main_navbar">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Assignments</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+          <li><a href="https://github.com/somebuddy/peer-feedback" target="_blank"><img src="/images/github.png"></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>

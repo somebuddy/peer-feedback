@@ -1,4 +1,4 @@
-/*global Assignments, moment, Router */
+/*global moment, Router */
 
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('llll');
@@ -22,18 +22,4 @@ Template.registerHelper('sum', function(a, b) {
 
 Template.registerHelper('console', function(a) {
   console.log(a);
-});
-
-
-Template.assignments_list.helpers({
-  assignments: function () {
-    return Assignments.find({});
-  }
-});
-
-Template.assignments_list.events({
-  'click .widget.assignment': function (event) {
-    var current = Router.current().route.path();
-    Router.go(current + '/' + this._id);
-  }
 });
