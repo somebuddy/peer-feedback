@@ -1,4 +1,4 @@
-/*global lodash, Reviews, Router, WorkForReview, ProjectAssignments, Requirements */
+/*global lodash, Reviews, Router, WorkForReview, Assignments, Requirements */
 
 WorkForReview = new Mongo.Collection('work-review-next');
 
@@ -38,7 +38,7 @@ Template.assignment_make_review_header.helpers({
     return WorkForReview.findOne();
   },
   'assignment': function () {
-    return ProjectAssignments.findOne({_id: Router.current().params._id});
+    return Assignments.findOne({_id: Router.current().params._id});
   }
 });
 
@@ -69,7 +69,7 @@ Template.make_review_content.helpers({
     return WorkForReview.findOne();
   },
   'assignment': function () {
-    return ProjectAssignments.findOne({_id: Template.instance().assignment});
+    return Assignments.findOne({_id: Template.instance().assignment});
   },
   'review': function () {
     return Template.instance().currentReview.get();

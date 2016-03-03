@@ -1,4 +1,4 @@
-/*global Router, ProjectAssignments, Requirements, Works, lodash */
+/*global Router, Assignments, Requirements, Works */
 
 Router.configure({
   layoutTemplate: 'page'
@@ -21,7 +21,7 @@ Router.route('/assignments/:_id', function() {
   this.render('assignment_details_header', {
     to: 'header',
     data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
+      return Assignments.findOne({_id:this.params._id});
     }
   });
   this.render('requirements_list', {
@@ -33,7 +33,7 @@ Router.route('/assignments/:_id', function() {
   this.render('submit_modals', {
     to: 'modal',
     data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
+      return Assignments.findOne({_id:this.params._id});
     }
   })
 });
@@ -50,7 +50,7 @@ Router.route('/reviews/:_id', function() {
   this.render('assignment_details_header', {
     to: 'header',
     data: function () {
-      return ProjectAssignments.findOne({_id:this.params._id});
+      return Assignments.findOne({_id:this.params._id});
     }
   });
   this.render('requirements_list', {
@@ -81,7 +81,7 @@ Router.route('/work/:id/summary', {
       data: function () {
         var work = Works.findOne({_id: this.params.id});
         var work_id = work ? work.assignment : null;
-        return ProjectAssignments.findOne({_id: work_id});
+        return Assignments.findOne({_id: work_id});
       }
     });
     this.render('work_summary_content', {

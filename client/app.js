@@ -1,9 +1,8 @@
-/*global angular, ProjectAssignments, Works, Reviews, moment, Router, lodash*/
+/*global Assignments, moment, Router */
 
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('llll');
 });
-
 
 Template.registerHelper('timeLeft', function(date) {
   return moment(date).fromNow();
@@ -28,7 +27,7 @@ Template.registerHelper('console', function(a) {
 
 Template.assignments_list.helpers({
   assignments: function () {
-    return ProjectAssignments.find({});
+    return Assignments.find({});
   }
 });
 
