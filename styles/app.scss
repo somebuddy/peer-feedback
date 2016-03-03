@@ -1,4 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@import url(//fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+@import url(https://fonts.googleapis.com/css?family=Teko:700);
 
 $line-height: 1.5rem;
 
@@ -21,12 +23,26 @@ body {
 
 // App specific styles
 .page.assignments {
-  background-color: rgba(255,170,0,.05);
+  background-color: #ECEFF1;
 
   > nav,
   > nav .navbar-collapse,
   > header {
-    background-color: #404D5E;
+    background-color: #37474F;
     color: white;
+  }
+
+  > header {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  > header .title {
+
+    > strong {
+      display: inline-block;
+      transform: scaleY(1.25);
+      font-family: Teko;
+      letter-spacing: 2px;
+    }
   }
 }
