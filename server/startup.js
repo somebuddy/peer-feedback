@@ -4,7 +4,7 @@ Meteor.startup(function () {
   if (Assignments.find().count() === 0) {
     var a;
 
-    a = Assignments.insert({
+    a = Meteor.call("addAssignment", {
       title: 'Exploring Ionic Framework',
       score: 8.0,
       tags: ['Coursera', 'Angular', 'Ionic'],
@@ -70,7 +70,7 @@ Meteor.startup(function () {
       score: 1.0
     });
 
-    a = Assignments.insert({
+    a = Meteor.call("addAssignment", {
       title: 'Ionic Modals, Forms, Popovers',
       score: 10.0,
       tags: ['Coursera', 'Angular', 'Ionic'],
@@ -150,7 +150,7 @@ Meteor.startup(function () {
       score: 1.0
     });
 
-    a = Assignments.insert({
+    a = Meteor.call("addAssignment", {
         title: 'Resolve and Local Storage',
         score: 10.0,
         tags: ['Coursera', 'Angular', 'Ionic'],
@@ -237,7 +237,7 @@ Meteor.startup(function () {
       score: 1.0
     });
 
-    a = Assignments.insert({
+    a = Meteor.call("addAssignment", {
         title: 'Cordova and ngCordova',
         score: 10.0,
         tags: ['Coursera', 'Angular', 'Ionic'],

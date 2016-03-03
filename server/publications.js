@@ -1,12 +1,4 @@
-/*global Assignments */
-
-Meteor.publish('assignmentList', function() {
-  return Assignments.find({});
-});
-
-Meteor.publish('assignment', function(id) {
-  return Assignments.find({_id: id});
-});
+/*global Requirements, Works, lodash */
 
 Meteor.publish('requirements', function(assignment) {
   return Requirements.find({assignment: assignment});
