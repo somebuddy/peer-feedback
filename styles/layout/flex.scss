@@ -1,0 +1,65 @@
+@mixin flex-container($display: flex, $direction: row, $wrap: nowrap) {
+  display: $display;
+  flex-flow: $direction $wrap;
+}
+
+@mixin flex-align($align: stretch, $align-content: flex-start, $justify: flex-start) {
+  align-content: $align-content;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin flex-child-fixed {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+@mixin flex-child-fluid($weight: 1) {
+  flex-grow: $weight;
+  flex-shrink: $weight;
+}
+
+@mixin flex-inline {
+  @include flex-container(inline-flex);
+  @include flex-align(center, center);
+}
+
+@mixin flex-inline-center {
+  @include flex-container(inline-flex);
+  @include flex-align(center, center, center);
+}
+
+@mixin flex-inline-column {
+  @include flex-container(inline-flex, column);
+  @include flex-align(stretch, stretch);
+}
+
+@mixin flex-vertical-center {
+  @include flex-container;
+  @include flex-align(center, center);
+}
+
+@mixin flex-center {
+  @include flex-container;
+  @include flex-align(center, center, center);
+}
+
+@mixin flex-row {
+  @include flex-container;
+  @include flex-align(stretch, stretch);
+}
+
+@mixin flex-rows {
+  @include flex-row;
+  flex-wrap: wrap;
+}
+
+@mixin flex-column {
+  @include flex-container($direction: column);
+  @include flex-align(stretch, stretch);
+}
+
+@mixin flex-columns {
+  @include flex-column;
+  flex-wrap: wrap;
+}

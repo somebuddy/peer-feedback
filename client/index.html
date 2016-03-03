@@ -7,7 +7,7 @@
 </body>
 
 <template name="page">
-  <div class="page assignments">
+  <div class="page assignments overlap-header">
     {{> yield "navbar" }}
     {{> yield "header" }}
     {{> yield "content" }}
@@ -53,64 +53,66 @@
 
 <template name="assignments_header">
   <header class="text-center">
-    <h1>Free peer reviews</h1>
+    <h1 class="title">Free <strong>peer reviews</strong></h1>
     <h4>Submit assignment. Make reviews. Get feedback.</h4>
-    <div class="button">Read more...</div>
+    <div class="button white">Read more...</div>
   </header>
 </template>
 
 <template name="reviews_header">
   <header class="text-center">
-    <h1>Make a review</h1>
+    <h1 class="title">Make a review</h1>
     <section class="description">
       <h4>Look at others works. Evaluate them. Because judging is funny.</h4>
-      <div class="button">Read more...</div>
+      <div class="button white">Read more...</div>
     </section>
   </header>
 </template>
 
 <template name="assignments_list">
-  <div class="board assignments">
-    {{#each assignments}}
-    <article class="widget assignment {{ dueCSSClass dueDate }} ">
-      <div class="main">
-        <div class="title">{{ title }}</div>
-      </div>
-      <a class="menu" href="{{ _id }}" style="display: none;">
-        <span class="glyphicon glyphicon-option-vertical"></span>
-      </a>
-      <div class="secondary description">
-          {{ description }}
-      </div>
-      <div class="tags secondary">
-        {{#each tags}}
-        <div class="tag">{{ this }}</div>
-        {{/each}}
-      </div>
-      <div class="main" style="display: none">
-        <div class="level">
-          {{>starsRating rating=level star="\\e074" }}
-        </div>
-        <div class="rating">
-          {{>starsRating rating=rating star="\\e006"}}
-        </div>
-      </div>
-      <div class="state">
+  <div class="content wide">
+    <div class="assignments grid">
+      {{#each assignments}}
+      <article class="box widget assignment {{ dueCSSClass dueDate }} ">
         <div class="main">
-          <div class="left">
-            <div class="score">
-              <strong>Points:</strong> {{ score }}
-            </div>
-          </div>
-          {{#if dueDate }}
-          <div class="right due-date">
-            <!--<strong>due</strong> {{ timeLeft dueDate }}-->
-            due <strong>{{ timeLeft dueDate }}</strong>
-          </div>
-          {{/if}}
+          <div class="title">{{ title }}</div>
         </div>
-      </div>
-    </article>
-    {{/each}}
+        <a class="menu" href="{{ _id }}" style="display: none;">
+          <span class="glyphicon glyphicon-option-vertical"></span>
+        </a>
+        <div class="secondary description">
+            {{ description }}
+        </div>
+        <div class="tags secondary">
+          {{#each tags}}
+          <div class="tag">{{ this }}</div>
+          {{/each}}
+        </div>
+        <div class="main" style="display: none">
+          <div class="level">
+            {{>starsRating rating=level star="\\e074" }}
+          </div>
+          <div class="rating">
+            {{>starsRating rating=rating star="\\e006"}}
+          </div>
+        </div>
+        <div class="state">
+          <div class="main">
+            <div class="left">
+              <div class="score">
+                <strong>Points:</strong> {{ score }}
+              </div>
+            </div>
+            {{#if dueDate }}
+            <div class="right due-date">
+              <!--<strong>due</strong> {{ timeLeft dueDate }}-->
+              due <strong>{{ timeLeft dueDate }}</strong>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+      </article>
+      {{/each}}
+    </div>
   </div>
 </template>

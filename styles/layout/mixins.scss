@@ -24,11 +24,3 @@
   width: $width;
   height: $height;
 }
-
-/* Flex align */
-@mixin flex-center () {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-}

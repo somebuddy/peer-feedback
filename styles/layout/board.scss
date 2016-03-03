@@ -1,0 +1,83 @@
+@import 'mixins';
+@import 'flex';
+
+$line-height: 1.5rem !default;
+$board-max-cols: 10;
+$screen-space: 1rem;
+
+/* Flex based container for block elements */
+
+@mixin board ($widget-space: .25rem) {
+  @include flex-column;
+  margin: 0 auto;
+  padding: $widget-space 0 0;
+
+  > .box {
+    flex: 0 0 auto;
+    margin-bottom: $widget-space;
+  }
+}
+
+@mixin board-list ($max-width: 60rem, $widget-space: .25rem) {
+  @include board($widget-space);
+  max-width: $max-width;
+
+  > .box {
+    @include flex-row;
+    max-width: $max-width;
+  }
+}
+
+@function board-width($cols, $width, $margin) {
+  // returns board width for given element width and margin and columns
+  @return $cols * ($width + $margin) + $margin;
+}
+
+@mixin board-grid-sizes($elem-width, $min-cols, $max-cols, $elem-space) {
+  // Generate media quries for board with given columns
+  @for $i from $min-cols to ($max-cols + 1) {
+    $max-width: board-width($i, $elem-width, $elem-space);
+    $screen-width: $max-width + $screen-space * 4; // additional space for scrollbar
+    @media (min-width: $screen-width) {
+      max-width: $max-width;
+    }
+  }
+}
+
+@mixin board-grid($widget-width: 18rem, $widget-space: .25rem) {
+  @include board($widget-space);
+  @include board-grid-sizes($widget-width, 2, $board-max-cols, $widget-space);
+
+  $breakpoint: board-width(2, $widget-width, $widget-space) + $screen-space * 4;
+
+  @media (min-width: #{$breakpoint}) {
+    flex-flow: row wrap;
+    padding: $widget-space 0 0 $widget-space;
+
+    > .box {
+      width: $widget-width;
+      flex-basis: $widget-width;
+      flex-shrink: 0;
+      flex-grow: 0;
+      margin: 0 $widget-space $widget-space 0;
+    }
+
+    > header,
+    > footer,
+    > .box.full-row {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.board {
+  @include board;
+}
+
+.board.list {
+  @include board-list;
+}
+
+.board.grid {
+  @include board-grid;
+}

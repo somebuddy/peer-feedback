@@ -1,10 +1,10 @@
-@import 'mixins';
+@import 'layout/mixins';
+@import 'layout/board';
 
 $line-height: 1.5rem !default;
-$board-space: 1px;
+$board-space: 0.0625rem;
 
 .page > header {
-
   section.work {
     display: flex;
     flex-flow: column nowrap;
@@ -20,20 +20,9 @@ $board-space: 1px;
   }
 }
 
-.board.requirements {
-  max-width: 60rem;
-  padding: 0 1rem 1.5rem;
-  margin: 3rem auto;
-
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-
-  min-height: 30rem;
-
-  // border: 1px solid transparent;
-  // border-radius: 6px;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  // background: rgba(255,255,255,.985);
+.requirements.list {
+  @include board-list($widget-space: $board-space);
+  margin-bottom: $line-height * 2;
 
   > header {
     color: white;
@@ -41,22 +30,15 @@ $board-space: 1px;
   }
 }
 
-.widget.requirement {
+.requirements > .widget.requirement {
   min-height: $line-height * 2;
-
-  margin: 0 $board-space $board-space 0;
-  background: white;
-  padding: .75rem 1rem;
-
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-content: stretch;
-  align-items: stretch;
-  position: relative;
-
   border-radius: 2px;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-width: 1px;
+}
+
+// Components
+.widget.requirement {
+  @include flex-row;
 
   > .row-id {
     flex: 0 0 4rem;
@@ -205,16 +187,6 @@ $board-space: 1px;
     > .yes:before { content: "\e013"; }
     > .no:before { content: "\e014"; }
   }
-
-  transition: all .5s ease;
-
-  &:hover {
-    // margin-top: 4px;
-    // margin-bottom: 4px;
-    // z-index: 100;
-    border-color: transparentize(#008EBF, .4);
-    // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  }
 }
 
 /* Elements for requirement commenting
@@ -223,7 +195,11 @@ $board-space: 1px;
   - reset comment field button
 */
 
-.widget.requirement .comment-button {
+.check-list .widget.requirement {
+  overflow: visible;
+}
+
+.requirements.list > .widget.requirement .comment-button {
   opacity: 1;
 
   &:before, &:after {
@@ -326,7 +302,7 @@ $board-space: 1px;
   }
 }
 
-.widget.requirement .comment-field {
+.requirements.list > .widget.requirement .comment-field {
   @include absolute(50%);
   background: rgba(255, 255, 255, .05);
   z-index: 0;
@@ -369,7 +345,7 @@ $board-space: 1px;
   }
 }
 
-.widget.requirement .reset-button {
+.requirements.list > .widget.requirement .reset-button {
   @include absolute(50%);
   transform: translateY(-50%) scale(0.01);
   margin-left: -6rem;
@@ -394,7 +370,7 @@ $board-space: 1px;
   }
 }
 
-.widget.requirement .comment-button.edit + .reset-button {
+.requirements.list > .widget.requirement .comment-button.edit + .reset-button {
   opacity: 1;
   transform: translateY(-50%) scale(1);
   transition: opacity .2s ease, transform .4s ease .1s;
