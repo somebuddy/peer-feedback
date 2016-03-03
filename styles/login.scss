@@ -1,0 +1,27 @@
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+#login-buttons #login-sign-in-link,
+#login-buttons #login-name-link, {
+  text-decoration: none;
+}
+
+#login-dropdown-list {
+  top: auto;
+  left: auto;
+  right: 0;
+  padding: ($line-height / 2) $column-width;
+
+  &, a {
+    color: rgba(0,0,0,.8);
+  }
+
+  a,
+  a#signup-link,
+  a#forgot-password-link {
+    line-height: $line-height;
+    min-height: $line-height * 3;
+    padding: 0;
+    margin: 0;
+  }
+}
