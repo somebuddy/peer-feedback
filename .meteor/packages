@@ -30,3 +30,5 @@ barbatus:stars-rating
 erasaur:meteor-lodash
 momentjs:moment
 
+accounts-ui
+accounts-password
