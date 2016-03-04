@@ -1,27 +1,37 @@
 <template name="assignment_state">
-  <section class="submit">
+  <section class="row assignment-state">
     {{#if lastWork }}
-      <div class="title">
-        <small>Last work:</small>
-        <br />
-        submitted at <strong>{{formatDate lastWork.createdAt }}</strong>
+      <div class="filler work-data">
+        <header>Last work:</header>
+        <div class="value">submitted at <strong>{{formatDate lastWork.createdAt }}</strong></div>
+        {{#if isHistoryExist }}
+        <footer>
+          <div class="expand-history">
+            <span class="hint">Earlier submitted works ({{ previousWorksCount }})</span>
+            <span class="glyphicon glyphicon-menu-down"></span>
+          </div>
+        </footer>
+        {{/if}}
       </div>
       {{> workReviewState work=lastWork }}
-      <div class="splitter"></div>
-
+      <div class="splitter light"></div>
       <div class="actions">
         <div class="button submit-button">Resubmit...</div>
         {{#if canReview }}
           <div class="button success review-button">Review works</div>
         {{/if}}
       </div>
-      <div class="expand-history" style="display: none;">
-        <div class="hint">Earlier submitted works</div>
-        <div class="icon"></div>
-      </div>
     {{else}}
-      <div class="submit-date">submit by <strong>{{formatDate dueDate }}</strong></div>
-      <div class="button primary submit-button">Submit your work...</div>
+      {{ > assignment_state_new }}
     {{/if}}
   </section>
+</template>
+
+<template name="assignment_state_new">
+  <div class="filler work-data">
+    <div class="value">submit by <strong>{{formatDate dueDate }}</strong></div>
+  </div>
+  <div class="actions">
+    <div class="button primary submit-button">Submit your work...</div>
+  </div>
 </template>
