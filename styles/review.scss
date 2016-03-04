@@ -1,5 +1,6 @@
 @import 'layout/mixins';
 @import 'layout/board';
+@import 'layout/row';
 
 $line-height: 1.5rem !default;
 $board-space: 0.0625rem;
@@ -20,83 +21,8 @@ $board-space: 0.0625rem;
   }
 }
 
-.requirements.list {
-  @include board-list($widget-space: $board-space);
-  margin-bottom: $line-height * 2;
-
-  > header {
-    color: white;
-    margin-bottom: .75rem;
-  }
-}
-
-.requirements > .widget.requirement {
-  min-height: $line-height * 2;
-  border-radius: 2px;
-  border-width: 1px;
-}
-
 // Components
 .widget.requirement {
-  @include flex-row;
-
-  > .row-id {
-    flex: 0 0 4rem;
-    margin: -.75rem 1rem -.75rem -1rem;
-    padding: .75rem 1rem;
-
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-
-    background: rgba(0,0,0,.15);
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  &.group-1 > .row-id { background: transparentize(#2196F3, 0.2); }
-  &.group-2 > .row-id { background: transparentize(#FFA000, 0.2); }
-  &.group-3 > .row-id { background: transparentize(#FF5722, 0.2); }
-  &.group-4 > .row-id { background: transparentize(#D32F2F, 0.2); }
-
-  > .title {
-    white-space: normal;
-    min-height: $line-height*2;
-    vertical-align: middle;
-    flex: 1 1 auto;
-    font-size: 1rem;
-    line-height: $line-height;
-    overflow: hidden;
-    margin-right: 1rem;
-  }
-
-  > .score {
-    flex: 0 0 auto;
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    opacity: .6;
-
-    background: rgba(0,0,0,.05);
-
-    margin: -.75rem -1rem;
-    padding: .75rem 1rem;
-
-    > .label {
-      color: black;
-      font-weight: 400;
-    }
-
-    > .value {
-      font-weight: 300;
-      transform: scaleY(1.25);
-    }
-  }
-
   .comment-button,
   .reset-button,
   .check-switcher > .yes,

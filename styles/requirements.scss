@@ -1,0 +1,77 @@
+@import 'layout/board';
+@import 'layout/row';
+
+$widget-height: 9rem;
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$widget-width: 22.5rem;
+$board-space: 0.0625rem;
+$secondary-opacity: .6;
+
+.requirements.list {
+  @include board-list($widget-space: $board-space);
+  margin-bottom: $line-height * 2;
+
+  > header {
+    color: white;
+    margin-bottom: .75rem;
+  }
+}
+
+.widget.requirement.row {
+  border-width: 1px;
+  padding-top: calc(#{$line-height / 2} - 1px);
+  padding-bottom: calc(#{$line-height / 2} - 1px);
+  min-height: $line-height * 3;
+  margin-bottom: $board-space;
+  border-radius: 2px;
+
+  > .row-id {
+    flex: 0 0 4rem;
+    margin: -.75rem 1rem -.75rem -1rem;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    background: rgba(0,0,0,.15);
+    color: white;
+  }
+
+  &.group-1 > .row-id { background: transparentize(#2196F3, 0.2); }
+  &.group-2 > .row-id { background: transparentize(#FFA000, 0.2); }
+  &.group-3 > .row-id { background: transparentize(#FF5722, 0.2); }
+  &.group-4 > .row-id { background: transparentize(#D32F2F, 0.2); }
+
+  > .title { white-space: normal; }
+
+  > .score {
+    @include flex-container($direction: column);
+    justify-content: center;
+    opacity: $secondary-opacity;
+    background: #ECEFF1;
+    margin: -.75rem 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    > .label {
+      font-size: .75rem;
+      line-height: $line-height;
+      padding: 0;
+      color: rgba(0,0,0,$secondary-opacity);
+      font-weight: 400;
+    }
+
+    > .value {
+      font-weight: 400;
+      transform: scaleY(1.25);
+    }
+  }
+
+  transition: all .5s ease;
+
+  &:hover {
+    overflow: hidden;
+    border-color: transparentize(#008EBF, .4);
+  }
+}
+
