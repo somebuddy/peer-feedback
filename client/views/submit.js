@@ -34,20 +34,24 @@ Template.submit_work.events({
   'click .close-button': function (event) {
     $(event.currentTarget).closest('.modal-wrapper').removeClass('show');
   },
-  'submit form': function (event) {
-    console.log(this);
+  'submit form': function (event, template) {
     event.preventDefault();
 
     var work = {
       assignment: this._id,
-      userName: event.target.user_name.value,
       sourceUrl: event.target.source_url.value,
       previewUrl: event.target.preview_url.value,
       comments: event.target.comments.value,
-      createdAt: new Date(),
     };
-    Works.insert(work);
-    $(event.target).closest('.modal-wrapper').removeClass('show');
+
+    Meteor.call('submitWork', work, function(e, result) {
+      if (e) {
+        console.error('Error:', e);
+      } else {
+        console.info('Result:', result);
+        $(event.target).closest('.modal-wrapper').removeClass('show');
+      }
+    });
   },
   'click .modal-wrapper': function (event) {
     if ($(event.target).is($('.modal-wrapper'))) {

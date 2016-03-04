@@ -13,7 +13,7 @@ Meteor.methods({
     if (!Meteor.user() && this.connection) throw new Meteor.Error("not-allowed", "Anonymous user detected", "You must sign in to add websites");
 
     // checking data
-    if (!data) throw new Meteor.Error("empty-data", "Coudn't create assignment with out any data");
+    if (!data) throw new Meteor.Error("empty-data", "Coudn't create assignment without any data");
     if (!data.title) throw new Meteor.Error("empty-data", "Assignment must have name");
 
     return Assignments.insert(data);
