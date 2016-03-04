@@ -16,7 +16,8 @@ $secondary-opacity: .6 !default;
   font-family: 'Roboto', sans-serif;
 
   .work-data,
-  .actions {
+  .actions,
+  .work-state {
     @include flex-column;
     justify-content: center;
   }
@@ -65,12 +66,9 @@ $secondary-opacity: .6 !default;
       background: lighten(#4CAF50, 5%);
     }
   }
-}
 
-.assignment-state {
-  .evaluating-state {
-    text-align: center;
-    margin-right: 1rem;
+  .work-state.evaluating {
+    opacity: $secondary-opacity;
 
     > .icon {
       @include flex-center;
@@ -82,7 +80,7 @@ $secondary-opacity: .6 !default;
     }
   }
 
-  .ready-state {
+  .work-state.ready {
     position: relative;
     cursor: pointer;
     text-align: center;
@@ -90,26 +88,11 @@ $secondary-opacity: .6 !default;
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
-    flex: 0 0 6rem;
-    @include flex-center;
-    flex-direction: column;
 
-    > .title {
-      flex: 0 0 auto;
+    > .title, > .value {
       font-size: .75rem;
       white-space: nowrap;
       opacity: .8;
-      line-height: $line-height;
-    }
-
-    > .value {
-      white-space: nowrap;
-    }
-
-    > .value.total {
-      font-size: .75rem;
-      opacity: .8;
-      line-height: $line-height;
     }
 
     > .value.earned {
@@ -119,17 +102,18 @@ $secondary-opacity: .6 !default;
 
     > .report-button {
       @include absolute(0,0,0,0);
-      @include flex-center;
-      flex-direction: column;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .9);
+      @include flex-column;
+      justify-content: center;
       color: black;
+      background: rgba(255, 255, 255, .9);
+      border-radius: 50%;
       opacity: 0;
       z-index: 1;
       transition: all .5s ease;
 
       > .icon {
         font-size: 2rem;
+        color: #FFA000;
         transition: all .5s ease;
       }
 
@@ -140,19 +124,6 @@ $secondary-opacity: .6 !default;
       }
     }
 
-    transition: all .3s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, .8);
-      color: black;
-
-      & > .report-button {
-        opacity: 1;
-
-        > .icon {
-          color: #FFA000;
-        }
-      }
-    }
+    &:hover > .report-button { opacity: 1; }
   }
 }
