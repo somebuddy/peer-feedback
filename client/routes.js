@@ -81,7 +81,10 @@ Router.route('/reviews/:_id', function() {
 
 Router.route('/make-review/:_id', {
   subscriptions: function() {
-    return Meteor.subscribe('requirements', this.params._id);
+    return [
+      Meteor.subscribe('assignment', this.params._id),
+      Meteor.subscribe('requirements', this.params._id)
+    ];
   },
   action: function() {
     // selecting random work
