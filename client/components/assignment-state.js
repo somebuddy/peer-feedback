@@ -8,7 +8,11 @@ Template.assignment_state.helpers({
     return Works.find({assignment:this._id}).count();
   },
   'lastWork': function () {
-    return Works.findOne({assignment:this._id}, {sort: {createdAt: -1}});
+    Meteor.subscribe('user-works-for-assignment', this._id);
+    return Works.findOne({
+      assignment:this._id,
+      user: Meteor.userId(),
+    }, {sort: {createdAt: -1}});
   }
 });
 

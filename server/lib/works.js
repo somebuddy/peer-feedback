@@ -1,5 +1,12 @@
 /*global Works, Assignments */
 
+Meteor.publish('user-works-for-assignment', function(assignment) {
+  return Works.find({
+    assignment: assignment,
+    user: this.userId
+  });
+});
+
 Meteor.methods({
   'submitWork': function (data) {
     if (!Meteor.user() && this.connection) throw new Meteor.Error("not-allowed", "Anonymous user detected", "You must sign in to submit works");
@@ -13,6 +20,7 @@ Meteor.methods({
 
     if (!data.sourceUrl) new Meteor.Error("empty-data", "You must insert your work URL");
 
+    data.createdAt = new Date();
     return Works.insert(data);
   }
 });
