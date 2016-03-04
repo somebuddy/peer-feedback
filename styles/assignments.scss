@@ -6,6 +6,7 @@ $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $widget-width: 22.5rem;
 $board-space: .5rem;
+$secondary-opacity: .6;
 
 .assignments.grid {
   @include board-grid($widget-width, $board-space);
@@ -14,146 +15,55 @@ $board-space: .5rem;
 .assignment.widget {
   @include flex-inline-column;
   min-height: $widget-height;
-  padding: .75rem 1rem 0;
+
+  &, &:hover {
+    border-radius: .5rem;
+  }
 
   /* Components */
-
-  > .main {
-    display: flex;
-
-    .title {
-      white-space: normal;
-      min-height: $line-height;
-      overflow-y: hidden;
-      overflow-x: visible;
-      flex: 1 1 auto;
-      font-size: 1.25rem;
-      line-height: $line-height;
-      overflow: hidden;
-      margin-right: 1rem;
-      margin-bottom: .75rem;
-    }
+  > .main .title {
+    font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    line-height: $line-height;
   }
 
   > .menu {
-    position: absolute;
-    right: 0;
-    top: 0;
+    @include absolute(0, 0);
     padding: .5rem;
-    align-self: flex-start;
-    opacity: 0.3;
-    cursor: pointer;
-    transition: all .5s ease;
-
-    &:hover {
-      opacity: 1;
-    }
+    margin: 0;
   }
 
   > .secondary {
-    display: flex;
-    flex-flow: row wrap;
     font-size: .875rem;
     line-height: $line-height;
-    min-height: 1.5rem;
-    opacity: 0.6;
-    display: flex;
     overflow: hidden;
-
-    > * {
-      margin-right: 1rem;
-    }
-  }
-
-  .rating, .level {
-    opacity: 0.5;
-
-    .stars-rating {
-      height: $line-height;
-    }
-
-    .star-glyph {
-      font-size: 1rem;
-      line-height: $line-height;
-      font-family: 'Glyphicons Halflings';
-    }
-  }
-
-  .rating {
-    margin-left: auto;
-
-    .current-rating {
-      color: #FFA000;
-
-    }
-  }
-
-  .level {
-    .current-rating {
-      color: rgba(0,0,0,.5);
-    }
-
-    [data-stars="4"], [data-stars="5"] {
-      display: none;
-    }
-  }
-
-  > .tags {
-    margin: 0.75rem 0;
-  }
-
-  > .secondary.description {
-    flex: 1 1 auto;
-    max-height: $line-height * 3;
-    opacity: .4;
+    opacity: $secondary-opacity;
     transition: all .5s ease;
   }
 
-  > .state {
-    flex: 0 0 auto;
-    margin-top: .75rem;
-    position: relative;
+  > .secondary.description {
+    min-height: $line-height * 3;
+    max-height: $line-height * 3;
 
-    display: flex;
-    flex-flow: row wrap;
-    align-content: flex-end;
-    align-items: flex-end;
-
-    > .main, > .secondary {
-      display: flex;
-      align-content: center;
-      align-items: center;
-      position: relative;
-      width: 100%;
-
-      > .left {
-        margin-right: auto;
-        order: -1;
-      }
-
-      > .right {
-        margin-left: auto;
-        order: 999;
-      }
-
-      > .center {
-        margin-right: auto;
-        margin-left: auto;
-      }
+    > .title {
+      align-items: flex-start;
+      white-space: normal;
+      max-height: $line-height * 3;
     }
+  }
 
-    > .main {
-      font-size: .875rem;
-      line-height: 1rem;
-      padding-bottom: .5rem;
-      opacity: 0.8;
+  > .state {
+    > .score,
+    > .due-date {
+      .title {
+        margin-right: .5rem;
+      }
     }
   }
 
   &.overdue:not(.done) {
     .due-date {
-      color: darkred;
-      color: red;
+      color: #d50000;
     }
   }
 
@@ -161,12 +71,11 @@ $board-space: .5rem;
 
   &:hover {
     overflow: hidden;
-    border-radius: 5px;
     border-color: transparentize(#008EBF, .4);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
-    .secondary.description {
-      opacity: .7;
+    .secondary {
+      opacity: 1;
     }
   }
 }

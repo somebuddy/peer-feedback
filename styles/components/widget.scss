@@ -6,7 +6,6 @@ $column-width: 1rem !default;
 .widget {
   position: relative;
   overflow: hidden;
-  padding: ($line-height / 2) $column-width;
 
   background: white;
   border-radius: 2px;

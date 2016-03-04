@@ -1,14 +1,14 @@
-@import '../layout/flex';
+@import '../layout/row';
 
 $line-height: 1.5rem !default;
 $tag-base-height: $line-height / 2;
 $column-width: 1rem !default;
 
 .tags {
-  @include flex-container($wrap: wrap);
-  @include flex-align(center);
+  @include row-layout;
 
   > .tag {
+    align-self: center;
     white-space: nowrap;
     font-size: $tag-base-height;
     line-height: $tag-base-height;
