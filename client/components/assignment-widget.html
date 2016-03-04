@@ -1,0 +1,31 @@
+<template name="assignment_widget">
+  <article class="box widget assignment {{ dueCSSClass dueDate }} ">
+    <div class="row main">
+      <div class="title">{{ title }}</div>
+    </div>
+    <a class="menu button flat disabled">
+      <span class="glyphicon glyphicon-option-vertical"></span>
+    </a>
+    <div class="row secondary description">
+      <div class="title">{{ description }}</div>
+    </div>
+    <div class="row tags secondary">
+      {{#each tags}}
+      <div class="tag">{{ this }}</div>
+      {{/each}}
+    </div>
+    <div class="row state secondary">
+      <div class="score">
+        <div class="title"><strong>Points:</strong></div>
+        <div class="value">{{ score }}</div>
+      </div>
+      <div class="filler"></div>
+      {{#if dueDate }}
+      <div class="due-date">
+        <div class="title">due</div>
+        <div class="value"><strong>{{ timeLeft dueDate }}</strong></div>
+      </div>
+      {{/if}}
+    </div>
+  </article>
+</template>
