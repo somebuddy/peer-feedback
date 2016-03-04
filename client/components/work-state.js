@@ -1,6 +1,6 @@
 /*global Router, Requirements, lodash, Reviews */
 
-Template.workReviewState.helpers({
+Template.work_state.helpers({
   'isReady': function () {
     return Reviews.find({work: this.work._id}).count() >= 3;
   },
@@ -31,9 +31,8 @@ Template.workReviewState.helpers({
   }
 });
 
-Template.workReviewState.events({
+Template.work_state.events({
   'click .ready-state': function () {
     Router.go('/work/' + this.work._id + '/summary');
   }
 });
-

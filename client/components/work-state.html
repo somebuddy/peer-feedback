@@ -1,0 +1,20 @@
+<template name="work_state">
+  {{#if isReady }}
+    <div class="ready-state">
+      {{#with workReviewSummary }}
+        <div class="title">earned</div>
+        <div class="value earned">{{ score }}</div>
+        <div class="value total">of {{ total }}</div>
+        <div class="report-button">
+          <i class="icon fa fa-bars"></i>
+          <div class="hint">view<br/>report</div>
+        </div>
+      {{/with}}
+    </div>
+  {{else}}
+    <div class="evaluating-state">
+      <div class="icon glyphicon glyphicon-hourglass"></div>
+      <div class="hint">Evaluating...</div>
+    </div>
+  {{/if}}
+</template>
