@@ -1,0 +1,147 @@
+/*
+** Styles for one row container
+*/
+
+@import 'flex';
+
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$row-border-width: 2px;
+$row-padding: $column-width;
+$row-child-margin: $column-width;
+$row-marker-width: $line-height; // left side row element: icon, checkbox etc.
+$secondary-opacity: .6;
+
+@mixin row-layout {
+  @include flex-row;
+  border-top: $row-border-width solid transparent;
+  border-bottom: $row-border-width solid transparent;
+  padding: 0 0 0 $row-padding;
+  margin: 0;
+  line-height: $line-height;
+
+  /* Default child styles */
+  > * {
+    @include flex-container(inline-flex);
+    @include flex-align(center, center, flex-start);
+    @include flex-child-fixed;
+    flex-basis: auto;
+    margin-right: $row-child-margin;
+
+    &:last-child {
+      margin-right: $row-padding;
+    }
+  }
+}
+
+/**
+* Row components
+*/
+
+@mixin row-marker {
+  /* Rules for first row element (icon, avatar, checkbox etc.) */
+  flex-basis: $row-marker-width;
+  order: -1;
+}
+
+@mixin row-filler {
+  /* Element that fill free space in row */
+  @include flex-child-fluid;
+  flex-basis: 0;
+  min-width: 0;
+}
+
+@mixin row-text-line {
+  /* One line text in row */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin row-column {
+  /* Fixed minimum size without padding */
+  flex-basis: $column-width;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+@mixin row-cell {
+  /* element that has own padding and margin between neighbors not required */
+  padding: 0 $row-child-margin;
+  margin: 0;
+  margin-left: -$row-child-margin;
+  &:first-child { margin-left: -$row-padding; }
+
+  & + .block,
+  & + .cell,
+  & + .button {
+    margin-left: 0;
+  }
+}
+
+@mixin row-block {
+  /* Styles of element that have own padding, width and height */
+  @include row-cell;
+  align-self: center;
+  &:last-child { margin-right: $row-padding; }
+}
+
+@mixin row-button {
+  @include row-cell;
+  color: inherit;
+  background: transparent;
+  border-color: transparent;
+  font-size: 1rem;
+}
+
+@mixin row-splitter {
+  /* 1 pixel element then fills element margin */
+  @include flex-child-fixed;
+  flex-basis: 1px;
+  align-self: center;
+  height: $line-height;
+
+  margin: 0 calc(#{$row-child-margin} + 1px) 0 0;
+  & + .cell, & + .block, & + .button {
+    margin-left: -$row-child-margin;
+  }
+
+  background-color: rgba(0,0,0,.15);
+  &.dark  { background-color: rgba(0,0,0,.3); }
+  &.light { background-color: rgba(255,255,255,.2); }
+}
+
+@mixin row-components {
+  /* Row with set of predefined child elements */
+  > .row-icon { @include row-marker; }
+
+  > .title, > .label {
+    @include row-text-line;
+    font-weight: 400;
+  }
+
+  > .title, > .filler { @include row-filler; }
+  > .icon, > .spacer { @include row-column; }
+  > .cell, > .toolbar, > nav { @include row-cell; }
+  > .splitter { @include row-splitter; }
+  > .block { @include row-block; }
+  > .button { @include row-button; }
+
+  &.right {
+    > .row-icon { order: 999; }
+  }
+
+  > .static {
+    opacity: $secondary-opacity;
+  }
+}
+
+
+/* CSS Classes */
+
+.row {
+  @include row-layout;
+  @include row-components;
+  width: 100%;
+  min-height: $line-height*2;
+}
