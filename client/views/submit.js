@@ -28,7 +28,7 @@ Template.submitted_works_list.helpers({
       avg: Math.round(score / reviews.length, 2)
     };
   }
-})
+});
 
 Template.submit_work.events({
   'click .close-button': function (event) {
@@ -44,11 +44,16 @@ Template.submit_work.events({
       comments: event.target.comments.value,
     };
 
+    var feedback = $(template.find('.feedback'));
+
     Meteor.call('submitWork', work, function(e, result) {
       if (e) {
-        console.error('Error:', e);
+        console.error(e);
+        feedback.addClass('error');
+        feedback.html(e.message + (e.details ? " (" + e.details + ")" : ""));
       } else {
         console.info('Result:', result);
+        feedback.removeClass('error hint success');
         $(event.target).closest('.modal-wrapper').removeClass('show');
       }
     });

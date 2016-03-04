@@ -5,3 +5,32 @@ $board-space: -1px;
   display: flex;
   flex-direction: column;
 }
+
+@mixin feedback-colorize ($color) {
+  color: $color;
+  background: transparentize($color, .95);
+  border-color: transparentize($color, .7);
+}
+
+#submit-work-modal .feedback {
+  padding: .75rem 1rem;
+  margin-bottom: .75rem;
+  border: 1px solid;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: $line-height;
+  transition: all .5s ease;
+
+  &:empty {
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    border-width: 0;
+  }
+
+  @include feedback-colorize(#546E7A);
+  &.error { @include feedback-colorize(#d50000); }
+  &.info { @include feedback-colorize(#0D47A1); }
+  &.success { @include feedback-colorize(#1B5E20); }
+}
