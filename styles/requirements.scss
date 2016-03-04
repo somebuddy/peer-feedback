@@ -67,7 +67,6 @@ $secondary-opacity: .6;
   transition: all .5s ease;
 
   &:hover {
-    overflow: hidden;
     border-color: transparentize(#008EBF, .4);
   }
 }

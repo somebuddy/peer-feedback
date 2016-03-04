@@ -23,6 +23,33 @@ $board-space: 0.0625rem;
 
 // Components
 .widget.requirement {
+  > .check-switcher {
+    margin: -.75rem 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    > .yes:hover, &.yes > .yes {
+      color: #388E3C;
+
+      &:before {
+        background: transparentize(#388E3C, .4);
+        color: white;
+      }
+    }
+
+    > .no:hover, &.no > .no {
+      color: #F44336;
+
+      &:before {
+        background: transparentize(#F44336, .4);
+        color: white;
+      }
+    }
+
+    > .yes:before { content: "\e013"; }
+    > .no:before { content: "\e014"; }
+  }
+
   .comment-button,
   .reset-button,
   .check-switcher > .yes,
@@ -80,38 +107,6 @@ $board-space: 0.0625rem;
       z-index: 11;
       transition: z-index 1s step-start;
     }
-  }
-
-  > .check-switcher {
-    flex: 0 0 auto;
-    display: flex;
-    flex-flow: row nowrap;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: center;
-    margin: -.75rem -1rem;
-    padding: .75rem 1rem;
-
-    > .yes:hover, &.yes > .yes {
-      color: #388E3C;
-
-      &:before {
-        background: transparentize(#388E3C, .4);
-        color: white;
-      }
-    }
-
-    > .no:hover, &.no > .no {
-      color: #F44336;
-
-      &:before {
-        background: transparentize(#F44336, .4);
-        color: white;
-      }
-    }
-
-    > .yes:before { content: "\e013"; }
-    > .no:before { content: "\e014"; }
   }
 }
 
