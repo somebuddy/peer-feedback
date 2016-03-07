@@ -24,3 +24,13 @@
   width: $width;
   height: $height;
 }
+
+@mixin min-size($width: null, $height: null) {
+  min-width: $width;
+  min-height: $height;
+}
+
+@mixin max-size($width: null, $height: null) {
+  max-width: $width;
+  max-height: $height;
+}
