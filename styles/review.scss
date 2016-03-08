@@ -1,6 +1,8 @@
 @import 'layout/mixins';
 @import 'layout/board';
 @import 'layout/row';
+@import 'layout/flex';
+@import 'helpers/no-select';
 
 $line-height: 1.5rem !default;
 $board-space: 0.0625rem;
@@ -31,7 +33,7 @@ $board-space: 0.0625rem;
     > .yes:hover, &.yes > .yes {
       color: #388E3C;
 
-      &:before {
+      &:before, &:after {
         background: transparentize(#388E3C, .4);
         color: white;
       }
@@ -40,61 +42,24 @@ $board-space: 0.0625rem;
     > .no:hover, &.no > .no {
       color: #F44336;
 
-      &:before {
+      &:before, &:after {
         background: transparentize(#F44336, .4);
         color: white;
       }
     }
 
-    > .yes:before { content: "\e013"; }
-    > .no:before { content: "\e014"; }
+    > .yes:before, > .yes:after { content: "\e013"; }
+    > .no:before, > .no:after { content: "\e014"; }
   }
 
   .comment-button,
   .reset-button,
   .check-switcher > .yes,
   .check-switcher > .no {
+    @include coin-button;
     margin-left: 1rem;
-    position: relative;
-    padding-left: 2.5rem;
-    min-height: 2.5rem;
-    min-width: 2.5rem;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    font-size: .875rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, .5);
-    opacity: .6;
-    cursor: pointer;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
     &:before, &:after {
-      @include absolute(50%, auto, auto, 0);
-      transform: translateY(-50%);
-      height: 2rem;
-      width: 2rem;
-      display: flex;
-      align-content: center;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-
-      background: rgba(0, 0, 0, .1);
-      color: rgba(0, 0, 0, .2);
-      border-radius: 50%;
       font-family: 'Glyphicons Halflings';
-
-      transition: all .3s ease;
-    }
-
-    &:hover {
-      opacity: 1;
     }
   }
 
