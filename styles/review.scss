@@ -7,15 +7,17 @@
 @import 'app/comment-button';
 
 $line-height: 1.5rem !default;
+$column-width: 1rem !default;
 $board-space: 0.0625rem;
 
-.page > header {
+.page > header.review-header {
+  padding-bottom: 9rem;
+
   section.work {
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex-column;
     max-width: 60rem;
     margin: 0 auto;
-    padding: .75rem 1rem;
+    padding: $line-height $column-width;
     border-top: 1px solid rgba(255,255,255,.15);
     border-bottom: 1px solid rgba(255,255,255,.15);
 

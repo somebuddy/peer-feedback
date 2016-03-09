@@ -37,6 +37,12 @@ Template.assignment_make_review_header.helpers({
   'work': function () {
     return WorkForReview.findOne();
   },
+  'workUserName': function (id) {
+    Meteor.subscribe('user-name', id);
+    var user = Meteor.users.findOne({_id: id});
+    console.log(id, user);
+    return user && user.username ? user.username : 'anonymous user';
+  },
   'assignment': function () {
     return Assignments.findOne({_id: Router.current().params._id});
   }
