@@ -1,0 +1,52 @@
+@import '../buttons/coin-button';
+
+.comment-button {
+  @include coin-button;
+  &:before, &:after { font-family: FontAwesome; }
+
+  // default state: empty -> add
+  &:before {
+    content: "\f0e5"; // comment
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .4);
+  }
+
+  &:after {
+    content: "\f067"; // plus
+    background: #CDDC39;
+    color: white;
+    padding: 3px 0 0 0;
+  }
+
+  &.completed:before, &.edit:before { color: white; }
+
+  &.completed {
+    &:before {
+      content: "\f0e5"; // comment
+      background: rgba(0, 0, 0, .5);
+    }
+
+    &:after {
+      content: "\f044"; // edit
+      background: #FFA000;
+      padding: 3px 0 0 3px;
+    }
+  }
+
+  // edit state: check
+  z-index: 1;
+  transition: z-index 1s step-end;
+
+  &.edit, &.completed.edit {
+    opacity: 1;
+    z-index: 11;
+    transition: z-index 1s step-start;
+
+    &:before, &:after {
+      content: "\f00c"; // check button
+      opacity: 1;
+      background: lighten(#388E3C, 20%);
+      padding: 2px 0 0 1px;
+    }
+  }
+}

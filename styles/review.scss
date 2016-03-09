@@ -3,6 +3,8 @@
 @import 'layout/row';
 @import 'layout/flex';
 @import 'helpers/no-select';
+@import 'buttons/coin-button';
+@import 'app/comment-button';
 
 $line-height: 1.5rem !default;
 $board-space: 0.0625rem;
@@ -24,6 +26,16 @@ $board-space: 0.0625rem;
 }
 
 // Components
+.reset-button,
+.check-switcher > .yes,
+.check-switcher > .no {
+  @include coin-button;
+  margin-left: 1rem;
+  &:before, &:after {
+    font-family: 'Glyphicons Halflings';
+  }
+}
+
 .widget.requirement {
   > .check-switcher {
     margin: -.75rem 0;
@@ -51,28 +63,6 @@ $board-space: 0.0625rem;
     > .yes:before, > .yes:after { content: "\e013"; }
     > .no:before, > .no:after { content: "\e014"; }
   }
-
-  .comment-button,
-  .reset-button,
-  .check-switcher > .yes,
-  .check-switcher > .no {
-    @include coin-button;
-    margin-left: 1rem;
-    &:before, &:after {
-      font-family: 'Glyphicons Halflings';
-    }
-  }
-
-  .comment-button {
-    z-index: 1;
-    align-self: center;
-    transition: z-index 1s step-end;
-
-    &.edit {
-      z-index: 11;
-      transition: z-index 1s step-start;
-    }
-  }
 }
 
 /* Elements for requirement commenting
@@ -83,109 +73,6 @@ $board-space: 0.0625rem;
 
 .check-list .widget.requirement {
   overflow: visible;
-}
-
-.requirements.list > .widget.requirement .comment-button {
-  opacity: 1;
-
-  &:before, &:after {
-    font-family: FontAwesome;
-    transition: all .4s ease;
-  }
-
-  // default state: empty -> add
-  &:before {
-    content: "\f0e5";
-    background: rgba(0, 0, 0, .08);
-    color: rgba(0, 0, 0, .4);
-
-    opacity: .8;
-    transform: translateY(-50%) scale(1);
-  }
-
-  &:after {
-    content: "\f067";
-    background: #CDDC39;
-    color: white;
-    padding: 3px 0 0 0;
-
-    opacity: 0;
-    transform: translateY(-50%) scale(0.01);
-  }
-
-  // Hover transtions
-  &:hover:before {
-    opacity: 0;
-    transform: translateY(-50%) scale(0.01);
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-  }
-
-
-  &.completed {
-    &:before {
-      content: "\f0e5";
-      background: rgba(0, 0, 0, .5);
-      color: white;
-
-      opacity: .8;
-      transform: translateY(-50%) scale(1);
-    }
-
-    &:after {
-      content: "\f044";
-      background: #FFA000;
-      color: white;
-      padding: 3px 0 0 4px;
-
-      opacity: 0;
-      transform: translateY(-50%) scale(0.01);
-    }
-
-    // Hover transtions
-    &:hover:before {
-      opacity: 0;
-      transform: translateY(-50%) scale(0.01);
-    }
-
-    &:hover:after {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-  }
-
-  // edit state: check
-  &.edit, &.completed.edit {
-    &:before, &:after {
-      content: "\f00c";
-      background: lighten(#388E3C, 20%);
-      color: white;
-      padding: 2px 0 0 1px;
-    }
-
-    &:before {
-      opacity: 0;
-      transform: translateY(-50%) scale(0.01);
-    }
-
-    &:after {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-
-    &:hover:before {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-
-    &:hover:after {
-      opacity: 0;
-      transform: translateY(-50%) scale(0.01);
-    }
-  }
 }
 
 .requirements.list > .widget.requirement .comment-field {
