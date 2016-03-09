@@ -1,5 +1,9 @@
 /*global moment, Router */
 
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});
+
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('llll');
 });
