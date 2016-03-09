@@ -1,5 +1,9 @@
 /*global Requirements, Works, lodash */
 
+Meteor.publish('user-name', function (id) {
+  return Meteor.users.find({_id: id});
+});
+
 Meteor.publish('requirements', function(assignment) {
   return Requirements.find({assignment: assignment});
 });
