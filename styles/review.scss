@@ -25,56 +25,69 @@ $board-space: 0.0625rem;
   }
 }
 
-// Components
+// Widget
+.check-list .widget.requirement {
+  overflow: visible;
+  .check-switcher { margin-right: 0; }
+}
+
+// Buttons
 .reset-button,
 .check-switcher > .yes,
 .check-switcher > .no {
   @include coin-button;
-  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@mixin check-switcher-colorize($color, $icon-color: white) {
+  color: $color;
+
   &:before, &:after {
-    font-family: 'Glyphicons Halflings';
+    background: transparentize($color, .4);
+    color: $icon-color;
   }
 }
 
-.widget.requirement {
-  > .check-switcher {
-    margin: -.75rem 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.check-switcher {
+  > .yes:before, > .yes:after { content: "\f00c"; }
+  > .yes:hover, &.yes > .yes { @include check-switcher-colorize(#388E3C); }
 
-    > .yes:hover, &.yes > .yes {
-      color: #388E3C;
+  > .no:before, > .no:after { content: "\f00d"; }
+  > .no:hover, &.no > .no { @include check-switcher-colorize(#F44336); }
+}
 
-      &:before, &:after {
-        background: transparentize(#388E3C, .4);
-        color: white;
-      }
-    }
+.reset-button {
+  @include absolute(50%);
+  transform: translateY(-50%) scale(0.01);
+  margin-left: -6rem;
+  z-index: 11;
+  opacity: 0;
+  transition: opacity .3s ease, transform .3s ease;
 
-    > .no:hover, &.no > .no {
-      color: #F44336;
+  &:before {
+    content: "\f0e2";
+    background: #afafaf;
+    color: white;
+    opacity: 1;
+    transform: translateY(-50%) scale(1) rotate(0deg);
+    transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
+  }
 
-      &:before, &:after {
-        background: transparentize(#F44336, .4);
-        color: white;
-      }
-    }
-
-    > .yes:before, > .yes:after { content: "\e013"; }
-    > .no:before, > .no:after { content: "\e014"; }
+  &:hover:before {
+    background: #F44336;
+    opacity: 1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transform: translateY(-50%) scale(1.2) rotate(-360deg);
   }
 }
 
-/* Elements for requirement commenting
-  - comment button (with states)
-  - comment field
-  - reset comment field button
-*/
-
-.check-list .widget.requirement {
-  overflow: visible;
+.requirements.list > .widget.requirement .comment-button.edit + .reset-button {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  transition: opacity .2s ease, transform .4s ease .1s;
 }
 
+// Comment form
 .requirements.list > .widget.requirement .comment-field {
   @include absolute(50%);
   background: rgba(255, 255, 255, .05);
@@ -116,35 +129,4 @@ $board-space: 0.0625rem;
     transform: translateX(-100%) scale(1);
     transition: opacity .5s ease, transform .5s ease .2s, z-index .7s step-start;
   }
-}
-
-.requirements.list > .widget.requirement .reset-button {
-  @include absolute(50%);
-  transform: translateY(-50%) scale(0.01);
-  margin-left: -6rem;
-  z-index: 11;
-  opacity: 0;
-  transition: opacity .3s ease, transform .3s ease;
-
-  &:before {
-    content: "\f0e2";
-    background: #afafaf;
-    font-family: FontAwesome;
-    color: white;
-    opacity: 1;
-    transform: translateY(-50%) scale(1) rotate(0deg);
-  }
-
-  &:hover:before {
-    background: #F44336;
-    transform: translateY(-50%) scale(1.2) rotate(-360deg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
-  }
-}
-
-.requirements.list > .widget.requirement .comment-button.edit + .reset-button {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
-  transition: opacity .2s ease, transform .4s ease .1s;
 }
