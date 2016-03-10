@@ -70,9 +70,9 @@
         <header class="row widget requirement group-{{ task }}">
           <div class="row-id">{{sum @index 1 }}</div>
           <div class="title">{{ title }}</div>
-          <div class="score {{requirementScoreRate this}}">
-            <span class="label">Earned: </span>
-            <span class="value">{{ result }}</span>
+          <div class="block score {{requirementScoreRate this}}">
+            <span class="value">{{ this.result }}</span>
+            <span class="total">of {{ this.total }}</span>
           </div>
         </header>
         <div class="reviews requirement">

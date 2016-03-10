@@ -6,6 +6,10 @@ $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $secondary-opacity: .6 !default;
 
+$success-color: #76b900;
+$fail-color: #FF3C00;
+$neutral-color: #37474F;
+
 .report.list {
   background: white;
   padding: 0;
@@ -117,9 +121,9 @@ $secondary-opacity: .6 !default;
     border-radius: 50%;
     color: white;
 
-    background: #37474F;
-    &.high { background: #43A047; }
-    &.low { background: #FF3C00; }
+    background: $neutral-color;
+    &.high { background: $success-color; }
+    &.low { background: $fail-color; }
   }
 
   > .feedback {
@@ -180,38 +184,38 @@ $secondary-opacity: .6 !default;
 
     .row-id {
       background: transparent;
-      color: rgba(0,0,0,.4);
+      color: rgba(0,0,0,.3);
     }
 
     > .title {
-      margin-right: 1rem;
       font-size: .9375rem;
-      line-height: $line-height;
+      color: rgba(0,0,0, $secondary-opacity);
     }
 
     > .score {
-      color: white;
-      margin-left: 0;
+      @include flex-align(center, center, center);
+      @include min-size($column-width * 3, $column-width * 3);
+      padding: $line-height/4 $column-width;
+      margin-right: $column-width;
+      border-radius: 3px;
       opacity: 1;
+      color: white;
+      background: $neutral-color;
+      &.high { background: $success-color; }
+      &.low { background: $fail-color; }
 
-      > .label {
-        color: white;
+      .title, .total { opacity: $secondary-opacity; }
+
+      .title, .total {
+        font-size: .625rem;
+        line-height: .75rem;
+        text-transform: uppercase;
       }
 
-      > .value {
-        @include flex-center;
-        font-size: 1.5rem;
+      .value {
+        font-size: 1.25rem;
+        line-height: $line-height;
         font-weight: 600;
-      }
-
-      &.high {
-        background: #47bc00;
-        color: white;
-      }
-
-      &.low {
-        background: #fe230a;
-        color: white;
       }
     }
   }
