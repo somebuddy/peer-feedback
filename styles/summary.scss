@@ -1,11 +1,12 @@
 @import 'layout/mixins';
 @import 'layout/flex';
 
-$line-height: 1.5rem;
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
 
 .report.list {
   background: white;
-  padding: 1.5rem 2rem;
+  padding: $line-height $column-width * 2;
   border-radius: 4px;
   border: 1px solid rgba(0,0,0,0.1);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -15,24 +16,12 @@ $line-height: 1.5rem;
 .report.list {
   > section > header {
     color: rgba(0, 0, 0, .7);
-
-    h3 {
-      margin: 0;
-    }
+    h3 { margin: 0; }
   }
 
-  > section.summary,
-  > section.details {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-  }
-
-  > section.summary {
+  > section {
+    @include flex-column;
     margin-bottom: 1.5rem;
-  }
-
-  > section.details {
   }
 
   .work.summary {

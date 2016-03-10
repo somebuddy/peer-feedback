@@ -1,4 +1,4 @@
-<template name="work_sammary_header">
+<template name="work_summary_header">
   <header>
     <h1 class="text-center">{{ title }}</h1>
     <section class="description">
@@ -9,60 +9,76 @@
 
 <template name="work_summary_content">
   <section class="content report list">
-    <section class="summary">
-      <header>
-        <h3>Summary</h3>
-      </header>
-      <div class="work summary">
-        <div class="details">
-          <div><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
-          <div><a href="{{ previewUrl }}">{{ previewUrl }}</a></div>
-          <div>submitted at <strong>{{formatDate createdAt }}</strong> by <strong>{{ getUserName user }}</strong></div>
-        </div>
-        {{#with workScore }}
-        <div class="score {{ workScoreRate }}" >
-          <span class="label">Earned points:</span>
-          <span class="value">{{ this.result }}</span>
-          <span class="label">of {{ this.total }}</span>
-        </div>
-        {{/with}}
+    {{ > work_summary_result }}
+    {{ > work_reviews_results }}
+    {{ > work_reviews_details }}
+  </section>
+</template>
+
+<template name="work_summary_result">
+  <section class="summary">
+    <header>
+      <h3>Summary</h3>
+    </header>
+    <div class="work summary">
+      <div class="details">
+        <div><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
+        <div><a href="{{ previewUrl }}">{{ previewUrl }}</a></div>
+        <div>submitted at <strong>{{formatDate createdAt }}</strong> by <strong>{{ getUserName user }}</strong></div>
       </div>
+      {{#with workScore }}
+      <div class="score {{ workScoreRate }}" >
+        <span class="label">Earned points:</span>
+        <span class="value">{{ this.result }}</span>
+        <span class="label">of {{ this.total }}</span>
+      </div>
+      {{/with}}
+    </div>
+  </section>
+</template>
+
+<template name="work_reviews_results">
+  <section class="reviews-summary">
+    <header>
       <h3>Reviews</h3>
-      <section class="reviews">
-        {{#each reviews}}
-        <article class="review summary {{reviewFeedbackStyle this}}">
-          <div class="user">{{ getUserName user }}</div>
-          <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-          <div class="feedback">{{ this.feedback }}</div>
-        </article>
-        {{/each}}
-      </section>
-    </section>
-    <section class="details">
-      <header>
-        <h4>Details</h4>
-      </header>
-      {{#each requirementsSummary}}
-        <article class="requirement summary">
-          <header class="row widget requirement group-{{ task }}">
-            <div class="row-id">{{sum @index 1 }}</div>
-            <div class="title">{{ title }}</div>
-            <div class="score {{requirementScoreRate this}}">
-              <span class="label">Earned: </span>
-              <span class="value">{{ result }}</span>
-            </div>
-          </header>
-          <div class="reviews requirement">
-            {{#each this.reviews}}
-            <article class="review summary {{reviewFeedbackStyle this}}">
-              <div class="user">{{ getUserName user }}</div>
-              <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
-              <div class="feedback">{{ this.feedback }}</div>
-            </article>
-            {{/each}}
-          </div>
-        </article>
+    </header>
+    <section class="reviews">
+      {{#each reviews}}
+      <article class="review summary {{reviewFeedbackStyle this}}">
+        <div class="user">{{ getUserName user }}</div>
+        <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
+        <div class="feedback">{{ this.feedback }}</div>
+      </article>
       {{/each}}
     </section>
+  </section>
+</template>
+
+<template name="work_reviews_details">
+  <section class="reviews-details">
+    <header>
+      <h4>Details</h4>
+    </header>
+    {{#each requirementsSummary}}
+      <article class="requirement summary">
+        <header class="row widget requirement group-{{ task }}">
+          <div class="row-id">{{sum @index 1 }}</div>
+          <div class="title">{{ title }}</div>
+          <div class="score {{requirementScoreRate this}}">
+            <span class="label">Earned: </span>
+            <span class="value">{{ result }}</span>
+          </div>
+        </header>
+        <div class="reviews requirement">
+          {{#each this.reviews}}
+          <article class="review summary {{reviewFeedbackStyle this}}">
+            <div class="user">{{ getUserName user }}</div>
+            <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
+            <div class="feedback">{{ this.feedback }}</div>
+          </article>
+          {{/each}}
+        </div>
+      </article>
+    {{/each}}
   </section>
 </template>

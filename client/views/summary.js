@@ -46,7 +46,7 @@ function aggregateRequirements(work) {
   });
 }
 
-Template.work_summary_content.helpers({
+Template.work_summary_result.helpers({
   'workScore': function () {
     var reviews = aggregateRequirements(this);
 
@@ -59,12 +59,14 @@ Template.work_summary_content.helpers({
     var r = (this.result || 0) / (this.total || 1);
     return r >= 0.8 ? 'high' : 'low';
   },
+});
+
+Template.work_reviews_results.helpers({
   'reviews': function () {
-    console.log(this);
     return Reviews.find({work: this._id});
   },
-  'reviewScore': function (review) {
-    return getReviewResult(review).earned;
+  'reviewFeedbackStyle': function (review) {
+    return review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
   },
   'scoreRate': function(review) {
     var s = getReviewResult(review).earned;
@@ -72,16 +74,19 @@ Template.work_summary_content.helpers({
     var r = (s || 0) / (t || 1);
     return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '');
   },
-  'requirements': function () {
-    return Requirements.find({assignment: this.assignment});
+  'reviewScore': function (review) {
+    return getReviewResult(review).earned;
   },
-  'reviewFeedbackStyle': function (review) {
-    return review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+});
+
+Template.work_reviews_details.helpers({
+  'requirementsSummary': function () {
+    return aggregateRequirements(this);
   },
   'requirementScoreRate': function (r) {
     return r && (r.result > 0) ? 'high' : 'low';
   },
-  'requirementsSummary': function () {
-    return aggregateRequirements(this);
-  }
-})
+  'reviewFeedbackStyle': function (review) {
+    return review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+  },
+});

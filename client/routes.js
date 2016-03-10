@@ -103,7 +103,7 @@ Router.route('/work/:id/summary', {
   },
   action: function () {
     this.render('navbar', { to: 'navbar' });
-    this.render('work_sammary_header', {
+    this.render('work_summary_header', {
       to: 'header',
       data: function () {
         var work = Works.findOne({_id: this.params.id});
