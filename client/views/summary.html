@@ -20,14 +20,21 @@
     <header>
       <h3>Summary</h3>
     </header>
-    <div class="work summary">
-      <div class="details">
-        <div><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
-        <div><a href="{{ previewUrl }}">{{ previewUrl }}</a></div>
-        <div>submitted at <strong>{{formatDate createdAt }}</strong> by <strong>{{ getUserName user }}</strong></div>
+    <div class="row work summary">
+      <div class="filler details">
+        <div class="user-name">{{ getUserName user }}</div>
+        <div>Source code: <a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
+        <div>Preview:
+          {{#if previewUrl }}
+            <a href="{{ previewUrl }}">{{ previewUrl }}</a>
+          {{else}}
+            <strong>&lt; without preview &gt;</strong>
+          {{/if}}
+        </div>
+        <div class="submit-date">submitted at <strong>{{formatDate createdAt }}</strong></div>
       </div>
       {{#with workScore }}
-      <div class="score {{ workScoreRate }}" >
+      <div class="cell score {{ workScoreRate }}" >
         <span class="label">Earned points:</span>
         <span class="value">{{ this.result }}</span>
         <span class="label">of {{ this.total }}</span>
@@ -39,10 +46,8 @@
 
 <template name="work_reviews_results">
   <section class="reviews-summary">
-    <header>
-      <h3>Reviews</h3>
-    </header>
-    <section class="reviews">
+    <section class="row reviews">
+      <div class="filler"></div>
       {{#each reviews}}
       <article class="review summary {{reviewFeedbackStyle this}}">
         <div class="user">{{ getUserName user }}</div>
@@ -70,6 +75,7 @@
           </div>
         </header>
         <div class="reviews requirement">
+          <div class="filler"></div>
           {{#each this.reviews}}
           <article class="review summary {{reviewFeedbackStyle this}}">
             <div class="user">{{ getUserName user }}</div>

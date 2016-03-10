@@ -6,10 +6,16 @@ $column-width: 1rem !default;
 
 .report.list {
   background: white;
-  padding: $line-height $column-width * 2;
+  padding: 0;
+  margin: 0 $column-width $line-height;
   border-radius: 4px;
   border: 1px solid rgba(0,0,0,0.1);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+  @media (min-width: 62rem) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 // Components
@@ -21,229 +27,195 @@ $column-width: 1rem !default;
 
   > section {
     @include flex-column;
-    margin-bottom: 1.5rem;
+    padding: $line-height $column-width * 2;
   }
 
-  .work.summary {
+  > section.summary { background: #CFD8DC; }
+  > section.reviews-summary { background: #ECEFF1; }
+}
+
+.report.list .work.summary {
+  margin: 0 (-$column-width);
+  .details, .score { @include flex-column; }
+
+  .score {
+    @include flex-align(center, center, center);
+    color: #607D8B;
+    &.high { color: #2E7D32; }
+    &.low { color: #d50000; }
+
+    .label {
+      color: inherit;
+      font-size: .75rem;
+      line-height: $line-height / 2;
+      text-align: center;
+    }
+
+    .value {
+      flex: 0 0 3.75rem;
+      @include flex-center;
+      font-size: 3.75rem;
+    }
+  }
+}
+
+.report.list .review.summary {
+  display: flex;
+  justify-content: center;
+
+  > .score {
+    order: 0;
+    @include flex-center;
+    @include size(3.5rem, 3.5rem);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .05);
+    font-size: 1.5rem;
+    background: #37474F;
+    color: white;
+
+    &.high { background: #43A047; }
+    &.low { background: #FF3C00; }
+  }
+
+  &.short {
     display: flex;
-    align-items: center;
+    flex-flow: column nowrap;
     align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    padding: .75rem 1rem;
+    order: 1;
+    color: yellowgreen;
 
-    .details {
-      flex: 1 1 auto;
+
+    > .user {
+      order: 1;
+      font-size: 0.75rem;
+      line-height: 1em;
+      color: rgba(0,0,0,.8);
+      font-weight: 600;
+      max-width: 5rem;
+      text-align: center;
     }
 
-    .score {
-      flex: 0 0 auto;
-      padding: 0.75rem 1rem;
-      @include flex-center;
-      flex-flow: column nowrap;
-      border-radius: 4px;
-      background: rgba(0, 0, 0, .3);
-      color: white;
-
-      .label {
-        color: inherit;
-        text-align: center;
-      }
-
-      .value {
-        @include flex-center;
-        font-size: 3.75rem;
-      }
-
-      &.high {
-        background: #47bc00;
-        color: white;
-        background: transparent;
-        color: #47bc00;
-      }
-
-      &.low {
-        background: #FFCCBC;
-        background: #fe230a;
-        color: white;
-        background: transparent;
-        color: #fe230a;
-      }
+    > .feedback {
+      display: none;
     }
   }
 
-  .reviews {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-  }
+  &.full {
+    flex: 1 1 100%;
+    order: 0;
+    color: rgba(0,0,0,.8);
+    padding: .75rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 
-  .review.summary {
-    display: flex;
-    justify-content: center;
-
-    > .score {
+    > .user {
       order: 0;
-      @include flex-center;
-      height: 3.5rem;
-      width: 3.5rem;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, .05);
-      font-size: 1.5rem;
-      color: black;
-
-      &.high {
-        background: #4CAF50;
-        background: #47bc00;
-        color: white;
-      }
-
-      &.low {
-        background: #FFCCBC;
-        background: #fe230a;
-        color: white;
-      }
-    }
-
-    &.short {
-      display: flex;
+      flex: 0 0 auto;
       flex-flow: column nowrap;
       align-content: center;
       align-items: center;
-      justify-content: flex-start;
-      flex: 0 0 auto;
-      padding: .75rem 1rem;
-      order: 1;
-      color: yellowgreen;
-
-
-      > .user {
-        order: 1;
-        font-size: 0.75rem;
-        line-height: 1em;
-        color: rgba(0,0,0,.8);
-        font-weight: 600;
-        max-width: 5rem;
-        text-align: center;
-      }
-
-      > .feedback {
-        display: none;
-      }
-    }
-
-    &.full {
-      flex: 1 1 100%;
-      order: 0;
+      font-size: 0.75rem;
+      line-height: 1em;
       color: rgba(0,0,0,.8);
-      padding: .75rem 1rem;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-weight: 600;
+      max-width: 5rem;
+      text-align: center;
+      margin-right: 1rem;
 
-      > .user {
-        order: 0;
-        flex: 0 0 auto;
-        flex-flow: column nowrap;
-        align-content: center;
-        align-items: center;
-        font-size: 0.75rem;
-        line-height: 1em;
-        color: rgba(0,0,0,.8);
-        font-weight: 600;
-        max-width: 5rem;
-        text-align: center;
-        margin-right: 1rem;
-
-        &:before {
-          content: '\f007';
-          font-family: FontAwesome;
-          @include flex-center;
-          display: inline-flex;
-          height: 3.5rem;
-          width: 3.5rem;
-          border-radius: 50%;
-          background: rgba(0, 0, 0, .05);
-          font-size: 1.5rem;
-          color: rgba(0,0,0,0.6);
-        }
-      }
-
-      > .feedback {
-        flex: 1 1 auto;
-        order: 1;
-        margin-right: 1rem;
-        font-size: .9375rem;
-        line-height: $line-height;
-        padding: .75rem 0;
-      }
-
-      > .score {
-        flex: 0 0 auto;
+      &:before {
+        content: '\f007';
+        font-family: FontAwesome;
         @include flex-center;
-        order: 2;
-        padding: .75rem 1rem;
+        display: inline-flex;
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, .05);
         font-size: 1.5rem;
-        line-height: $line-height;
+        color: rgba(0,0,0,0.6);
       }
     }
+
+    > .feedback {
+      flex: 1 1 auto;
+      order: 1;
+      margin-right: 1rem;
+      font-size: .9375rem;
+      line-height: $line-height;
+      padding: .75rem 0;
+    }
+
+    > .score {
+      flex: 0 0 auto;
+      @include flex-center;
+      order: 2;
+      padding: .75rem 1rem;
+      font-size: 1.5rem;
+      line-height: $line-height;
+    }
   }
+}
 
-  .requirement.summary {
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: stretch;
-    align-items: stretch;
-    margin: .75rem 0;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+.report.list .requirement.summary {
+  @include flex-column;
+  margin: .75rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 
-    > header.widget.requirement {
-      background: rgba(0, 0, 0, .05);
+  > header.widget.requirement {
+    background: rgba(0, 0, 0, .05);
 
-      .row-id {
-        background: transparent;
-        color: rgba(0,0,0,.4);
-      }
+    .row-id {
+      background: transparent;
+      color: rgba(0,0,0,.4);
+    }
 
-      > .title {
-        margin-right: 1rem;
-        font-size: .9375rem;
-        line-height: $line-height;
-      }
+    > .title {
+      margin-right: 1rem;
+      font-size: .9375rem;
+      line-height: $line-height;
+    }
 
-      > .score {
+    > .score {
+      color: white;
+      margin-left: 0;
+      opacity: 1;
+
+      > .label {
         color: white;
-        margin-left: 0;
-        opacity: 1;
-
-        > .label {
-          color: white;
-        }
-
-        > .value {
-          @include flex-center;
-          font-size: 1.5rem;
-          font-weight: 600;
-        }
-
-        &.high {
-          background: #47bc00;
-          color: white;
-        }
-
-        &.low {
-          background: #fe230a;
-          color: white;
-        }
       }
-    }
 
-    > .reviews.requirement {
-      padding: 0.75rem 1rem;
+      > .value {
+        @include flex-center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      &.high {
+        background: #47bc00;
+        color: white;
+      }
+
+      &.low {
+        background: #fe230a;
+        color: white;
+      }
     }
   }
 
-  .requirement.summary .widget.requirement{
+  > .reviews.requirement {
+    padding: 0.75rem 1rem;
+  }
+
+
+  .widget.requirement{
     border: none;
     box-shadow: none;
   }
 
-  .requirement.summary .review.summary {
+  .review.summary {
     &.short {
       > .user {
         display: none;
@@ -277,4 +249,9 @@ $column-width: 1rem !default;
       }
     }
   }
+}
+
+.reviews-details .reviews.requirement {
+  @include flex-rows;
+  justify-content: flex-end;
 }
