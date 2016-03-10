@@ -31,7 +31,7 @@
       <section class="reviews">
         {{#each reviews}}
         <article class="review summary {{reviewFeedbackStyle this}}">
-          <div class="user">Anonymous User</div>
+          <div class="user">{{ getUserName user }}</div>
           <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
           <div class="feedback">{{ this.feedback }}</div>
         </article>
@@ -55,7 +55,7 @@
           <div class="reviews requirement">
             {{#each this.reviews}}
             <article class="review summary {{reviewFeedbackStyle this}}">
-              <div class="user">Anonymous User</div>
+              <div class="user">{{ getUserName user }}</div>
               <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
               <div class="feedback">{{ this.feedback }}</div>
             </article>
