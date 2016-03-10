@@ -17,7 +17,7 @@
         <div class="details">
           <div><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
           <div><a href="{{ previewUrl }}">{{ previewUrl }}</a></div>
-          <div>submitted at <strong>{{formatDate createdAt }}</strong> by user <strong>{{ userName }}</strong></div>
+          <div>submitted at <strong>{{formatDate createdAt }}</strong> by <strong>{{ getUserName user }}</strong></div>
         </div>
         {{#with workScore }}
         <div class="score {{ workScoreRate }}" >

@@ -11,7 +11,7 @@
     </section>
     {{#if work}}
       <section class="work">
-        <div class="user">User name: {{ workUserName work.user }} </div>
+        <div class="user">User name: {{ getUserName work.user }} </div>
         <div class="submit-date">submited at <strong>{{formatDate work.createdAt }}</strong></div>
         <div class="sourceUrl">
           <label>Source code: </label>
