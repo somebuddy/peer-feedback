@@ -16,7 +16,7 @@
 </template>
 
 <template name="work_summary_result">
-  <section class="summary row">
+  <section class="work-summary row">
     <div class="filler details">
       <div class="user-name">{{ getUserName user }}</div>
       <div class="submit-date">
@@ -50,16 +50,13 @@
 
 <template name="work_reviews_results">
   <section class="reviews-summary">
-    <section class="row reviews">
-      <div class="filler"></div>
-      {{#each reviews}}
-      <article class="review summary {{reviewFeedbackStyle this}}">
-        <div class="user">{{ getUserName user }}</div>
-        <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-        <div class="feedback">{{ this.feedback }}</div>
-      </article>
-      {{/each}}
-    </section>
+    {{#each reviews}}
+    <article class="review summary {{reviewFeedbackStyle this}}">
+      <div class="user">{{ getUserName user }}</div>
+      <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
+      <div class="feedback">{{ this.feedback }}</div>
+    </article>
+    {{/each}}
   </section>
 </template>
 

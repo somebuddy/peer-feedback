@@ -19,28 +19,16 @@ $secondary-opacity: .6 !default;
   }
 }
 
-// Components
 .report.list {
-  > section > header {
-    color: rgba(0, 0, 0, .7);
-    h3 { margin: 0; }
-  }
-
-  > section {
-    padding: $line-height $column-width * 2;
-  }
-
-  > section.reviews-summary,
-  > section.reviews-default {
-    @include flex-column;
-  }
-
-  > section.summary { background: #CFD8DC; }
+  > section { padding: $line-height $column-width * 2; }
+  > section.work-summary { background: #CFD8DC; }
   > section.reviews-summary { background: #ECEFF1; }
 }
 
+// Sections
+
 // Work summary section
-.report.list .summary {
+.report.list .work-summary {
   .details, .score { @include flex-column; }
 
   .details {
@@ -100,8 +88,17 @@ $secondary-opacity: .6 !default;
   }
 }
 
-// Summary by review section
-.report.list .review.summary {
+.reviews-summary {
+  @include flex-rows;
+  justify-content: flex-end;
+}
+
+.reviews-details {
+  @include flex-column;
+}
+
+// Components
+.review.summary {
   display: flex;
   justify-content: center;
 
