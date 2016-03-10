@@ -16,31 +16,35 @@
 </template>
 
 <template name="work_summary_result">
-  <section class="summary">
-    <header>
-      <h3>Summary</h3>
-    </header>
-    <div class="row work summary">
-      <div class="filler details">
-        <div class="user-name">{{ getUserName user }}</div>
-        <div>Source code: <a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
-        <div>Preview:
+  <section class="summary row">
+    <div class="filler details">
+      <div class="user-name">{{ getUserName user }}</div>
+      <div class="submit-date">
+        <span class="title">submitted at</span>
+        <span class="value">{{formatDate createdAt }}</span>
+      </div>
+      <div class="work-link">
+        <div class="title">Source code: </div>
+        <div class="value"><a href="{{ sourceUrl }}">{{ sourceUrl }}</a></div>
+      </div>
+      <div class="work-link">
+        <div class="title">Preview: </div>
+        <div class="value">
           {{#if previewUrl }}
             <a href="{{ previewUrl }}">{{ previewUrl }}</a>
           {{else}}
-            <strong>&lt; without preview &gt;</strong>
+            &lt; without preview &gt;
           {{/if}}
         </div>
-        <div class="submit-date">submitted at <strong>{{formatDate createdAt }}</strong></div>
       </div>
-      {{#with workScore }}
-      <div class="cell score {{ workScoreRate }}" >
-        <span class="label">Earned points:</span>
-        <span class="value">{{ this.result }}</span>
-        <span class="label">of {{ this.total }}</span>
-      </div>
-      {{/with}}
     </div>
+    {{#with workScore }}
+    <div class="cell score {{ workScoreRate }}" >
+      <span class="title">Earned points:</span>
+      <span class="value">{{ this.result }}</span>
+      <span class="total">of {{ this.total }}</span>
+    </div>
+    {{/with}}
   </section>
 </template>
 

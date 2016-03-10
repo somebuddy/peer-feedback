@@ -3,6 +3,7 @@
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
+$secondary-opacity: .6 !default;
 
 .report.list {
   background: white;
@@ -26,17 +27,53 @@ $column-width: 1rem !default;
   }
 
   > section {
-    @include flex-column;
     padding: $line-height $column-width * 2;
+  }
+
+  > section.reviews-summary,
+  > section.reviews-default {
+    @include flex-column;
   }
 
   > section.summary { background: #CFD8DC; }
   > section.reviews-summary { background: #ECEFF1; }
 }
 
-.report.list .work.summary {
-  margin: 0 (-$column-width);
+// Work summary section
+.report.list .summary {
   .details, .score { @include flex-column; }
+
+  .details {
+    .user-name {
+      font-size: 1.5rem;
+      font-weight: 300;
+      text-transform: capitalize;
+      margin-bottom: $line-height - .875rem;
+    }
+
+    .submit-date {
+      font-size: .875rem;
+      line-height: $line-height;
+      opacity: $secondary-opacity;
+      margin-bottom: $line-height / 2;
+
+      > .value { font-weight: 600; }
+    }
+
+    .work-link {
+      margin-bottom: $line-height / 2;
+
+      > .title {
+        font-size: .75rem;
+        text-transform: uppercase;
+        opacity: $secondary-opacity;
+      }
+
+      > .value {
+        font-weight: 500;
+      }
+    }
+  }
 
   .score {
     @include flex-align(center, center, center);
@@ -44,21 +81,26 @@ $column-width: 1rem !default;
     &.high { color: #2E7D32; }
     &.low { color: #d50000; }
 
-    .label {
-      color: inherit;
+    .title, .total { opacity: $secondary-opacity; }
+
+    .title {
       font-size: .75rem;
-      line-height: $line-height / 2;
-      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .total {
+      font-size: 1rem;
+      font-variant: small-caps;
     }
 
     .value {
-      flex: 0 0 3.75rem;
-      @include flex-center;
-      font-size: 3.75rem;
+      font-size: $line-height * 2.5;
+      line-height: $line-height * 3;
     }
   }
 }
 
+// Summary by review section
 .report.list .review.summary {
   display: flex;
   justify-content: center;
