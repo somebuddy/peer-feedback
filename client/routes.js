@@ -115,7 +115,11 @@ Router.route('/work/:id/summary', {
     this.render('work_summary_content', {
       to: 'content',
       data: function () {
-        return Works.findOne({_id: this.params.id});
+        var work = Works.findOne({_id: this.params.id});
+        var assignment_id = work ? work.assignment : null;
+        Meteor.subscribe('assignment', assignment_id);
+        Meteor.subscribe('requirements', assignment_id);
+        return work;
       }
     });
   }
