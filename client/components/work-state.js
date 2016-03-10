@@ -2,7 +2,8 @@
 
 Template.work_state.helpers({
   'isReady': function () {
-    return Reviews.find({work: this.work._id}).count() >= 3;
+    Meteor.subscribe('work-reviews', this.work._id);
+    return Reviews.find({work: this.work._id}).count() >= 1;
   },
   'workReviewSummary': function () {
     var reviews = Reviews.find({work: this.work._id}).fetch();
@@ -32,7 +33,7 @@ Template.work_state.helpers({
 });
 
 Template.work_state.events({
-  'click .ready-state': function () {
+  'click .work-state.ready': function () {
     Router.go('/work/' + this.work._id + '/summary');
   }
 });

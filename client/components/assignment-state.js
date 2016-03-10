@@ -17,7 +17,6 @@ Template.assignment_state.helpers({
   },
   'isHistoryExist': function () {
     Meteor.subscribe('user-works-for-assignment', this._id);
-    console.log(getUserWorks(this._id).count());
     return getUserWorks(this._id).count() > 1;
   },
   'previousWorksCount': function () {

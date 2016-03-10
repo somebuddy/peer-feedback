@@ -86,10 +86,10 @@ Template.make_review_content.events({
   'submit .check-list': function (event, template) {
     event.preventDefault();
     // Check if all selected
-    // if (!lodash(this.requirements).every('result')) {
-    //   alert('Please make a choice for every requirement');
-    //   return false;
-    // };
+    if (!lodash(this.requirements).every('result')) {
+      alert('Please make a choice for every requirement');
+      return false;
+    };
 
     warnkWorkForReviewCollection();
     var review = Template.instance().currentReview.get();
@@ -101,7 +101,8 @@ Template.make_review_content.events({
     console.log('Review completed: ', review);
 
     // Save to database
-    Reviews.insert(review, function(error, result) {
+    Meteor.call('addReview', review, function(error, result) {
+      console.log(error, result);
       if (result) {
         // todo: show thanks message
         console.info('Review saved: ', result);
