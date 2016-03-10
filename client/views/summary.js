@@ -1,3 +1,5 @@
+/*global lodash, Reviews, Requirements */
+
 function getReviewResult (review) {
   var r = lodash.reduce(review.results, function (t, r) {
     t.total += r.score || 0;

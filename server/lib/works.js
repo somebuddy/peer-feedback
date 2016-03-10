@@ -1,6 +1,10 @@
 /*global Works, Assignments */
 
-Meteor.publish('user-works-for-assignment', function(assignment) {
+Meteor.publish('user-work', function (work_id) {
+  return Works.find({_id: work_id});
+});
+
+Meteor.publish('user-works-for-assignment', function (assignment) {
   return Works.find({
     assignment: assignment,
     user: this.userId
