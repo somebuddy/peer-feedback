@@ -78,7 +78,7 @@
         <div class="reviews requirement">
           <div class="filler"></div>
           {{#each this.reviews}}
-          <article class="review summary {{reviewFeedbackStyle this}}">
+          <article class="review summary {{reviewFeedbackStyle this}} size-{{ this.result }}">
             <div class="user">{{ getUserName user }}</div>
             <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
             <div class="feedback">{{ this.feedback }}</div>

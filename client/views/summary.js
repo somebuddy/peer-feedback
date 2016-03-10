@@ -87,6 +87,7 @@ Template.work_reviews_details.helpers({
     return r && (r.result > 0) ? 'high' : 'low';
   },
   'reviewFeedbackStyle': function (review) {
-    return review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+    var summaryClass = review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+    return summaryClass;
   },
 });
