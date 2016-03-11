@@ -6,9 +6,13 @@ $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $secondary-opacity: .6 !default;
 
-$success-color: #76b900;
-$fail-color: #FF3C00;
-$neutral-color: #37474F;
+$success-background-color: #76b900;
+$fail-background-color: #FF3C00;
+$neutral-background-color: #37474F;
+
+$success-text-color: #2E7D32;
+$fail-text-color: #d50000;
+$neutral-text-color: #607D8B;
 
 .report.list {
   background: white;
@@ -16,6 +20,7 @@ $neutral-color: #37474F;
   margin: 0 $column-width $line-height;
   border-radius: 4px;
   border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(#90A4AE,.5);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
   @media (min-width: 62rem) {
@@ -25,9 +30,18 @@ $neutral-color: #37474F;
 }
 
 .report.list {
-  > section { padding: $line-height $column-width * 2; }
-  > section.work-summary { background: #CFD8DC; }
-  > section.reviews-summary { background: #ECEFF1; }
+  > header {
+    background: #546E7A;
+    background: #B0BEC5;
+    color: #455A64;
+    font-size: 2rem;
+    font-family: 'Roboto Condensed';
+    line-height: 3rem;
+    font-weight: 100;
+  }
+  > header, > section { padding: $line-height $column-width * 2; }
+  > section.work-summary { background: #E4EBEE; }
+  > section.reviews-summary { background: #F6F8FA; }
 }
 
 // Sections
@@ -70,9 +84,13 @@ $neutral-color: #37474F;
 
   .score {
     @include flex-align(center, center, center);
-    color: #607D8B;
+    color: $neutral-text-color;
     &.high { color: #2E7D32; }
     &.low { color: #d50000; }
+
+    color: $neutral-text-color;
+    &.high { color: $success-text-color; }
+    &.low { color: $fail-text-color; }
 
     .title, .total { opacity: $secondary-opacity; }
 
@@ -121,9 +139,9 @@ $neutral-color: #37474F;
     border-radius: 50%;
     color: white;
 
-    background: $neutral-color;
-    &.high { background: $success-color; }
-    &.low { background: $fail-color; }
+    background: $neutral-background-color;
+    &.high { background: $success-background-color; }
+    &.low { background: $fail-background-color; }
   }
 
   > .feedback {
@@ -176,11 +194,12 @@ $neutral-color: #37474F;
 // Requirement result
 .requirement.summary {
   @include flex-column;
-  margin: .75rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-top: 2px solid rgba(0, 0, 0, 0.09);
 
   > header.widget.requirement {
-    background: rgba(0, 0, 0, .05);
+    background: rgba(0, 0, 0, .03);
 
     .row-id {
       background: transparent;
@@ -200,9 +219,9 @@ $neutral-color: #37474F;
       border-radius: 3px;
       opacity: 1;
       color: white;
-      background: $neutral-color;
-      &.high { background: $success-color; }
-      &.low { background: $fail-color; }
+      background: $neutral-background-color;
+      &.high { background: $success-background-color; }
+      &.low { background: $fail-background-color; }
 
       .title, .total { opacity: $secondary-opacity; }
 
