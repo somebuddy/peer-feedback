@@ -1,6 +1,7 @@
 @import 'layout/mixins';
 @import 'layout/flex';
 @import 'helpers/no-select';
+@import 'buttons/coin-button';
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
@@ -31,13 +32,15 @@ $neutral-text-color: #607D8B;
 
 .report.list {
   > header {
-    background: #546E7A;
     background: #B0BEC5;
     color: #455A64;
-    font-size: 2rem;
-    font-family: 'Roboto Condensed';
-    line-height: 3rem;
-    font-weight: 100;
+
+    > .title {
+      font-size: 2rem;
+      line-height: 3rem;
+      font-family: 'Roboto Condensed';
+      font-weight: 100;
+    }
   }
   > header, > section { padding: $line-height $column-width * 2; }
   > section.work-summary { background: #E4EBEE; }
@@ -121,6 +124,36 @@ $neutral-text-color: #607D8B;
 }
 
 // Components
+[class|="share"] {
+  @include coin-button;
+  font-size: 1.5rem;
+
+  &:before {
+    background: rgba(#263238, .1);
+    color: rgba(#263238, .4);
+  }
+
+  &:after {
+    background: rgba(#455A64, .6);
+    color: rgba(255, 255, 255, .8);
+  }
+}
+
+.share-twitter {
+  &:before, &:after { content: "\f099"; }
+}
+
+.share-google {
+  &:before, &:after { content: "\f0d5"; }
+}
+
+.share-facebook {
+  &:before, &:after { content: "\f09a"; }
+}
+
+.share-linkedin {
+  &:before, &:after { content: "\f0e1"; }
+}
 
 // Review result
 .review.summary {
