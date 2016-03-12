@@ -61,7 +61,9 @@
     <article class="review summary {{reviewFeedbackStyle this}}">
       <div class="user">{{ getUserName user }}</div>
       <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-      <div class="feedback">{{ this.feedback }}</div>
+      <div class="feedback">
+        {{#markdown}}{{ this.feedback }}{{/markdown}}
+      </div>
     </article>
     {{/each}}
   </section>
@@ -88,7 +90,9 @@
           <article class="review summary {{reviewFeedbackStyle this}} size-{{ this.result }}">
             <div class="user">{{ getUserName user }}</div>
             <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
-            <div class="feedback">{{ this.feedback }}</div>
+            <div class="feedback">
+              {{#markdown}}{{ this.feedback }}{{/markdown}}
+            </div>
           </article>
           {{/each}}
         </div>
