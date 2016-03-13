@@ -9,31 +9,35 @@
     <section class="description">
       <h4 class="text-center">{{ assignment.description }}</h4>
     </section>
-    {{#if work}}
-      <section class="work">
-        <div class="user">User name: {{ getUserName work.user }} </div>
-        <div class="submit-date">submited at <strong>{{formatDate work.createdAt }}</strong></div>
-        <div class="sourceUrl">
-          <label>Source code: </label>
-          <a href="{{ work.sourceUrl }}">{{ work.sourceUrl }}</a>
-        </div>
-        {{#if work.previewUrl }}
-          <div class="sourceUrl"><label>Preview: </label>
-            <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
-          </div>
-        {{/if}}
-      </section>
-    {{ else }}
-      <section class="work">
-        <h3 class="text-center">Here is no works yet</h3>
-      </section>
-    {{/if}}
   </header>
 </template>
 
 <template name="make_review_content">
-  <div class="content">
+  <div class="content make-review">
   {{#if work}}
+    <section class="work-info">
+      <div class="filler details">
+        <div class="user-name">{{ getUserName work.user }}</div>
+        <div class="submit-date">
+          <span class="title">submitted at</span>
+          <span class="value">{{formatDate work.createdAt }}</span>
+        </div>
+        <div class="work-link">
+          <div class="title">Source code: </div>
+          <div class="value"><a href="{{ work.sourceUrl }}">{{ work.sourceUrl }}</a></div>
+        </div>
+        <div class="work-link">
+          <div class="title">Preview: </div>
+          <div class="value">
+            {{#if previewUrl }}
+              <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
+            {{else}}
+              &lt; without preview &gt;
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </section>
     <form class="requirements list check-list">
       <header>
         <h3>Checklist</h3>
@@ -55,6 +59,10 @@
         <button class="button success submit-review">Submit review</button>
       </footer>
     </form>
+  {{else}}
+    <section class="work">
+      <h3 class="text-center">Here is no works yet</h3>
+    </section>
   {{/if}}
   </div>
 </template>

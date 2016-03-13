@@ -1,0 +1,40 @@
+@import '../layout/flex';
+
+$line-height: 1.5rem !default;
+$secondary-opacity: .6 !default;
+
+.work-info {
+  .details {
+    @include flex-column;
+
+    .user-name {
+      font-size: 1.5rem;
+      font-weight: 300;
+      text-transform: capitalize;
+      margin-bottom: $line-height - .875rem;
+    }
+
+    .submit-date {
+      font-size: .875rem;
+      line-height: $line-height;
+      opacity: $secondary-opacity;
+      margin-bottom: $line-height / 2;
+
+      > .value { font-weight: 600; }
+    }
+
+    .work-link {
+      margin-bottom: $line-height / 2;
+
+      > .title {
+        font-size: .75rem;
+        text-transform: uppercase;
+        opacity: $secondary-opacity;
+      }
+
+      > .value { font-weight: 500; }
+    }
+  }
+
+  .earned-score { margin: 0; }
+}
