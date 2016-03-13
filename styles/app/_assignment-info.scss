@@ -1,0 +1,56 @@
+@import '../layout/flex';
+
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+.assignment-info {
+  max-width: 60rem;
+  margin: 0 auto $line-height;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+
+  .main {
+    @include flex-column;
+    max-width: 40%;
+  }
+
+  .project {
+    border: 2px solid rgba(255,255,255,.3);
+    background: #FF6F00;
+    margin: 0;
+    font-weight: 600;
+    padding: .125rem $column-width;
+    opacity: 1;
+
+    &:hover { background: lighten(#FF6F00, 8%); }
+  }
+
+  .assignment-title {
+    font-family: 'Roboto Condensed', 'Roboto', 'Open Sans', sans-serif;
+    font-weight: 100;
+    font-size: $line-height * 1.5;
+    line-height: $line-height * 2;
+    margin: $line-height/2 0;
+  }
+
+  .description {
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: $line-height;
+    margin-bottom: $line-height/2;
+  }
+
+  .tags {
+    margin-left: -1rem;
+    > .tag { color: rgba(255,255,255,.6); }
+  }
+
+  .earned-score {
+    display: none;
+    color: rgba(255,255,255,.8);
+  }
+
+  &.full {
+    .earned-score { display: flex; }
+    .open-details { display: none; }
+  }
+}

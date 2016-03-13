@@ -32,16 +32,6 @@ function prepareNewReview (assignment) {
   return review;
 }
 
-/* Header template */
-Template.assignment_make_review_header.helpers({
-  'work': function () {
-    return WorkForReview.findOne();
-  },
-  'assignment': function () {
-    return Assignments.findOne({_id: Router.current().params._id});
-  }
-});
-
 /* Content template */
 Template.make_review_content.onCreated(function () {
   var self = this;

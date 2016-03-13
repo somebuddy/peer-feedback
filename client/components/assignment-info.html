@@ -1,0 +1,27 @@
+<template name="assignment_info">
+  <article class="assignment-info row {{ class }}">
+  {{#with info}}
+    <div class="main">
+      <div class="row">
+        <div class="block button project">Ionic</div>
+      </div>
+      <div class="assignment-title">{{ title }}</div>
+      <div class="description">{{ description }}</div>
+      <div class="row tags">
+        {{#each tags}}
+          <div class="tag">{{ this }}</div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="filler"></div>
+    <div class="block open-details">
+      <div class="button js-open-assignment">View Details...</div>
+    </div>
+    <div class="block earned-score large">
+      <div class="title">total score:</div>
+      <div class="value">{{ score }}</div>
+      <div class="title">points</div>
+    </div>
+  {{/with}}
+  </article>
+</template>

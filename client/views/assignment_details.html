@@ -1,13 +1,6 @@
 <template name="assignment_details_header">
   <header>
-    <a class="button" href="/">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      Back to list
-    </a>
-    <h1 class="text-center">{{ title }}</h1>
-    <section class="description">
-      <h4 class="text-center">{{ description }}</h4>
-    </section>
+    {{> assignment_info id=_id class="full" }}
     {{> assignment_state }}
   </header>
 </template>

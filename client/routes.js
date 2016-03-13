@@ -9,6 +9,7 @@ Router.route('/', function() {
 });
 
 Router.route('/assignments', {
+  name: 'assignment.list',
   waitOn: function () {
     return [
       Meteor.subscribe('assignmentList'),
@@ -25,6 +26,7 @@ Router.route('/assignments', {
 });
 
 Router.route('/assignments/:_id', {
+  name: 'assignment.open',
   waitOn: function () {
     return [
       Meteor.subscribe('assignment', this.params._id),
@@ -89,7 +91,10 @@ Router.route('/make-review/:_id', {
   action: function() {
     // selecting random work
     this.render('navbar', { to: 'navbar' });
-    this.render('assignment_make_review_header', { to: 'header' });
+    this.render('assignment_header', {
+      to: 'header',
+      data: {_id: this.params._id}
+    });
     this.render('make_review_content', { to: 'content' });
   }
 });
@@ -103,13 +108,12 @@ Router.route('/work/:id/summary', {
   },
   action: function () {
     this.render('navbar', { to: 'navbar' });
-    this.render('work_summary_header', {
+    this.render('assignment_header', {
       to: 'header',
       data: function () {
         var work = Works.findOne({_id: this.params.id});
         var assignment_id = work ? work.assignment : null;
-        Meteor.subscribe('assignment', assignment_id);
-        return Assignments.findOne({_id: assignment_id});
+        return {_id: assignment_id};
       }
     });
     this.render('work_summary_content', {

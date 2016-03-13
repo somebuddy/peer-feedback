@@ -5,27 +5,11 @@
 @import 'helpers/no-select';
 @import 'buttons/coin-button';
 @import 'app/comment-button';
+@import 'app/assignment-info';
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $board-space: 0.0625rem;
-
-.page > header.review-header {
-  padding-bottom: 9rem;
-
-  section.work {
-    @include flex-column;
-    max-width: 60rem;
-    margin: 0 auto;
-    padding: $line-height $column-width;
-    border-top: 1px solid rgba(255,255,255,.15);
-    border-bottom: 1px solid rgba(255,255,255,.15);
-
-    a, a:hover {
-      color: white;
-    }
-  }
-}
 
 .make-review {
   .work-info {

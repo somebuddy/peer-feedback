@@ -1,15 +1,5 @@
-
-<template name="assignment_make_review_header">
-  <header class="review-header">
-    <a class="button" href="/">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      Assignments list
-    </a>
-    <h1 class="text-center">{{ assignment.title }}</h1>
-    <section class="description">
-      <h4 class="text-center">{{ assignment.description }}</h4>
-    </section>
-  </header>
+<template name="assignment_header">
+  <header>{{ > assignment_info id=_id }}</header>
 </template>
 
 <template name="make_review_content">

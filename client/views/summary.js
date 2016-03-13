@@ -37,11 +37,9 @@ function aggregateRequirements(work) {
     rq.reviews = lodash.map(revs, function(rv) {
       return getRequirementReview(rv, rq._id);
     });
-
     var earnd = lodash.filter(rq.reviews, 'result').length;
     var tot = rq.reviews.length;
     rq.result = earnd > 0.5 * tot ? rq.score : 0;
-
     return rq;
   });
 }
