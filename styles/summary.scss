@@ -3,6 +3,9 @@
 @import 'helpers/helpers';
 @import 'buttons/coin-button';
 
+@import 'app/user-feedback';
+@import 'app/earned-score';
+
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $secondary-opacity: .6 !default;
@@ -28,9 +31,7 @@ $neutral-text-color: #607D8B;
     margin-left: auto;
     margin-right: auto;
   }
-}
 
-.report.list {
   > header {
     background: #B0BEC5;
     color: #455A64;
@@ -47,81 +48,7 @@ $neutral-text-color: #607D8B;
   > section.reviews-summary { background: #F6F8FA; }
 }
 
-// Sections
-
-// Work summary section
-.report.list .work-summary {
-  .details, .score { @include flex-column; }
-
-  .details {
-    .user-name {
-      font-size: 1.5rem;
-      font-weight: 300;
-      text-transform: capitalize;
-      margin-bottom: $line-height - .875rem;
-    }
-
-    .submit-date {
-      font-size: .875rem;
-      line-height: $line-height;
-      opacity: $secondary-opacity;
-      margin-bottom: $line-height / 2;
-
-      > .value { font-weight: 600; }
-    }
-
-    .work-link {
-      margin-bottom: $line-height / 2;
-
-      > .title {
-        font-size: .75rem;
-        text-transform: uppercase;
-        opacity: $secondary-opacity;
-      }
-
-      > .value {
-        font-weight: 500;
-      }
-    }
-  }
-
-  .score {
-    @include flex-align(center, center, center);
-    color: $neutral-text-color;
-    &.high { color: #2E7D32; }
-    &.low { color: #d50000; }
-
-    color: $neutral-text-color;
-    &.high { color: $success-text-color; }
-    &.low { color: $fail-text-color; }
-
-    .title, .total { opacity: $secondary-opacity; }
-
-    .title {
-      font-size: .75rem;
-      text-transform: uppercase;
-    }
-
-    .total {
-      font-size: 1rem;
-      font-variant: small-caps;
-    }
-
-    .value {
-      font-size: $line-height * 2.5;
-      line-height: $line-height * 3;
-    }
-  }
-}
-
-.reviews-summary {
-  @include flex-rows;
-  justify-content: flex-end;
-}
-
-.reviews-details {
-  @include flex-column;
-}
+.reviews-details { @include flex-column; }
 
 // Components: share buttons
 [class|="share"] {
@@ -155,92 +82,44 @@ $neutral-text-color: #607D8B;
   &:before, &:after { content: "\f0e1"; }
 }
 
-// Review result
-.review.summary {
-  flex: 1 1 100%;
-  @include flex-row;
-  line-height: $line-height;
-  padding: $line-height/2 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+// Component: Work result and feedbacks
+.report.list .work-summary {
+  .details {
+    @include flex-column;
 
-  > .user {
-    order: 0;
-    flex: 0 0 auto;
-    max-width: 6rem;
-    margin: -.25rem $column-width (-.25rem) 0;
-
-    @include break-words;
-    @include text-ellipsis;
-
-    font-size: .75rem;
-    font-weight: 600;
-    text-align: center;
-    color: rgba(#37474F,.8);
-
-    &:before {
-      @include flex-center;
-      @include size(3.5rem, 3.5rem);
-      margin: 0 auto;
-      border-radius: 50%;
-
-      font-family: FontAwesome;
+    .user-name {
       font-size: 1.5rem;
-      content: '\f007';
+      font-weight: 300;
+      text-transform: capitalize;
+      margin-bottom: $line-height - .875rem;
+    }
 
-      background: rgba(#263238, .05);
+    .submit-date {
+      font-size: .875rem;
+      line-height: $line-height;
+      opacity: $secondary-opacity;
+      margin-bottom: $line-height / 2;
+
+      > .value { font-weight: 600; }
+    }
+
+    .work-link {
+      margin-bottom: $line-height / 2;
+
+      > .title {
+        font-size: .75rem;
+        text-transform: uppercase;
+        opacity: $secondary-opacity;
+      }
+
+      > .value { font-weight: 500; }
     }
   }
 
-  > .score {
-    order: 2;
-    flex: 0 0 auto;
-    @include flex-center;
-    @include size(3rem, 3rem);
-    margin: .25rem $column-width .25rem 0;
-    border-radius: 50%;
-    font-size: 1.5rem;
-
-    color: white;
-    background: $neutral-background-color;
-    &.high { background: $success-background-color; }
-    &.low { background: $fail-background-color; }
-  }
-
-  > .feedback {
-    order: 1;
-    flex: 1 1 auto;
-    margin-right: 1rem;
-    font-size: .9375rem;
-    line-height: $line-height;
-  }
-
-  &.short {
-    flex: 0 0 auto;
-    border-bottom: none;
-    flex-direction: column;
-    order: 1;
-    margin: 0 0 0 $column-width;
-
-    > .user {
-      order: 1;
-      margin-right: 0;
-    }
-
-    > .score {
-      order: 0;
-      margin: 0 auto .5rem;
-    }
-    > .user:before, > .feedback { display: none; }
-  }
-
-  &.full {
-    order: 0;
-    > .user { order: 0; }
-    > .score { order: 2; }
-  }
+  .earned-score { margin: 0; }
 }
 
-// Requirement result
+// Component: Requirement result and feedbacks
 .requirement.summary {
   @include flex-column;
   margin: 0;
@@ -249,94 +128,30 @@ $neutral-text-color: #607D8B;
 
   > header.widget.requirement {
     background: rgba(0, 0, 0, .03);
+    font-size: .9375rem;
 
-    .row-id {
-      background: transparent;
+    > .row-id {
       color: rgba(0,0,0,.3);
+      background: transparent;
     }
 
-    > .title {
-      font-size: .9375rem;
-      color: rgba(0,0,0, $secondary-opacity);
-    }
+    > .title { color: rgba(0,0,0, $secondary-opacity); }
 
-    > .score {
-      @include flex-align(center, center, center);
+    > .earned-score {
       @include min-size($column-width * 3, $column-width * 3);
-      padding: $line-height/4 $column-width;
       margin-right: $column-width;
-      border-radius: 3px;
-      opacity: 1;
+      padding: $line-height/4 $column-width;
       color: white;
       background: $neutral-background-color;
       &.high { background: $success-background-color; }
       &.low { background: $fail-background-color; }
-
-      .title, .total { opacity: $secondary-opacity; }
-
-      .title, .total {
-        font-size: .625rem;
-        line-height: .75rem;
-        text-transform: uppercase;
-      }
-
-      .value {
-        font-size: 1.25rem;
-        line-height: $line-height;
-        font-weight: 600;
-      }
     }
   }
 
-  > .reviews.requirement {
-    padding: $line-height/2 $column-width $line-height/2 $column-width*4;
-  }
+  > .user-feedback-list { padding: $line-height/2 $column-width $line-height/2 $column-width*4; }
 
   .widget.requirement{
     border: none;
     box-shadow: none;
   }
-}
-
-// Requirement review
-.requirement.summary .review.summary {
-  > .score { margin: 0; }
-
-  &.short {
-    @include size(2.5rem, 2.5rem);
-    @include no-select;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    margin: 0 .25rem 0 (-.25rem);
-    padding: 0;
-
-    > .user { display: none; }
-
-    > .score {
-      @include size(.5rem, .5rem);
-      color: transparent;
-    }
-
-    &.size-1 > .score { @include size(1rem, 1rem); }
-    &.size-2 > .score { @include size(1.5rem, 1.5rem); }
-  }
-
-  &.full {
-    padding-right: .25rem;
-
-    > .user:before, > .score {
-      @include size(2.5rem, 2.5rem);
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    > .feedback { font-size: .8125rem; }
-  }
-}
-
-
-.reviews-details .reviews.requirement {
-  @include flex-rows;
-  justify-content: flex-end;
 }

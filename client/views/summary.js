@@ -66,7 +66,7 @@ Template.work_reviews_results.helpers({
     return Reviews.find({work: this._id});
   },
   'reviewFeedbackStyle': function (review) {
-    return review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+    return review && review.feedback && review.feedback.trim().length > 0 ? '': 'short';
   },
   'scoreRate': function(review) {
     var s = getReviewResult(review).earned;
@@ -87,7 +87,7 @@ Template.work_reviews_details.helpers({
     return r && (r.result > 0) ? 'high' : 'low';
   },
   'reviewFeedbackStyle': function (review) {
-    var summaryClass = review && review.feedback && review.feedback.trim().length > 0 ? 'full': 'short';
+    var summaryClass = review && review.feedback && review.feedback.trim().length > 0 ? 'small': 'bubble';
     return summaryClass;
   },
 });

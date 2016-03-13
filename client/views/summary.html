@@ -46,7 +46,7 @@
       </div>
     </div>
     {{#with workScore }}
-    <div class="cell score {{ workScoreRate }}" >
+    <div class="block earned-score large {{ workScoreRate }}" >
       <span class="title">Earned points:</span>
       <span class="value">{{ this.result }}</span>
       <span class="total">of {{ this.total }}</span>
@@ -56,14 +56,12 @@
 </template>
 
 <template name="work_reviews_results">
-  <section class="reviews-summary">
+  <section class="reviews-summary user-feedback-list">
     {{#each reviews}}
-    <article class="review summary {{reviewFeedbackStyle this}}">
+    <article class="user-feedback {{reviewFeedbackStyle this}}">
       <div class="user">{{ getUserName user }}</div>
       <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-      <div class="feedback">
-        {{#markdown}}{{ this.feedback }}{{/markdown}}
-      </div>
+      <div class="feedback">{{#markdown}}{{ this.feedback }}{{/markdown}}</div>
     </article>
     {{/each}}
   </section>
@@ -76,23 +74,20 @@
     </header>
     {{#each requirementsSummary}}
       <article class="requirement summary">
-        <header class="row widget requirement group-{{ task }}">
+        <header class="row widget requirement">
           <div class="row-id">{{sum @index 1 }}</div>
           <div class="title">{{ title }}</div>
-          <div class="block score {{requirementScoreRate this}}">
+          <div class="block earned-score small {{requirementScoreRate this}}">
             <span class="value">{{ this.result }}</span>
             <span class="total">of {{ this.total }}</span>
           </div>
         </header>
-        <div class="reviews requirement">
-          <div class="filler"></div>
+        <div class="user-feedback-list">
           {{#each this.reviews}}
-          <article class="review summary {{reviewFeedbackStyle this}} size-{{ this.result }}">
+          <article class="user-feedback {{reviewFeedbackStyle this}} size-{{ this.result }}">
             <div class="user">{{ getUserName user }}</div>
             <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
-            <div class="feedback">
-              {{#markdown}}{{ this.feedback }}{{/markdown}}
-            </div>
+            <div class="feedback">{{#markdown}}{{ this.feedback }}{{/markdown}}</div>
           </article>
           {{/each}}
         </div>

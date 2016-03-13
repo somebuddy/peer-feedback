@@ -1,0 +1,53 @@
+@import '../layout/flex';
+
+$secondary-opacity: .6 !default;
+
+$success-text-color: #2E7D32;
+$fail-text-color: #d50000;
+$neutral-text-color: #607D8B;
+
+.earned-score {
+  @include flex-container($direction: column);
+  @include flex-align(center, center, center);
+  opacity: 1;
+  border-radius: .25rem;
+
+  color: $neutral-text-color;
+  &.high { color: $success-text-color; }
+  &.low { color: $fail-text-color; }
+
+  .title, .total { opacity: $secondary-opacity; }
+
+  .title {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+
+  .total {
+    font-size: 1rem;
+    font-variant: small-caps;
+  }
+
+  .value {
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: $line-height;
+  }
+
+  &.large {
+    .value {
+      font-size: $line-height * 2.5;
+      line-height: $line-height * 3;
+    }
+  }
+
+  &.small {
+    .title, .total {
+      font-size: .625rem;
+      line-height: $line-height/2;
+      text-transform: uppercase;
+    }
+
+    .value { font-size: 1.25rem; }
+  }
+}
