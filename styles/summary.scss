@@ -44,7 +44,10 @@ $neutral-text-color: #607D8B;
     }
   }
   > header, > section { padding: $line-height $column-width * 2; }
-  > section.work-info { background: #E4EBEE; }
+  > section.work-info {
+    background: #E4EBEE;
+    padding: $line-height $column-width;
+  }
   > section.reviews-summary { background: #F6F8FA; }
 }
 

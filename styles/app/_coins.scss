@@ -52,19 +52,31 @@
     }
   }
 
-  .share-twitter {
+  &.share-twitter {
     &:before, &:after { content: "\f099"; }
+    &:after {
+      background: rgba(#55acee, .9);
+    }
   }
 
-  .share-google {
+  &.share-google {
     &:before, &:after { content: "\f0d5"; }
+    &:after {
+      background: rgba(#dc4e41, .9);
+    }
   }
 
-  .share-facebook {
+  &.share-facebook {
     &:before, &:after { content: "\f09a"; }
+    &:after {
+      background: rgba(#3b5998, .9);
+    }
   }
 
-  .share-linkedin {
+  &.share-linkedin {
     &:before, &:after { content: "\f0e1"; }
+    &:after {
+      background: rgba(#0077b5, .9);
+    }
   }
 }

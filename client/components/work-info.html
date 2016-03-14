@@ -21,40 +21,44 @@
 
     <div class="row content">
       <div class="filler details">
-        <div class="work-title">My Awesome Project</div>
-        <div class="work-date">
+        <div class="variable work-title">
+          <div class="value">My Awesome Project</div>
+        </div>
+        <div class="variable work-date">
           <div class="title">submitted at</div>
           <div class="value">{{formatDate work.createdAt }}</div>
         </div>
-        <div class="work-link">
+        <div class="variable work-link">
           <div class="title">Source code: </div>
-          <div class="value"><a href="https://peer-feedback-somebuddy.c9users.io">https://peer-feedback-somebuddy.c9users.io</a></div>
+          <div class="value">
+            <a href="https://peer-feedback-somebuddy.c9users.io" target="_blank">https://peer-feedback-somebuddy.c9users.io</a>
+          </div>
         </div>
-        <div class="work-link">
+        <div class="variable work-link">
           <div class="title">Preview: </div>
           <div class="value">
             {{#if work.previewUrl }}
-              <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
+              <a href="{{ work.previewUrl }}">https://www.codeschool.com/courses/front-end-foundations</a>
             {{else}}
               &lt; without preview &gt;
             {{/if}}
           </div>
         </div>
       </div>
-      <div class="filler"></div>
       <div class="cell column">
         <div class="earned-score large {{ workScoreRate }}" >
           <span class="title">You gave:</span>
           <span class="value">0</span>
           <span class="total">of 8</span>
           <span class="total">7 of 8 to check</span>
+          <div class="button submit-button">Submit</div>
         </div>
       </div>
     </div>
 
     <div class="row comment">
       <div class="filler">
-        <div class="work-comment">
+        <div class="variable work-comment">
           <div class="title">Comment: </div>
           <div class="value">{{#markdown}}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci tortor, interdum at mollis ut, eleifend eget erat. Phasellus viverra in massa sed tempus. Etiam ornare at lorem sit amet accumsan. Fusce ornare, lacus eu porttitor condimentum, mi sem hendrerit lorem, in tempor neque enim quis augue. Cras tortor dui, volutpat sit amet mi vitae, interdum posuere nunc. Nulla sagittis quam augue. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 

@@ -1,40 +1,80 @@
 @import '../layout/flex';
+@import '../helpers/text-wrap';
+@import 'coins';
 
 $line-height: 1.5rem !default;
+$column-width: 1rem !default;
 $secondary-opacity: .6 !default;
 
 .work-info {
-  .details {
-    @include flex-column;
+  padding: $line-height $column-width;
+  line-height: $line-height;
+
+  .header, .content {
+    margin-bottom: $line-height;
+  }
+
+  .user {
+    @include flex-vertical-center;
+    font-size: 1.2rem;
+    opacity: $secondary-opacity;
+
+    .user-pic {
+      @include flex-center;
+      @include size($line-height * 2, $line-height * 2);
+      border-radius: 50%;
+      background: rgba(#263238, .05);
+      color: rgba(#263238, .8);
+      margin-right: $column-width;
+
+      &:before {
+        content: '\f007';
+        font-family: FontAwesome;
+      }
+    }
 
     .user-name {
-      font-size: 1.5rem;
       font-weight: 300;
       text-transform: capitalize;
-      margin-bottom: $line-height - .875rem;
-    }
-
-    .submit-date {
-      font-size: .875rem;
-      line-height: $line-height;
-      opacity: $secondary-opacity;
-      margin-bottom: $line-height / 2;
-
-      > .value { font-weight: 600; }
-    }
-
-    .work-link {
-      margin-bottom: $line-height / 2;
-
-      > .title {
-        font-size: .75rem;
-        text-transform: uppercase;
-        opacity: $secondary-opacity;
-      }
-
-      > .value { font-weight: 500; }
     }
   }
 
-  .earned-score { margin: 0; }
+  .details {
+    @include flex-column;
+  }
+
+  .variable {
+    @include flex-column;
+    margin-bottom: $line-height/2;
+
+    > .title {
+      font-size: $line-height/2;
+      text-transform: uppercase;
+      opacity: $secondary-opacity;
+    }
+
+    > .value {
+      font-weight: 400;
+      white-space: normal;
+    }
+  }
+
+  .work-title > .value {
+    font-size: $line-height;
+    font-weight: 300;
+    margin: $line-height/2 0 $line-height/2;
+  }
+
+  .work-link > .value {
+    @include break-words;
+    font-size: 1.125rem;
+  }
+
+  .work-comment > .value { font-size: .8125rem; }
+
+  .earned-score .submit-button {
+    color: white;
+    background: #8BC34A;
+    border-color: darken(#8BC34A, 3%);
+  }
 }
