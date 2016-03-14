@@ -1,0 +1,67 @@
+<template name="work_info">
+  <section class="work-info">
+    <div class="row header">
+      <div class="user">
+        <div class="user-pic"></div>
+        <div class="user-name">Somebuddy</div>
+      </div>
+      <div class="filler"></div>
+      <div class="actions">
+        <div class="coin-button share-twitter"></div>
+        <div class="coin-button share-google"></div>
+        <div class="coin-button share-facebook"></div>
+        <div class="coin-button share-linkedin"></div>
+        <div class="coin-button share"></div>
+        <div class="coin-button lock"></div>
+        <div class="coin-button bookmark-work"></div>
+        <div class="coin-button flag-work"></div>
+        <div class="coin-button delete-work"></div>
+      </div>
+    </div>
+
+    <div class="row content">
+      <div class="filler details">
+        <div class="work-title">My Awesome Project</div>
+        <div class="work-date">
+          <div class="title">submitted at</div>
+          <div class="value">{{formatDate work.createdAt }}</div>
+        </div>
+        <div class="work-link">
+          <div class="title">Source code: </div>
+          <div class="value"><a href="https://peer-feedback-somebuddy.c9users.io">https://peer-feedback-somebuddy.c9users.io</a></div>
+        </div>
+        <div class="work-link">
+          <div class="title">Preview: </div>
+          <div class="value">
+            {{#if work.previewUrl }}
+              <a href="{{ work.previewUrl }}">{{ work.previewUrl }}</a>
+            {{else}}
+              &lt; without preview &gt;
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      <div class="filler"></div>
+      <div class="cell column">
+        <div class="earned-score large {{ workScoreRate }}" >
+          <span class="title">You gave:</span>
+          <span class="value">0</span>
+          <span class="total">of 8</span>
+          <span class="total">7 of 8 to check</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row comment">
+      <div class="filler">
+        <div class="work-comment">
+          <div class="title">Comment: </div>
+          <div class="value">{{#markdown}}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci tortor, interdum at mollis ut, eleifend eget erat. Phasellus viverra in massa sed tempus. Etiam ornare at lorem sit amet accumsan. Fusce ornare, lacus eu porttitor condimentum, mi sem hendrerit lorem, in tempor neque enim quis augue. Cras tortor dui, volutpat sit amet mi vitae, interdum posuere nunc. Nulla sagittis quam augue. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+
+  Praesent sodales eu elit eget rhoncus. Morbi odio diam, tincidunt quis sagittis vel, feugiat vitae diam. Donec varius lacus sed nisi mollis, sit amet accumsan lorem congue. Sed felis sem, pretium vitae elementum id, porttitor in risus. Vivamus leo mauris, consectetur quis metus ac, suscipit dignissim nibh. Donec aliquet ut orci sit amet cursus. Nam vitae ultrices mauris. Cras sed bibendum eros, a aliquam lectus. Curabitur at porta nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse congue dui laoreet diam laoreet sodales vel eget leo. Nunc in feugiat magna.
+          {{/markdown}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

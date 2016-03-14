@@ -1,0 +1,70 @@
+@import '../buttons/coin-button';
+
+.coin-button {
+  @include coin-button;
+
+  &:before {
+    background: rgba(#263238, .1);
+    color: rgba(#263238, .4);
+  }
+
+  &:after {
+    background: rgba(#455A64, .6);
+    color: rgba(255, 255, 255, .8);
+  }
+
+  &.bookmark-work {
+    &:before { content: "\f02e"; }
+    &:after {
+      content: "\f097";
+      background: rgba(#338d11, .8);
+    }
+  }
+
+  &.flag-work {
+    &:before { content: "\f024"; }
+    &:after {
+      content: "\f024";
+      background: rgba(#d50000, .9);
+    }
+  }
+
+  &.share {
+    &:before, &:after { content: "\f1e0"; }
+    &:after {
+      background: rgba(#0288D1, .9);
+    }
+  }
+
+  &.lock {
+    &:before, &:after { content: "\f023"; }
+    &:after {
+      background: rgba(#FF6F00, .9);
+    }
+  }
+
+  &.delete-work {
+    &:before { content: "\f00d"; }
+
+    &:after {
+      background: rgba(#d50000, .9);
+      content: "\f014";
+    }
+  }
+
+  .share-twitter {
+    &:before, &:after { content: "\f099"; }
+  }
+
+  .share-google {
+    &:before, &:after { content: "\f0d5"; }
+  }
+
+  .share-facebook {
+    &:before, &:after { content: "\f09a"; }
+  }
+
+  .share-linkedin {
+    &:before, &:after { content: "\f0e1"; }
+  }
+}
