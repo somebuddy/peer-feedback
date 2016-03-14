@@ -1,21 +1,30 @@
 <template name="work_info">
   <section class="work-info">
     <div class="row header">
+      {{#unless isAuthor}}
       <div class="user">
         <div class="user-pic"></div>
-        <div class="user-name">Somebuddy</div>
+        <div class="user-name">{{ getUserName work.user }}</div>
       </div>
+      {{/unless}}
       <div class="filler"></div>
       <div class="actions">
-        <div class="coin-button share-twitter"></div>
-        <div class="coin-button share-google"></div>
-        <div class="coin-button share-facebook"></div>
-        <div class="coin-button share-linkedin"></div>
-        <div class="coin-button share"></div>
-        <div class="coin-button lock"></div>
+        {{#if isPublic }}
+          <div class="coin-button share-twitter"></div>
+          <div class="coin-button share-google"></div>
+          <div class="coin-button share-facebook"></div>
+        {{/if}}
+        {{#if canMakePublic }}
+          <div class="coin-button share"></div>
+        {{/if}}
+        {{#if canMakePrivate }}
+          <div class="coin-button lock"></div>
+        {{/if}}
         <div class="coin-button bookmark-work"></div>
         <div class="coin-button flag-work"></div>
-        <div class="coin-button delete-work"></div>
+        {{#if isAuthor}}
+          <div class="coin-button delete-work"></div>
+        {{/if}}
       </div>
     </div>
 
