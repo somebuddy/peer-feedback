@@ -4,7 +4,7 @@ var isPublic = function (work) {
 
 var isAuthor = function (work) {
   return work && work.user === Meteor.userId();
-}
+};
 
 Template.work_info.helpers({
   isAuthor: function () {
@@ -18,5 +18,11 @@ Template.work_info.helpers({
   },
   canMakePrivate: function () {
     return isAuthor(this.work) && isPublic(this.work);
+  },
+  workScoreRate: function () {
+    if (this.score) {
+      var r = (this.score.result || 0) / (this.score.total || 1);
+      return r >= 0.8 ? 'high' : 'low';
+    }
   }
 });
