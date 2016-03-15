@@ -63,6 +63,22 @@ Template.make_review_content.helpers({
   },
   'review': function () {
     return Template.instance().currentReview.get();
+  },
+  reviewScore: function () {
+    var review = Template.instance().currentReview.get();
+    var score = {};
+    score.total = lodash.reduce(review.results, function(total, req) {
+      return total + req.score;
+    }, 0);
+    score.result = lodash.reduce(review.results, function(total, req) {
+      return total + (req.result ? req.result.value || 0 : 0) * req.score;
+    }, 0);
+    score.checked = lodash.filter(review.results, function(r) {
+      return r && r.result && r.result.value !== undefined;
+    }).length;
+    score.count = review.results.length;
+    console.log(score);
+    return score;
   }
 });
 
@@ -124,6 +140,7 @@ Template.check_requirement.events({
   'click .check-switcher .yes': function (event, template) {
     this.requirement.result = this.requirement.result || {};
     this.requirement.result.value = 1;
+    console.log(Template.instance());
     template.state.set( 1 );
   },
   'click .check-switcher .no': function (event, template) {

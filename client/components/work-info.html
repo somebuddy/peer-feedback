@@ -21,7 +21,9 @@
           <div class="coin-button lock"></div>
         {{/if}}
         <div class="coin-button bookmark-work"></div>
+        {{#unless isAuthor}}
         <div class="coin-button flag-work"></div>
+        {{/unless}}
         {{#if isAuthor}}
           <div class="coin-button delete-work"></div>
         {{/if}}
