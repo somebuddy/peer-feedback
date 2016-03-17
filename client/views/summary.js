@@ -1,4 +1,54 @@
-/*global lodash, Reviews, Requirements */
+/*global lodash, Reviews, Requirements, Reports, lodash */
+
+Reports = new Mongo.Collection("reports");
+
+Template.work_summary_reviews.helpers({
+  reviews: function () {
+    console.log(this);
+    Meteor.subscribe('reports', this._id, {
+      onError: function(error) {
+        console.log('On error', error);
+      },
+      onReady: function(result) {
+        console.log('On result', result);
+      }
+    });
+    var reps = Reports.findOne({_id: this._id});
+    console.log(reps);
+    if (reps && reps.result) {
+      reps.result = lodash.values(reps.result);
+    }
+    return reps || {};
+  },
+  reviewFeedbackStyle: function () {
+
+  },
+  scoreRate: function () {
+
+  },
+  reviewScore: function () {
+
+  },
+  report: function() {
+    Meteor.subscribe("reports", this._id);
+    var result = Reports.findOne(this._id);
+    console.log(result);
+    // console.log(Reviews.find({}).fetch());
+    // console.log(Works.find({}).fetch());
+    return result;
+  }
+});
+
+function checkWorkState (work_id) {
+  // Report is ready when:
+  // - user made enough review after submit this work (so, need counter)
+  // - work have enough reviews (so, need parameter into assignment details)
+  // - reviews should be in done state
+  // - no active reviews (not done for this work)
+
+  var reviews = Reviews.find({work: work_id});
+  // Check if enough reviews
+}
 
 function getReviewResult (review) {
   var r = lodash.reduce(review.results, function (t, r) {
@@ -61,6 +111,7 @@ Template.work_summary_result.helpers({
 
 Template.work_reviews_results.helpers({
   'reviews': function () {
+    console.log(Reviews.find({work: this._id}).fetch());
     return Reviews.find({work: this._id});
   },
   'reviewFeedbackStyle': function (review) {
