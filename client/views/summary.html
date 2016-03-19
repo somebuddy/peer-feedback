@@ -9,9 +9,9 @@
     </header>
     {{ > work_summary_result }}
 
-    {{ > work_summary_reviews }}
+    {{ > work_summary_reviews workId=this._id }}
+    {{ > work_summary_requirements }}
 
-    {{ > work_reviews_results }}
     {{ > work_reviews_details }}
   </section>
 </template>
@@ -21,48 +21,41 @@
 </template>
 
 <template name="work_summary_reviews">
-  <section class="reviews-summary user-feedback-list">
-  {{#if reviews }}
-    {{#if reviews.error }}
-      <div class="alert alert-danger">{{ reviews.error.message }}</div>
-    {{/if}}
+  {{#if Template.subscriptionsReady}}
+    <section class="reviews-summary user-feedback-list">
+    {{#if reports }}
+      {{#if reports.error }}
+        <div class="alert alert-danger">{{ reports.error.message }}</div>
+      {{/if}}
 
-    {{#if reviews }}
-      {{#each reviews.result}}
-      <article class="user-feedback {{reviewFeedbackStyle this}}">
-        <div class="user">{{ getUserName user }}</div>
-        <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-        <div class="feedback">{{#markdown}}{{ this.feedback }}{{/markdown}}</div>
-      </article>
-      {{/each}}
+      {{#if reports }}
+        {{#each reports.result}}
+        <article class="user-feedback {{reviewFeedbackStyle this}}">
+          <div class="user">{{ getUserName user }}</div>
+          <div class="score {{scoreRate rate}}">{{ score.earned }}</div>
+          <div class="feedback">{{#markdown}}{{ feedback }}{{/markdown}}</div>
+        </article>
+        {{/each}}
+      {{/if}}
     {{/if}}
+    </section>
+  {{else}}
+    <h3>Loading...</h3>
   {{/if}}
-  </section>
 </template>
 
 <template name="work_summary_requirements">
-  <h1>Summary Requirements</h1>
-</template>
-
-
-
-<template name="work_reviews_results">
-  <section class="reviews-summary user-feedback-list">
-    {{#each reviews}}
-    <article class="user-feedback {{reviewFeedbackStyle this}}">
-      <div class="user">{{ getUserName user }}</div>
-      <div class="score {{scoreRate this}}">{{reviewScore this}}</div>
-      <div class="feedback">{{#markdown}}{{ this.feedback }}{{/markdown}}</div>
-    </article>
-    {{/each}}
-  </section>
-</template>
-
-<template name="work_reviews_details">
   <section class="reviews-details">
     <header>
       <h4>Details</h4>
     </header>
+  </section>
+</template>
+
+
+
+<template name="work_reviews_details">
+  <section class="reviews-details">
     {{#each requirementsSummary}}
       <article class="requirement summary">
         <header class="row widget requirement">

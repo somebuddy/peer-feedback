@@ -2,41 +2,53 @@
 
 Reports = new Mongo.Collection("reports");
 
-Template.work_summary_reviews.helpers({
-  reviews: function () {
-    console.log(this);
-    Meteor.subscribe('reports', this._id, {
-      onError: function(error) {
-        console.log('On error', error);
-      },
-      onReady: function(result) {
-        console.log('On result', result);
-      }
-    });
-    var reps = Reports.findOne({_id: this._id});
-    console.log(reps);
-    if (reps && reps.result) {
-      reps.result = lodash.values(reps.result);
+Template.work_summary_reviews.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    var data = Template.currentData();
+    if (data) {
+      self.subscribe("reports", data.workId);
     }
+  });
+});
+
+var reviewResult = function (review) {
+  return lodash.reduce(review.results, function(t, r) {
+    var score = r.score || 0;
+    t.total += score;
+    t.earned += (r.result ? r.result.value || 0 : 0) * score;
+    return t;
+  }, {
+    earned: 0,
+    total: 0
+  });
+};
+
+var getRateClass = (r) => { return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '') };
+
+Template.work_summary_reviews.helpers({
+  reports: function () {
+    var reps = Reports.findOne({_id: this.workId});
+
+    if (reps && reps.result) {
+      reps.result = lodash(reps.result)
+        .values()
+        .map(function (review) {
+          var s = reviewResult(review);
+          review.score = s;
+          review.rate = s && s.total ? s.earned / s.total : 0;
+          return review;
+        })
+        .value();
+      console.log(reps.result);
+    }
+
     return reps || {};
   },
   reviewFeedbackStyle: function () {
 
   },
-  scoreRate: function () {
-
-  },
-  reviewScore: function () {
-
-  },
-  report: function() {
-    Meteor.subscribe("reports", this._id);
-    var result = Reports.findOne(this._id);
-    console.log(result);
-    // console.log(Reviews.find({}).fetch());
-    // console.log(Works.find({}).fetch());
-    return result;
-  }
+  scoreRate: getRateClass
 });
 
 function checkWorkState (work_id) {
