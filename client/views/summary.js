@@ -24,7 +24,8 @@ var reviewResult = function (review) {
   });
 };
 
-var getRateClass = (r) => { return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '') };
+var getReviewRateClass = (r) => { return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '') };
+var getReviewDisplayClass = (r) => { return r && r.feedback && r.feedback.trim().length > 0 ? '': 'short' };
 
 Template.work_summary_reviews.helpers({
   reports: function () {
@@ -40,15 +41,12 @@ Template.work_summary_reviews.helpers({
           return review;
         })
         .value();
-      console.log(reps.result);
     }
 
     return reps || {};
   },
-  reviewFeedbackStyle: function () {
-
-  },
-  scoreRate: getRateClass
+  reviewFeedbackStyle: getReviewDisplayClass,
+  scoreRate: getReviewRateClass
 });
 
 function checkWorkState (work_id) {
