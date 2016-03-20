@@ -49,6 +49,54 @@ Template.work_summary_reviews.helpers({
   scoreRate: getReviewRateClass
 });
 
+Template.work_summary_requirements.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    var data = Template.currentData();
+    if (data) {
+      self.subscribe("reports", data.workId);
+    }
+  });
+});
+
+Template.work_summary_requirements.helpers({
+  requirements: function() {
+    var reps = Reports.findOne({_id: this.workId});
+    if (reps && reps.result) {
+      // concat all requirements from all reviews
+      var result = lodash(reps.result)
+        .values()
+        .reduce(function (t, r) {
+          var results = lodash.map(r.results, function (req) {
+            req.user = r.user;
+            return req;
+          });
+          return t.concat(results);
+        }, []);
+
+      // group requirements
+      result = lodash(result)
+        .reduce(function (a, r) {
+          var key = [r._id, r.title, r.score];
+          if (!a[key]) {
+            a[key] = { reviews: [r]};
+            a[key]._id = r._id;
+            a[key].title = r.title;
+            a[key].score = r.score;
+          } else {
+            a[key].reviews.push(r);
+          }
+          return a;
+        }, {});
+
+      // build the list
+      reps.result = lodash.values(result);
+      console.log(reps.result);
+    }
+    return reps || {};
+  }
+})
+
 function checkWorkState (work_id) {
   // Report is ready when:
   // - user made enough review after submit this work (so, need counter)
