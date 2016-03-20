@@ -64,9 +64,8 @@ var getRequirementResult = function (reviews) {
   var result = lodash(reviews)
     .countBy('result.value')
     .toPairs()
-    .maxBy(0)
-    // .value();
-  console.log(result);
+    .maxBy(1)[0];
+  return lodash.toSafeInteger(result);
 };
 
 Template.work_summary_requirements.helpers({
@@ -104,6 +103,7 @@ Template.work_summary_requirements.helpers({
         .values()
         .map(function (r) {
           r.result = getRequirementResult(r.reviews);
+          r.rate = r.result / (r.score || 1);
           return r;
         })
         .value();
@@ -112,7 +112,8 @@ Template.work_summary_requirements.helpers({
     return reps || {};
   },
   requirementFeedbackStyle: (r) => { return r && r.result && r.result.comment ? '' : 'bubble'; },
-  requirementScoreRate: (r) => { return r && r.result && r.result.value ? 'high' : 'low'; }
+  requirementScoreRate: (r) => { return r && r.result && r.result.value ? 'high' : 'low'; },
+  requirementSummaryScoreRate: getReviewRateClass
 });
 
 function checkWorkState (work_id) {

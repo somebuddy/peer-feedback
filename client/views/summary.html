@@ -56,8 +56,8 @@
           <header class="row widget requirement">
             <div class="row-id">{{sum @index 1 }}</div>
             <div class="title">{{ title }}</div>
-            <div class="block earned-score small {{rate}}">
-              <span class="value">{{ result }}</span>
+            <div class="block earned-score small {{requirementSummaryScoreRate rate}}">
+              <span class="value">{{ rate }}</span>
               <span class="total">of {{ score }}</span>
             </div>
           </header>
