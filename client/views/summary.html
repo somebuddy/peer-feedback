@@ -63,10 +63,11 @@
           </header>
           <div class="user-feedback-list">
             {{#each reviews}}
-            <article class="user-feedback {{reviewFeedbackStyle this}} size-{{ result }}">
+            <article class="user-feedback small {{requirementFeedbackStyle this}} size-{{ result.value }}">
               <div class="user">{{ getUserName user }}</div>
-              <div class="score {{requirementScoreRate this}}">{{ result }}</div>
-              <div class="feedback">{{#markdown}}{{ feedback }}{{/markdown}}</div>
+              <div class="score {{requirementScoreRate this}}">{{ result.value }}</div>
+              <div class="feedback">{{#markdown}}{{ result.comment }}{{/markdown}}</div>
+              <div class="feedback">{{ console result }}</div>
             </article>
             {{/each}}
           </div>

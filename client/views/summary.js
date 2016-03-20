@@ -111,8 +111,8 @@ Template.work_summary_requirements.helpers({
     }
     return reps || {};
   },
-  reviewFeedbackStyle: function() {},
-  requirementScoreRate: function() {},
+  requirementFeedbackStyle: (r) => { return r && r.result && r.result.comment ? '' : 'bubble'; },
+  requirementScoreRate: (r) => { return r && r.result && r.result.value ? 'high' : 'low'; }
 });
 
 function checkWorkState (work_id) {
