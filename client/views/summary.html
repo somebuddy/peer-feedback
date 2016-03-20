@@ -11,8 +11,6 @@
 
     {{ > work_summary_reviews workId=this._id }}
     {{ > work_summary_requirements workId=this._id }}
-
-    {{ > work_reviews_details }}
   </section>
 </template>
 
@@ -67,38 +65,11 @@
               <div class="user">{{ getUserName user }}</div>
               <div class="score {{requirementScoreRate this}}">{{ result.value }}</div>
               <div class="feedback">{{#markdown}}{{ result.comment }}{{/markdown}}</div>
-              <div class="feedback">{{ console result }}</div>
             </article>
             {{/each}}
           </div>
         </article>
       {{/each}}
     {{/if}}
-  </section>
-</template>
-
-<template name="work_reviews_details">
-  <section class="reviews-details">
-    {{#each requirementsSummary}}
-      <article class="requirement summary">
-        <header class="row widget requirement">
-          <div class="row-id">{{sum @index 1 }}</div>
-          <div class="title">{{ title }}</div>
-          <div class="block earned-score small {{requirementScoreRate this}}">
-            <span class="value">{{ this.result }}</span>
-            <span class="total">of {{ this.score }}</span>
-          </div>
-        </header>
-        <div class="user-feedback-list">
-          {{#each this.reviews}}
-          <article class="user-feedback {{reviewFeedbackStyle this}} size-{{ this.result }}">
-            <div class="user">{{ getUserName user }}</div>
-            <div class="score {{requirementScoreRate this}}">{{ this.result }}</div>
-            <div class="feedback">{{#markdown}}{{ this.feedback }}{{/markdown}}</div>
-          </article>
-          {{/each}}
-        </div>
-      </article>
-    {{/each}}
   </section>
 </template>

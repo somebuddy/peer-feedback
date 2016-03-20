@@ -76,20 +76,19 @@ Template.work_summary_requirements.helpers({
       var result = lodash(reps.result)
         .values()
         .reduce(function (t, r) {
-          var results = lodash.map(r.results, function (req) {
-            req.user = r.user;
-            return req;
-          });
+          var results = lodash(r.results)
+            .map((req) => lodash.pick(req, ['title', 'score', 'result', 'task']))
+            .map((req) => lodash.set(req, 'user', r.user))
+            .value();
           return t.concat(results);
         }, []);
 
       // group requirements
       result = lodash(result)
         .reduce(function (a, r) {
-          var key = [r._id, r.title, r.score];
+          var key = [r.title, r.score];
           if (!a[key]) {
             a[key] = { reviews: [r]};
-            a[key]._id = r._id;
             a[key].title = r.title;
             a[key].score = r.score;
           } else {
@@ -107,7 +106,6 @@ Template.work_summary_requirements.helpers({
           return r;
         })
         .value();
-      // console.log(reps.result);
     }
     return reps || {};
   },
@@ -115,26 +113,6 @@ Template.work_summary_requirements.helpers({
   requirementScoreRate: (r) => { return r && r.result && r.result.value ? 'high' : 'low'; },
   requirementSummaryScoreRate: getReviewRateClass
 });
-
-function checkWorkState (work_id) {
-  // Report is ready when:
-  // - user made enough review after submit this work (so, need counter)
-  // - work have enough reviews (so, need parameter into assignment details)
-  // - reviews should be in done state
-  // - no active reviews (not done for this work)
-
-  var reviews = Reviews.find({work: work_id});
-  // Check if enough reviews
-}
-
-function getReviewResult (review) {
-  var r = lodash.reduce(review.results, function (t, r) {
-    t.total += r.score || 0;
-    t.earned += r.result ? r.result.value || 0 : 0;
-    return t;
-  }, { earned: 0, total: 0});
-  return r;
-}
 
 function getRequirementReview (rev, req) {
   // Find in review result for particular requiremnt
@@ -183,37 +161,5 @@ Template.work_summary_result.helpers({
   'workScoreRate': function () {
     var r = (this.result || 0) / (this.total || 1);
     return r >= 0.8 ? 'high' : 'low';
-  },
-});
-
-Template.work_reviews_results.helpers({
-  'reviews': function () {
-    console.log(Reviews.find({work: this._id}).fetch());
-    return Reviews.find({work: this._id});
-  },
-  'reviewFeedbackStyle': function (review) {
-    return review && review.feedback && review.feedback.trim().length > 0 ? '': 'short';
-  },
-  'scoreRate': function(review) {
-    var s = getReviewResult(review).earned;
-    var t = getAssignmentScore(review.assignment);
-    var r = (s || 0) / (t || 1);
-    return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '');
-  },
-  'reviewScore': function (review) {
-    return getReviewResult(review).earned;
-  },
-});
-
-Template.work_reviews_details.helpers({
-  'requirementsSummary': function () {
-    return aggregateRequirements(this);
-  },
-  'requirementScoreRate': function (r) {
-    return r && (r.result > 0) ? 'high' : 'low';
-  },
-  'reviewFeedbackStyle': function (review) {
-    var summaryClass = review && review.feedback && review.feedback.trim().length > 0 ? 'small': 'bubble';
-    return summaryClass;
   },
 });
