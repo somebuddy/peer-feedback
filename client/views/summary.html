@@ -61,6 +61,15 @@
               <span class="total">of {{ score }}</span>
             </div>
           </header>
+          <div class="user-feedback-list">
+            {{#each reviews}}
+            <article class="user-feedback {{reviewFeedbackStyle this}} size-{{ result }}">
+              <div class="user">{{ getUserName user }}</div>
+              <div class="score {{requirementScoreRate this}}">{{ result }}</div>
+              <div class="feedback">{{#markdown}}{{ feedback }}{{/markdown}}</div>
+            </article>
+            {{/each}}
+          </div>
         </article>
       {{/each}}
     {{/if}}

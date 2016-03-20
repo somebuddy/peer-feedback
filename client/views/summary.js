@@ -59,6 +59,16 @@ Template.work_summary_requirements.onCreated(function () {
   });
 });
 
+var getRequirementResult = function (reviews) {
+  // count result by simple majority
+  var result = lodash(reviews)
+    .countBy('result.value')
+    .toPairs()
+    .maxBy(0)
+    // .value();
+  console.log(result);
+};
+
 Template.work_summary_requirements.helpers({
   requirements: function() {
     var reps = Reports.findOne({_id: this.workId});
@@ -90,12 +100,20 @@ Template.work_summary_requirements.helpers({
         }, {});
 
       // build the list
-      reps.result = lodash.values(result);
-      console.log(reps.result);
+      reps.result = lodash(result)
+        .values()
+        .map(function (r) {
+          r.result = getRequirementResult(r.reviews);
+          return r;
+        })
+        .value();
+      // console.log(reps.result);
     }
     return reps || {};
-  }
-})
+  },
+  reviewFeedbackStyle: function() {},
+  requirementScoreRate: function() {},
+});
 
 function checkWorkState (work_id) {
   // Report is ready when:
