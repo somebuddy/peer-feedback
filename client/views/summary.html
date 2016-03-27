@@ -7,15 +7,14 @@
       <div class="share-facebook"></div>
       <div class="share-linkedin"></div>
     </header>
-    {{ > work_summary_result }}
-
+    {{ > work_summary_result workId=this._id }}
     {{ > work_summary_reviews workId=this._id }}
     {{ > work_summary_requirements workId=this._id }}
   </section>
 </template>
 
 <template name="work_summary_result">
-  {{ > work_info work=this score=workScore }}
+  {{ > work_info work=work score=workScore }}
 </template>
 
 <template name="work_summary_reviews">
@@ -29,7 +28,7 @@
       {{#each reports.result}}
       <article class="user-feedback {{reviewFeedbackStyle this}}">
         <div class="user">{{ getUserName user }}</div>
-        <div class="score {{scoreRate rate}}">{{ score.earned }}</div>
+        <div class="score {{scoreRate score.rate}}">{{ score.earned }}</div>
         <div class="feedback">{{#markdown}}{{ feedback }}{{/markdown}}</div>
       </article>
       {{/each}}
