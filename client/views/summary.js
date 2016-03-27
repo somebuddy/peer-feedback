@@ -3,9 +3,11 @@
 Reports = new Mongo.Collection("reports");
 
 // Template Helpers
-var getReviewRateClass = (r) => { return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '') };
+Template.registerHelper('scoreRateClass', (r) => { return r >= 0.8 ? 'high' : (r < 0.5 ? 'low' : '') });
+
 var getReviewDisplayClass = (r) => { return r && r.feedback && r.feedback.trim().length > 0 ? '': 'short' };
 var getRequirementDisplayClass = (r) => { return r && r.comment && r.comment.trim().length > 0 ? '': 'bubble' };
+
 
 // Calculators
 var calculateReviewResult = function (review) {
@@ -50,8 +52,9 @@ var groupRequirements = function(lst, fields) {
 };
 
 var getRequirementResult = function (reviews) {
-  var result = lodash(reviews).countBy('result.value').toPairs().maxBy(1)[0];
-  return lodash.toSafeInteger(result);
+  var r = lodash(reviews).countBy('result.value').toPairs()
+    .orderBy([1, 0], ['desc', 'desc']).value()[0][0];
+  return lodash.toSafeInteger(r[0]);
 };
 
 var calculateRequirementsStat = function(lst) {
@@ -82,60 +85,41 @@ var calculateWorkScore = function (report) {
 
 // -----------------------------------------------------------------------------
 
-// Work summary
-Template.work_summary_result.onCreated(function () {
+// Work report
+Template.work_report.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var data = Template.currentData();
     if (data) {
-      self.subscribe("reports", data.workId);
-      self.subscribe('user-work', data.workId);
+      self.subscribe("reports", data.id);
+      self.subscribe('user-work', data.id);
     }
   });
 });
 
-Template.work_summary_result.helpers({
-  work: function () {
-    return Works.findOne({_id: this.workId});
-  },
+Template.work_report.helpers({
+  work: function () { return Works.findOne({_id: this.id}); },
+  report: function () { return Reports.findOne({_id: this.id}); },
   workScore: function () {
-    var report = Reports.findOne({_id: this.workId});
+    var report = Reports.findOne({_id: this.id});
     return calculateWorkScore(report);
   },
 });
 
 // Review summary
-Template.work_summary_reviews.onCreated(function () {
-  var self = this;
-  self.autorun(function () {
-    var data = Template.currentData();
-    if (data) self.subscribe("reports", data.workId);
-  });
-});
-
 Template.work_summary_reviews.helpers({
   reports: function () {
     var report = Reports.findOne({_id: this.workId});
     return calculateReviewsStat(report);
   },
   reviewFeedbackStyle: getReviewDisplayClass,
-  scoreRate: getReviewRateClass
 });
 
 // Requirement statistic
-Template.work_summary_requirements.onCreated(function () {
-  var self = this;
-  self.autorun(function () {
-    var data = Template.currentData();
-    if (data) self.subscribe("reports", data.workId);
-  });
-});
-
 Template.work_summary_requirements.helpers({
   requirements: function() {
     var report = Reports.findOne({_id: this.workId});
     return rebuildReportByRequirements(report);
   },
   requirementFeedbackStyle: getRequirementDisplayClass,
-  requirementScoreRate: getReviewRateClass,
 });

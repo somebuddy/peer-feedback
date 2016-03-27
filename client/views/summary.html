@@ -12,13 +12,9 @@
 </template>
 
 <template name="work_report">
-  {{ > work_summary_result workId=id }}
+  {{ > work_info work=work score=workScore }}
   {{ > work_summary_reviews workId=id }}
   {{ > work_summary_requirements workId=id }}
-</template>
-
-<template name="work_summary_result">
-  {{ > work_info work=work score=workScore }}
 </template>
 
 <template name="work_summary_reviews">
@@ -32,7 +28,7 @@
       {{#each reports.result}}
       <article class="user-feedback {{reviewFeedbackStyle this}}">
         <div class="user">{{ getUserName user }}</div>
-        <div class="score {{scoreRate score.rate}}">{{ score.earned }}</div>
+        <div class="score {{scoreRateClass score.rate}}">{{ score.earned }}</div>
         <div class="feedback">{{#markdown}}{{ feedback }}{{/markdown}}</div>
       </article>
       {{/each}}
@@ -57,7 +53,7 @@
           <header class="row widget requirement">
             <div class="row-id">{{sum @index 1 }}</div>
             <div class="title">{{ title }}</div>
-            <div class="block earned-score small {{requirementScoreRate rate}}">
+            <div class="block earned-score small {{scoreRateClass rate}}">
               <span class="value">{{ rate }}</span>
               <span class="total">of {{ score }}</span>
             </div>
@@ -66,7 +62,7 @@
             {{#each reviews}}
             <article class="user-feedback small {{requirementFeedbackStyle result}} size-{{ result.value }}">
               <div class="user">{{ getUserName user }}</div>
-              <div class="score {{requirementScoreRate result.value}}">{{ result.value }}</div>
+              <div class="score {{scoreRateClass result.value}}">{{ result.value }}</div>
               <div class="feedback">{{#markdown}}{{ result.comment }}{{/markdown}}</div>
             </article>
             {{/each}}
