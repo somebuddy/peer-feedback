@@ -23,11 +23,6 @@ var calculateReviewResult = function (review) {
 
 var mapReviewScore = (r) => lodash.map(r, (r) => lodash.set(r, 'score', calculateReviewResult(r)));
 
-var calculateReviewsStat = function (report) {
-  if (report && report.result) report.result = mapReviewScore(lodash.values(report.result));
-  return report || {};
-};
-
 var getRequirementsList = function (report) {
   return lodash(report.result).values()
     .reduce(function (t, r) {
@@ -83,7 +78,10 @@ var calculateWorkScore = function (report) {
   }, {result: 0, total: 0});
 };
 
-// -----------------------------------------------------------------------------
+var calculateReviewsStat = function (report) {
+  if (report && report.result) report.result = mapReviewScore(lodash.values(report.result));
+  return report || {};
+};
 
 // Work report
 Template.work_report.onCreated(function () {

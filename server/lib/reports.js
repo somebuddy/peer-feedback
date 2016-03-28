@@ -19,7 +19,6 @@ Meteor.publish('work-reviews', function(id) {
 
 var getChanger = function (pub, collection, docId) {
   return function (result, error) {
-    console.log('Send: ', !!result, !!error);
     pub.changed(collection, docId, {
       error: error,
       result: !error ? result : undefined
@@ -29,11 +28,10 @@ var getChanger = function (pub, collection, docId) {
 
 var getWorkChecker = function (workId, userId) {
   return function(doc) {
-    console.log('Checking doc: ', doc.public, doc.user);
     if (!doc) return new Meteor.Error(404, "Work is not found");
     if (!doc.public && doc.user !== userId) return new Meteor.Error(403, "Work is private");
-    if (doc.madeReviews < 3) return new Meteor.Error(412, "Not enough reviews");
-  }
+    if ((doc.madeReviews || 0) < 3) return new Meteor.Error(412, "Not enough reviews");
+  };
 };
 
 Meteor.publish('reports', function(workId) {
@@ -52,28 +50,25 @@ Meteor.publish('reports', function(workId) {
   var workHandle = work.observe({
     added: function(doc) {
       if (doc._id === workId) {
-        console.log('Added', doc);
         error = checker(doc);
         changer(reviews, error);
       }
     },
     removed: function (doc) {
       if (doc._id === workId) {
-        console.log('Removed');
         error = checker(undefined);
         changer(reviews, error);
       }
     },
     changed: function(doc) {
       if (doc._id === workId) {
-        console.log('Changed');
         error = checker(doc);
         changer(reviews, error);
       }
     }
   });
 
-  var handle = Reviews.find({ work: workId, finished: true }).observe({
+  var handle = Reviews.find({ work: workId }).observe({
     added: function (review) {
       reviews[review._id] = review;
       changer(reviews, error);

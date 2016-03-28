@@ -49,6 +49,46 @@ $neutral-text-color: #607D8B;
     padding: $line-height $column-width;
   }
   > section.reviews-summary { background: #F6F8FA; }
+
+  .report-error,
+  .report-info,
+  .report-loading {
+    display: flex;
+    justify-content: center;
+    margin: $line-height/2 auto;
+    font-size: 1.25rem;
+    line-height: $line-height;
+    padding: $line-height/2 $column-width;
+
+    &:before {
+      display: inline-block;
+      font-family: FontAwesome;
+      margin-right: $column-width;
+    }
+  }
+
+  .report-error {
+    color: #d50000;
+    &:before { content: "\f06a"; }
+  }
+
+  .report-info {
+    color: darken(#01579B, 10%);
+    &:before { content: "\f05a"; }
+  }
+
+  .report-loading {
+    color: #607D8B;
+    &:before {
+      content: "\f110";
+      animation: rotate-animation 2s infinite linear;
+    }
+  }
+}
+
+@keyframes rotate-animation {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .reviews-details { @include flex-column; }
