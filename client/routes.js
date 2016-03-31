@@ -101,30 +101,20 @@ Router.route('/make-review/:_id', {
 
 Router.route('/work/:id/summary', {
   subscriptions: function() {
-    return [
-      Meteor.subscribe('user-work', this.params.id),
-      Meteor.subscribe('work-reviews', this.params.id)
-    ];
+    return Meteor.subscribe('user-work', this.params.id);
   },
   action: function () {
     this.render('navbar', { to: 'navbar' });
     this.render('assignment_header', {
       to: 'header',
-      data: function () {
+      data: () => {
         var work = Works.findOne({_id: this.params.id});
-        var assignment_id = work ? work.assignment : null;
-        return {_id: assignment_id};
+        return {_id: work ? work.assignment : null};
       }
     });
-    this.render('work_summary_content', {
+    this.render('work_summary', {
       to: 'content',
-      data: function () {
-        var work = Works.findOne({_id: this.params.id});
-        var assignment_id = work ? work.assignment : null;
-        Meteor.subscribe('assignment', assignment_id);
-        Meteor.subscribe('requirements', assignment_id);
-        return work;
-      }
+      data: () => this.params.id
     });
   }
 })

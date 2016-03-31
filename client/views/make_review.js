@@ -3,7 +3,7 @@
 WorkForReview = new Mongo.Collection('work-review-next');
 
 /* Debug helpers */
-function warnkWorkForReviewCollection () {
+function warnWorkForReviewCollection () {
   if (WorkForReview.find().count() > 1) {
     console.warn('In work for review collection more than 1 document. It sucks. Here is what we have: ', WorkForReview.find().fetch());
   }
@@ -91,7 +91,7 @@ Template.make_review_content.events({
       return false;
     };
 
-    warnkWorkForReviewCollection();
+    warnWorkForReviewCollection();
     var review = Template.instance().currentReview.get();
     review.work = WorkForReview.findOne()._id;
     review.feedback = event.target.feedback.value;
