@@ -54,7 +54,7 @@ Router.route('/assignments/:_id', {
       data: function () {
         return Assignments.findOne({_id:this.params._id});
       }
-    })
+    });
   }
 });
 
@@ -117,4 +117,4 @@ Router.route('/work/:id/summary', {
       data: () => this.params.id
     });
   }
-})
+});

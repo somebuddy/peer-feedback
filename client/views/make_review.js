@@ -1,4 +1,4 @@
-/*global lodash, Reviews, Router, WorkForReview, Assignments, Requirements */
+/*global lodash, Router, WorkForReview, Assignments, Requirements, $ */
 
 WorkForReview = new Mongo.Collection('work-review-next');
 
@@ -77,7 +77,6 @@ Template.make_review_content.helpers({
       return r && r.result && r.result.value !== undefined;
     }).length;
     score.count = review.results.length;
-    console.log(score);
     return score;
   }
 });
@@ -89,7 +88,7 @@ Template.make_review_content.events({
     if (!lodash(this.requirements).every('result')) {
       alert('Please make a choice for every requirement');
       return false;
-    };
+    }
 
     warnWorkForReviewCollection();
     var review = Template.instance().currentReview.get();
@@ -108,8 +107,8 @@ Template.make_review_content.events({
         console.info('Review saved: ', result);
         template.find("form").reset();
         template.reviewCounter.set(template.reviewCounter.get() + 1);
-      };
-      if (error) { console.log('Error: ', error) };
+      }
+      if (error) { console.log('Error: ', error) }
     });
   }
 });
@@ -118,7 +117,7 @@ Template.make_review_content.events({
 /* Button to check requirement */
 
 Template.registerHelper('getMark', function(req) {
-  return req === 0 ? 'no' : (req === 1? 'yes' : '')
+  return req === 0 ? 'no' : (req === 1? 'yes' : '');
 });
 
 Template.check_requirement.onCreated(function () {
@@ -126,7 +125,7 @@ Template.check_requirement.onCreated(function () {
   self.state = new ReactiveVar;
   self.getResult = () => Template.currentData().requirement.result;
   self.autorun(function() {
-    self.state.set(self.getResult() ? self.getResult().value : null)
+    self.state.set(self.getResult() ? self.getResult().value : null);
   });
 });
 
@@ -182,4 +181,4 @@ Template.requirement_comment.events({
     this.requirement.result.comment = event.currentTarget.value;
     template.commentDep.changed();
   }
-})
+});

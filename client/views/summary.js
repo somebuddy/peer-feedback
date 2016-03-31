@@ -1,4 +1,4 @@
-/*global lodash, Reports, Works */
+/*global lodash, Router, Reports, Works */
 
 Reports = new Mongo.Collection("reports");
 
@@ -71,7 +71,7 @@ var calculateWorkScore = report => lodash(rebuildReportByRequirements(report))
 var calculateReviewsStat = report => report && mapReviewScore(lodash.values(report));
 
 // Templates
-Template.work_report.onCreated(function () {
+var workSubscribe = function () {
   this.autorun(() => {
     var data = Template.currentData();
     if (data) {
@@ -79,7 +79,9 @@ Template.work_report.onCreated(function () {
       this.subscribe('user-work', data.id);
     }
   });
-});
+};
+
+Template.work_report.onCreated(workSubscribe);
 
 Template.work_report.helpers({
   work: function () { return Works.findOne({_id: this.id}); },
@@ -95,4 +97,17 @@ Template.work_summary_reviews.helpers({
 Template.work_summary_requirements.helpers({
   requirements: rebuildReportByRequirements,
   requirementFeedbackStyle: getRequirementDisplayClass,
+});
+
+// work state widget
+Template.work_state.onCreated(workSubscribe);
+Template.work_state.helpers({
+  report: function () { return Reports.findOne({_id: this.id}); },
+  workScore: calculateWorkScore
+});
+
+Template.work_state.events({
+  'click .work-state.ready': function () {
+    Router.go('/work/' + this.id + '/summary');
+  }
 });

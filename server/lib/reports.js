@@ -1,30 +1,13 @@
 /*global Works, Reviews */
 
-Meteor.publish('work-reviews', function(id) {
-  var work = Works.findOne({ _id: id });
-  var result = Reviews.find({ work: id });
-  // console.log(this.userId);
-
-  // if (!work) this.error(new Meteor.Error(404, "Work is not found"));
-  // if (!work.public && work.user !== this.userId) throw new Meteor.Error(403, "Work is private");
-
-  // if (result.count() < 3) throw new Meteor.Error(412, "Report is not ready");
-
-  // if (work.madeReviews >= 3) {
-  //   return result;
-  // }
-
-  return this.ready();
-});
-
 var getChanger = function (pub, collection, docId) {
   return function (result, error) {
     pub.changed(collection, docId, {
       error: error,
       result: !error ? result : undefined
     });
-  }
-}
+  };
+};
 
 var getWorkChecker = function (workId, userId) {
   return function(doc) {

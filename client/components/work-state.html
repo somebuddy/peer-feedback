@@ -1,9 +1,9 @@
 <template name="work_state">
-  {{#if isReady }}
+  {{#if report.result }}
     <div class="work-state ready">
-      {{#with workReviewSummary }}
+      {{#with workScore report.result }}
         <div class="title">earned</div>
-        <div class="value earned">{{ score }}</div>
+        <div class="value earned">{{ result }}</div>
         <div class="value total">of {{ total }}</div>
         <div class="report-button">
           <i class="icon fa fa-bars"></i>
