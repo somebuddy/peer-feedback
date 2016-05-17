@@ -23,6 +23,10 @@ body {
 
 @import 'layout/page';
 
+.page > nav {
+  overflow: visible;
+}
+
 // App specific styles
 .page.assignments {
   background-color: #ECEFF1;
