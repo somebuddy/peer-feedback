@@ -7,6 +7,7 @@ $secondary-opacity: .6;
 
 .requirements.list {
   @include board-list($widget-space: $board-space);
+  padding: 1.5rem 1rem;
   margin-bottom: $line-height * 2;
 
   > header {
