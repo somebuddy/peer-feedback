@@ -1,0 +1,11 @@
+.page > nav {
+  z-index: 999;
+
+  .user {
+    @include flex-center;
+
+    #login-name-link {
+      text-transform: capitalize;
+    }
+  }
+}
