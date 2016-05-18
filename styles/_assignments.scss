@@ -15,14 +15,15 @@ $secondary-opacity: .6;
 .assignment.widget {
   @include flex-inline-column;
   min-height: $widget-height;
+  background: white;
 
   &, &:hover {
-    border-radius: .5rem;
+    border-radius: $line-height / 3;
   }
 
   /* Components */
   > .main .title {
-    font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+    font-family: font-family(condensed);
     font-size: 1.25rem;
     line-height: $line-height;
   }
@@ -67,15 +68,9 @@ $secondary-opacity: .6;
     }
   }
 
-  transition: all .5s ease;
-
   &:hover {
-    overflow: hidden;
     border-color: transparentize(#008EBF, .4);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
-    .secondary {
-      opacity: 1;
-    }
+    .secondary { opacity: 1; }
   }
 }

@@ -1,11 +1,12 @@
 @import "{}/imports/box-ui/styles/box-ui";
 
-@import 'app/navbar';
-@import 'app/widget';
-
 @import url(https://fonts.googleapis.com/css?family=Teko:700);
 
+@import 'app/navbar';
+@import 'app/widget';
 @import 'layout/page';
+
+@import 'assignments';
 
 // App specific styles
 .page.assignments {
