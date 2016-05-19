@@ -1,6 +1,3 @@
-@import 'layout/mixins';
-@import 'layout/flex';
-
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $secondary-opacity: .6 !default;
@@ -107,9 +104,8 @@ $neutral-text-color: #607D8B;
 
     > .title { color: rgba(0,0,0, $secondary-opacity); }
 
-    > .earned-score {
+    .earned-score {
       @include min-size($column-width * 3, $column-width * 3);
-      margin-right: $column-width;
       padding: $line-height/4 $column-width;
       color: white;
       background: $neutral-background-color;

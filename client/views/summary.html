@@ -48,9 +48,11 @@
       <header class="row widget requirement">
         <div class="row-id">{{sum @index 1 }}</div>
         <div class="title">{{ title }}</div>
-        <div class="block earned-score small {{scoreRateClass rate}}">
-          <span class="value">{{ rate }}</span>
-          <span class="total">of {{ score }}</span>
+        <div class="cell">
+          <div class="earned-score small {{scoreRateClass rate}}">
+            <span class="value">{{ rate }}</span>
+            <span class="total">of {{ score }}</span>
+          </div>
         </div>
       </header>
       <div class="user-feedback-list">

@@ -9,14 +9,18 @@
   justify-content: $justify;
 }
 
-@mixin flex-child-fixed {
-  flex-grow: 0;
-  flex-shrink: 0;
+@mixin flex-child($basis, $grow, $shink) {
+  flex-grow: $grow;
+  flex-shrink: $shink;
+  flex-basis: $basis;
 }
 
-@mixin flex-child-fluid($weight: 1) {
-  flex-grow: $weight;
-  flex-shrink: $weight;
+@mixin flex-child-fixed($basis: auto) {
+  @include flex-child($basis, 0, 0);
+}
+
+@mixin flex-child-fluid($weight: 1, $basis: auto) {
+  @include flex-child($basis, $weight, $weight);
 }
 
 @mixin flex-inline {

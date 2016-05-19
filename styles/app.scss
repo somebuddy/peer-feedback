@@ -2,8 +2,11 @@
 
 @import url(https://fonts.googleapis.com/css?family=Teko:700);
 
-@import 'layout/page';
+@import 'layout/layout';
+
+// Components
 @import 'app/navbar';
+@import 'login';
 @import 'app/widget';
 @import 'app/buttons';
 @import 'app/coins';
@@ -11,8 +14,9 @@
 @import 'app/reset-button';
 @import 'app/check-switcher';
 @import 'app/user-feedback';
-@import 'app/work-info';
 
+@import 'app/work-info';
+@import 'submits';
 
 // App specific styles
 .page.assignments {
@@ -39,4 +43,12 @@
   }
 }
 
+// App parts
 @import 'assignments';
+@import 'modal';
+@import 'input';
+@import 'requirements';
+@import 'assignment-state';
+@import 'review';
+@import 'summary';
+@import 'works';
