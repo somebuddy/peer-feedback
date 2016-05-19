@@ -1,10 +1,5 @@
 @import 'layout/mixins';
 @import 'layout/flex';
-@import 'helpers/helpers';
-
-@import 'app/user-feedback';
-@import 'app/earned-score';
-@import 'app/work-info';
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
@@ -17,6 +12,8 @@ $neutral-background-color: #37474F;
 $success-text-color: #2E7D32;
 $fail-text-color: #d50000;
 $neutral-text-color: #607D8B;
+
+@import 'app/earned-score';
 
 .report.list {
   background: white;
