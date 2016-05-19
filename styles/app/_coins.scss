@@ -1,8 +1,4 @@
-@import '../buttons/coin-button';
-
 .coin-button {
-  @include coin-button;
-
   &:before {
     background: rgba(#263238, .1);
     color: rgba(#263238, .4);

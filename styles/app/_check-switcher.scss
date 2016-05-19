@@ -1,0 +1,21 @@
+.check-switcher > .yes,
+.check-switcher > .no {
+  @include coin-button;
+}
+
+@mixin check-switcher-colorize($color, $icon-color: white) {
+  color: $color;
+
+  &:before, &:after {
+    background: transparentize($color, .4);
+    color: $icon-color;
+  }
+}
+
+.check-switcher {
+  > .yes:before, > .yes:after { content: "\f00c"; }
+  > .yes:hover, &.yes > .yes { @include check-switcher-colorize(#388E3C); }
+
+  > .no:before, > .no:after { content: "\f00d"; }
+  > .no:hover, &.no > .no { @include check-switcher-colorize(#F44336); }
+}

@@ -12,10 +12,10 @@
     {{#if report.result }}
       <header class="row">
         <div class="title">Reviews Report</div>
-        <div class="share-twitter"></div>
-        <div class="share-google"></div>
-        <div class="share-facebook"></div>
-        <div class="share-linkedin"></div>
+        <div class="coin-button share-twitter cell"></div>
+        <div class="coin-button share-google cell"></div>
+        <div class="coin-button share-facebook cell"></div>
+        <div class="coin-button share-linkedin cell"></div>
       </header>
       {{ > work_info work=work score=(workScore report.result) }}
       {{ > work_summary_reviews report=report.result }}

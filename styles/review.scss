@@ -3,8 +3,6 @@
 @import 'layout/row';
 @import 'layout/flex';
 @import 'helpers/no-select';
-@import 'buttons/coin-button';
-@import 'app/comment-button';
 @import 'app/assignment-info';
 
 $line-height: 1.5rem !default;
@@ -30,54 +28,6 @@ $board-space: 0.0625rem;
 }
 
 // Buttons
-.reset-button,
-.check-switcher > .yes,
-.check-switcher > .no {
-  @include coin-button;
-  margin-right: 1rem;
-}
-
-@mixin check-switcher-colorize($color, $icon-color: white) {
-  color: $color;
-
-  &:before, &:after {
-    background: transparentize($color, .4);
-    color: $icon-color;
-  }
-}
-
-.check-switcher {
-  > .yes:before, > .yes:after { content: "\f00c"; }
-  > .yes:hover, &.yes > .yes { @include check-switcher-colorize(#388E3C); }
-
-  > .no:before, > .no:after { content: "\f00d"; }
-  > .no:hover, &.no > .no { @include check-switcher-colorize(#F44336); }
-}
-
-.reset-button {
-  @include absolute(50%);
-  transform: translateY(-50%) scale(0.01);
-  margin-left: -6rem;
-  z-index: 11;
-  opacity: 0;
-  transition: opacity .3s ease, transform .3s ease;
-
-  &:before {
-    content: "\f0e2";
-    background: #afafaf;
-    color: white;
-    opacity: 1;
-    transform: translateY(-50%) scale(1) rotate(0deg);
-    transition: transform .4s ease, background .2s ease, box-shadow .4s ease .3s;
-  }
-
-  &:hover:before {
-    background: #F44336;
-    opacity: 1;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transform: translateY(-50%) scale(1.2) rotate(-360deg);
-  }
-}
 
 .requirements.list > .widget.requirement .comment-button.edit + .reset-button {
   opacity: 1;

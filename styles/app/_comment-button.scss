@@ -1,7 +1,6 @@
-@import '../buttons/coin-button';
-
 .comment-button {
   @include coin-button;
+  align-self: center;
   &:before, &:after { font-family: FontAwesome; }
 
   // default state: empty -> add

@@ -2,11 +2,15 @@
 
 @import url(https://fonts.googleapis.com/css?family=Teko:700);
 
+@import 'layout/page';
 @import 'app/navbar';
 @import 'app/widget';
-@import 'layout/page';
+@import 'app/buttons';
+@import 'app/coins';
+@import 'app/comment-button';
+@import 'app/reset-button';
+@import 'app/check-switcher';
 
-@import 'assignments';
 
 // App specific styles
 .page.assignments {
@@ -32,3 +36,5 @@
     }
   }
 }
+
+@import 'assignments';

@@ -1,7 +1,6 @@
 @import 'layout/mixins';
 @import 'layout/flex';
 @import 'helpers/helpers';
-@import 'buttons/coin-button';
 
 @import 'app/user-feedback';
 @import 'app/earned-score';
@@ -92,38 +91,6 @@ $neutral-text-color: #607D8B;
 }
 
 .reviews-details { @include flex-column; }
-
-// Components: share buttons
-[class|="share"] {
-  @include coin-button;
-  font-size: 1.5rem;
-
-  &:before {
-    background: rgba(#263238, .1);
-    color: rgba(#263238, .4);
-  }
-
-  &:after {
-    background: rgba(#455A64, .6);
-    color: rgba(255, 255, 255, .8);
-  }
-}
-
-.share-twitter {
-  &:before, &:after { content: "\f099"; }
-}
-
-.share-google {
-  &:before, &:after { content: "\f0d5"; }
-}
-
-.share-facebook {
-  &:before, &:after { content: "\f09a"; }
-}
-
-.share-linkedin {
-  &:before, &:after { content: "\f0e1"; }
-}
 
 // Component: Requirement result and feedbacks
 .requirement.summary {

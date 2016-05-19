@@ -1,0 +1,13 @@
+@mixin page-header-button-colorize($cls, $base-color) {
+  @include button-colorize($cls, $bkg: lighten($base-color, 10%), $border: darken($base-color, 10%))
+}
+
+.page > header,
+.modal > footer,
+.requirements > footer {
+  .button {
+    @include page-header-button-colorize(primary, #2196F3);
+    @include page-header-button-colorize(success, #4CAF50);
+    @include page-header-button-colorize(danger, #F44336);
+  }
+}
