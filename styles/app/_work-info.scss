@@ -11,7 +11,7 @@ $secondary-opacity: .6 !default;
   }
 
   .user {
-    @include flex-vertical-center;
+    @include flex-middle-left;
     font-size: 1.2rem;
     opacity: $secondary-opacity;
 
