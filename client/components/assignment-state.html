@@ -15,7 +15,7 @@
       </div>
       {{> work_state work=lastWork id=lastWork._id }}
       <div class="splitter light"></div>
-      <div class="actions">
+      <div class="block actions">
         <div class="button white submit-button">Resubmit...</div>
         {{#if canReview }}
           <div class="button success review-button">Review works</div>
@@ -31,7 +31,7 @@
   <div class="filler work-data">
     <div class="value">submit by <strong>{{formatDate dueDate }}</strong></div>
   </div>
-  <div class="actions">
+  <div class="block actions">
     <div class="button primary submit-button">Submit your work...</div>
   </div>
 </template>

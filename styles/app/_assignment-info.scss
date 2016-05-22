@@ -37,8 +37,11 @@ $column-width: 1rem !default;
     margin-bottom: $line-height/2;
   }
 
-  .tags {
+  .category, .tags {
     margin-left: -1rem;
+  }
+
+  .tags {
     > .tag { color: rgba(255,255,255,.6); }
   }
 

@@ -19,7 +19,7 @@ $secondary-opacity: .6;
   padding-top: calc(#{$line-height / 2} - 1px);
   padding-bottom: calc(#{$line-height / 2} - 1px);
   min-height: $line-height * 3;
-  margin-bottom: $board-space;
+  margin: 0 0 $board-space;
   border-radius: 2px;
 
   > .row-id {

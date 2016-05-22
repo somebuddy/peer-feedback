@@ -1,6 +1,6 @@
 <template name="work_state">
   {{#if report.result }}
-    <div class="work-state ready">
+    <div class="block work-state ready">
       {{#with workScore report.result }}
         <div class="title">earned</div>
         <div class="value earned">{{ result }}</div>
@@ -12,7 +12,7 @@
       {{/with}}
     </div>
   {{else}}
-    <div class="work-state evaluating">
+    <div class="block work-state evaluating">
       <div class="icon glyphicon glyphicon-hourglass"></div>
       <div class="hint">Evaluating...</div>
     </div>
