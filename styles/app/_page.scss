@@ -1,0 +1,38 @@
+$line-height: 1.5rem !default;
+$col-width: 1rem !default;
+$content-max-width: 60rem !default;
+$overlap-value: $line-height * 6 !default;
+
+.page {
+  > header {
+    padding: 3*$line-height $col-width;
+    @include box-shadow(2);
+
+    > .description {
+      max-width: $content-max-width + 2 * $col-width;
+      margin: 0 auto;
+      padding: ($line-height / 2) $col-width;
+      font-weight: 300;
+    }
+  }
+
+  > .content {
+    max-width: $content-max-width + 2 * $col-width;
+    margin: 0 auto;
+    padding: $line-height $col-width;
+
+    &.wide {
+      max-width: 100%;
+    }
+  }
+
+  &.overlap-header {
+    > header {
+      padding-bottom: $overlap-value + $line-height;
+
+      + .content {
+        margin-top: -$overlap-value;
+      }
+    }
+  }
+}

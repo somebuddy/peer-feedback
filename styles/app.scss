@@ -2,9 +2,9 @@
 
 @import url(https://fonts.googleapis.com/css?family=Teko:700);
 
-@import 'layout/layout';
-
 // Components
+@import 'app/page';
+@import 'app/board';
 @import 'app/navbar';
 @import 'login';
 @import 'app/widget';
