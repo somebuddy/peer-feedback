@@ -1,12 +1,20 @@
 <template name="assignment_info">
-  <article class="assignment-info row {{ class }}">
+  <article class="assignment-info {{ class }}">
   {{#with info}}
-    <div class="main">
-      <div class="row category">
-        <div class="block button project">Ionic</div>
+    <div class="categories">
+      <div class="block button project-link">Ionic</div>
+      <div class="block level">Advanced</div>
+    </div>
+    <div class="score">
+      <div class="earned-score large">
+        <div class="title">max score:</div>
+        <div class="value">{{ score }}</div>
+        <div class="title">points</div>
       </div>
+    </div>
+    <div class="main">
       <div class="assignment-title">{{ title }}</div>
-      <div class="description">{{ description }}</div>
+      <div class="assignment-description">{{ description }}</div>
       <div class="tags">
         {{#each tags}}
           <div class="tag">{{ this }}</div>
@@ -14,15 +22,8 @@
       </div>
     </div>
     <div class="filler"></div>
-    <div class="block open-details">
+    <div class="open-details">
       <div class="button white js-open-assignment">View Details...</div>
-    </div>
-    <div class="block">
-      <div class="earned-score large">
-        <div class="title">total score:</div>
-        <div class="value">{{ score }}</div>
-        <div class="title">points</div>
-      </div>
     </div>
   {{/with}}
   </article>

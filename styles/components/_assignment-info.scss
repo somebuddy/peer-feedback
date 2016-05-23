@@ -1,0 +1,138 @@
+/*
+* Short information about assignment in assignment details page header
+*/
+
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$max-page-width: 60rem !default;
+
+.assignment-info {
+  @include row-container;
+  flex-wrap: wrap;
+  @include relative;
+  max-width: $max-page-width;
+  margin: 0 auto;
+  font-family: font-family(sans);
+
+  // Component: categories
+  .categories {
+    order: -2;
+    @include flex-child-fluid($basis: 50%);
+    @include row-container;
+    margin-left: -$column-width;
+  }
+
+  // Component: main (assignment description)
+  .main {
+    order: 0;
+    @include flex-child-fluid($basis: 100%);
+    @include flex-column;
+  }
+
+  @media (min-width: 768px) {
+    .main {
+      @include flex-child-fluid($basis: 60%);
+    }
+  }
+
+  // Component: assignment score value, open-details-link
+  .score, .open-details {
+    order: 2;
+    @include flex-child-fixed($basis: auto);
+
+    .earned-score { color: rgba(255,255,255,.8); }
+  }
+
+  @media (max-width: 768px) {
+    .score {
+      order: -1;
+      min-height: 2 * $line-height;
+
+      .earned-score {
+        @include flex-row;
+        @include flex-align-middle;
+
+        .title, .total {
+          font-size: .625rem;
+        }
+
+        .value {
+          font-size: 1.25rem;
+          line-height: $line-height;
+          margin: 0 $column-width;
+        }
+      }
+    }
+
+    .open-details {
+      order: 99;
+      min-height: 2 * $line-height;
+      margin: $line-height/2 auto;
+    }
+  }
+
+  // Component: wide screen filler
+  .filler {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      order: 1;
+    }
+  }
+
+  // Element: assignment title
+  .assignment-title {
+    font-family: font-family(condensed);
+    color: orange;
+    font-weight: 100;
+    font-size: $line-height * 1.5;
+    line-height: $line-height * 2;
+    margin: $line-height/2 0;
+  }
+
+  // Element: assignment description
+  .assignment-description {
+    font-weight: 400;
+    opacity: $secondary-opacity;
+    font-size: 1.125rem;
+    line-height: $line-height;
+    margin-bottom: $line-height/2;
+    overflow: hidden;
+  }
+
+  // Element: tags
+  .tags {
+    margin-left: -$column-width;
+
+    > .tag {
+      color: white;
+      opacity: $secondary-opacity;
+    }
+  }
+
+  // Element: project lable
+  .project-link {
+    background: #FF6F00;
+    color: white;
+    border: 2px solid rgba(255,255,255,.3);
+  }
+
+  // Element: level badge
+  .level {
+    font-size: font-size(small) * 1rem;
+    font-weight: bold;
+    opacity: $secondary-opacity;
+  }
+
+  // Modifications: full/short info
+  .score { display: none; }
+  .open-details { display: flex; }
+  .tags { display: none; }
+
+  &.full {
+    .score { display: flex; }
+    .tags { display: flex; }
+    .open-details { display: none; }
+  }
+}
