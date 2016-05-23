@@ -11,7 +11,7 @@ $max-page-width: 60rem !default;
   flex-wrap: wrap;
   @include relative;
   max-width: $max-page-width;
-  margin: 0 auto;
+  margin: 0 auto $line-height;
   font-family: font-family(sans);
 
   // Component: categories
@@ -84,7 +84,6 @@ $max-page-width: 60rem !default;
   // Element: assignment title
   .assignment-title {
     font-family: font-family(condensed);
-    color: orange;
     font-weight: 100;
     font-size: $line-height * 1.5;
     line-height: $line-height * 2;
@@ -113,7 +112,6 @@ $max-page-width: 60rem !default;
 
   // Element: project lable
   .project-link {
-    background: #FF6F00;
     color: white;
     border: 2px solid rgba(255,255,255,.3);
   }
@@ -135,4 +133,25 @@ $max-page-width: 60rem !default;
     .tags { display: flex; }
     .open-details { display: none; }
   }
+}
+
+@mixin assignment-info-colorize ($cls: null, $color: white) {
+  $selector: if($cls, "&." + $cls, "&");
+  #{$selector} {
+    .assignment-title {
+      color: lighten($color, 10%);
+    }
+
+    .project-link {
+      background: darken($color, 10%);
+    }
+  }
+}
+
+.assignment-info {
+  @include assignment-info-colorize($color: orange);
+  @include assignment-info-colorize(blue, $color: #2196F3);
+  @include assignment-info-colorize(red, $color: #F44336);
+  @include assignment-info-colorize(amber, $color: #FFC107);
+  @include assignment-info-colorize(purple, $color: #9C27B0);
 }
