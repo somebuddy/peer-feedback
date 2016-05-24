@@ -8,7 +8,10 @@ Template.assignment_info.helpers({
 });
 
 Template.assignment_info.events({
-  'click .project': function () {
+  'click .project-link': function () {
+    Router.go('assignment.list');
+  },
+  'click .parent-path': function () {
     Router.go('assignment.list');
   },
   'click .js-open-assignment': function() {
