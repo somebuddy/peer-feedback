@@ -11,8 +11,41 @@ $max-page-width: 60rem !default;
   flex-wrap: wrap;
   @include relative;
   max-width: $max-page-width;
-  margin: 0 auto $line-height;
+  margin: 0 (-$column-width) $line-height;
   font-family: font-family(sans);
+
+  @media (min-width: 40rem) {
+    margin: 0 auto $line-height;
+  }
+
+  // Component: parent-path
+  .parent-path {
+    order: -3;
+    @include flex-child-fluid($basis: 100%);
+    @include row-container;
+    margin-left: -$column-width;
+
+    .path {
+      font-size: $line-height/2;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: white;
+
+      &:after {
+        content: '';
+        display: block;
+        @include size($line-height/4, $line-height/4);
+        margin-left: $column-width/2;
+        border-top: 2px solid;
+        border-right: 2px solid;
+        transform: rotate(45deg);
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+    }
+  }
 
   // Component: categories
   .categories {
@@ -20,6 +53,18 @@ $max-page-width: 60rem !default;
     @include flex-child-fluid($basis: 50%);
     @include row-container;
     margin-left: -$column-width;
+    margin-right: $column-width;
+  }
+
+  @media (min-width: 768px) {
+    .parent-path {
+      @include flex-child-fluid($basis: 50%);
+      margin-right: auto;
+    }
+
+    .categories {
+      @include flex-child-fixed($basis: auto);
+    }
   }
 
   // Component: main (assignment description)
@@ -27,6 +72,8 @@ $max-page-width: 60rem !default;
     order: 0;
     @include flex-child-fluid($basis: 100%);
     @include flex-column;
+    margin-top: $line-height;
+    margin-bottom: $line-height;
   }
 
   @media (min-width: 768px) {
@@ -110,17 +157,30 @@ $max-page-width: 60rem !default;
     }
   }
 
-  // Element: project lable
-  .project-link {
-    color: white;
-    border: 2px solid rgba(255,255,255,.3);
-  }
-
   // Element: level badge
   .level {
+    @include relative;
     font-size: font-size(small) * 1rem;
-    font-weight: bold;
+    padding-left: 5 * $line-height/2 + $column-width/2;
     opacity: $secondary-opacity;
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      @include absolute($top: .3125 * $line-height, $left: 0);
+      @include size(5 * $line-height/2, .375 * $line-height);
+      background-image: linear-gradient(90deg, rgba(255,255,255, 1) #{.375 * $line-height}, transparent $line-height/8);
+      background-size: $line-height/2 $line-height/2;
+      background-repeat: repeat-x;
+    }
+
+    &:before {
+      opacity: .2;
+    }
+
+    @for $i from 0 through 5 {
+      &.level-#{$i}:after { width: $i * $line-height/2; }
+    }
   }
 
   // Modifications: full/short info
@@ -142,16 +202,23 @@ $max-page-width: 60rem !default;
       color: lighten($color, 10%);
     }
 
-    .project-link {
-      background: darken($color, 10%);
+    .path.project-link {
+      color: lighten($color, 20%);
+    }
+
+    .level {
+      &:after {
+        background-image: linear-gradient(90deg, lighten($color, 10%) #{.375 * $line-height}, transparent $line-height/8);
+      }
     }
   }
 }
 
 .assignment-info {
-  @include assignment-info-colorize($color: orange);
+  @include assignment-info-colorize($color: #F5DD00);
   @include assignment-info-colorize(blue, $color: #2196F3);
   @include assignment-info-colorize(red, $color: #F44336);
   @include assignment-info-colorize(amber, $color: #FFC107);
+  @include assignment-info-colorize(yellow, $color: #F5DD00);
   @include assignment-info-colorize(purple, $color: #9C27B0);
 }

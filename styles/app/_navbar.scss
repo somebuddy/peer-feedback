@@ -3,7 +3,9 @@
   z-index: 999;
 
   .user {
-    @include flex-center;
+    @include flex-child-fluid($basis: auto);
+    @include flex-middle-left;
+    padding: 0 $column-width;
 
     #login-name-link {
       text-transform: capitalize;
