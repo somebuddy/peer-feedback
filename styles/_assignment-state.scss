@@ -2,23 +2,6 @@ $line-height: 1.5rem !default;
 $secondary-opacity: .6 !default;
 
 .page > header > .assignment-state {
-  max-width: 60rem;
-  margin: 0 auto;
-  padding-top: $line-height / 2;
-  padding-bottom: $line-height / 2;
-
-  border-top-color: rgba(255,255,255,.15);
-  border-bottom-color: rgba(255,255,255,.15);
-
-  font-family: 'Roboto', sans-serif;
-
-  .work-data,
-  .actions,
-  .work-state {
-    @include flex-column;
-    justify-content: center;
-  }
-
   .work-data {
     > header,
     > footer {

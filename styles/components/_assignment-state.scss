@@ -1,0 +1,51 @@
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$max-page-width: 60rem !default;
+
+.assignment-state {
+  @include row-container;
+  flex-wrap: wrap;
+  max-width: 60rem;
+  margin: $line-height auto;
+  padding: $line-height / 2 0;
+
+  border-top: 2px solid rgba(255,255,255,.1);
+  border-bottom: 2px solid rgba(255,255,255,.1);
+
+  font-family: font-family(sans);
+
+  .work-data,
+  .actions,
+  .work-state {
+    @include flex-column;
+    justify-content: center;
+  }
+
+  // Component: splitter
+  .splitter {
+    display: none;
+  }
+
+  // Component: actions
+  .actions {
+    margin-top: $line-height;
+    @include flex-child-fluid($basis: 100%);
+  }
+
+  @media (min-width: 40rem) {
+    padding-left: $column-width;
+  }
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+
+    .splitter {
+      display: flex;
+    }
+
+    .actions {
+      @include flex-child-fixed($basis: auto);
+      margin-top: 0;
+    }
+  }
+}
