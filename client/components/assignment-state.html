@@ -4,26 +4,61 @@
       <div class="filler work-data">
         <header>Last work:</header>
         <div class="value">submitted at <strong>{{formatDate lastWork.createdAt }}</strong></div>
-        {{#if isHistoryExist }}
-        <footer>
-          <div class="expand-history">
-            <span class="hint">Earlier submitted works ({{ previousWorksCount }})</span>
-            <span class="glyphicon glyphicon-menu-down"></span>
-          </div>
-        </footer>
-        {{/if}}
       </div>
       {{> work_state work=lastWork id=lastWork._id }}
       <div class="splitter light"></div>
       <div class="block actions">
-        <div class="button white submit-button">Resubmit...</div>
+        <div class="button submit-button">Resubmit...</div>
         {{#if canReview }}
-          <div class="button success review-button">Review works</div>
+          <div class="button review-button">Review works</div>
+        {{/if}}
+      </div>
+      <div class="works-history">
+        {{#if isHistoryExist }}
+          <div class="expand-history">
+            <span class="hint">Previously submitted ({{ previousWorksCount }})</span>
+            <span class="glyphicon glyphicon-menu-down"></span>
+          </div>
         {{/if}}
       </div>
     {{else}}
       {{ > assignment_state_new }}
     {{/if}}
+  </section>
+  <section class="assignment-state not-allowed">
+    <div class="text">You must login to submit your work.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-lock"></i></div>
+  </section>
+  <section class="assignment-state no-works">
+    <div class="text">Submit your work before due date.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-plus"></i></div>
+  </section>
+  <section class="assignment-state make-reviews">
+    <div class="text">Review others works.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-eye"></i></div>
+  </section>
+  <section class="assignment-state wait">
+    <div class="text">Your work is evaluating...</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-hourglass-half"></i></div>
+  </section>
+  <section class="assignment-state ready">
+    <div class="text">Evaluation is ready. Look at final report.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-file-text"></i></div>
+  </section>
+  <section class="assignment-state passed">
+    <div class="text">Congratulations! You pass the assignment.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-trophy"></i></div>
+  </section>
+  <section class="assignment-state failded">
+    <div class="text">Sorry, you didn't get enouch points. Please, fix the errors and resubmit your work.</div>
+    <div class="filler"></div>
+    <div class="sign"><i class="fa fa-frown-o"></i></div>
   </section>
 </template>
 

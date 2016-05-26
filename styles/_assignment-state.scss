@@ -2,35 +2,6 @@ $line-height: 1.5rem !default;
 $secondary-opacity: .6 !default;
 
 .page > header > .assignment-state {
-  .work-data {
-    > header,
-    > footer {
-      font-size: .75rem;
-      line-height: $line-height;
-      opacity: $secondary-opacity;
-    }
-
-    > .value {
-      font-size: 1.25rem;
-      line-height: $line-height;
-      font-weight: 300;
-
-      > strong {
-        font-weight: 400;
-      }
-    }
-
-    > header {
-      text-transform: uppercase;
-    }
-
-    > footer {
-      cursor: pointer;
-      transition: opacity .3s ease;
-      &:hover { opacity: 1; }
-    }
-  }
-
   .splitter { height: 3rem; }
   .actions { margin-right: 0; }
 

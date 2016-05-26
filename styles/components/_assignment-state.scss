@@ -3,22 +3,60 @@ $column-width: 1rem !default;
 $max-page-width: 60rem !default;
 
 .assignment-state {
+  @include widget-layout;
   @include row-container;
+  @include widget-colorize($background: rgba(white, .2), $color: #FFF);
+
+
   flex-wrap: wrap;
   max-width: 60rem;
   margin: $line-height auto;
-  padding: $line-height / 2 0;
+  padding: $line-height $column-width;
 
   border-top: 2px solid rgba(255,255,255,.1);
   border-bottom: 2px solid rgba(255,255,255,.1);
 
   font-family: font-family(sans);
 
+  @media (min-width: 40rem) {
+    padding-left: $column-width;
+  }
+
   .work-data,
+  .works-history,
   .actions,
   .work-state {
     @include flex-column;
     justify-content: center;
+    @include flex-child-fluid($basis: 100%);
+  }
+
+  // Component: work data
+  .work-data {
+    > header,
+    > footer {
+      font-size: .75rem;
+      line-height: $line-height/2;
+      opacity: $secondary-opacity;
+      text-transform: uppercase;
+    }
+
+    > .value {
+      font-size: 0.875rem;
+      line-height: $line-height;
+      margin: $line-height/2 0;
+      font-weight: 300;
+
+      > strong { font-weight: 400; }
+
+      @media (min-width: 40rem) {
+        font-size: 1rem;
+      }
+
+      @media (min-width: 60rem) {
+        font-size: 1.125rem;
+      }
+    }
   }
 
   // Component: splitter
@@ -32,6 +70,7 @@ $max-page-width: 60rem !default;
     @include flex-child-fluid($basis: 100%);
   }
 
+  // Responsive changes
   @media (min-width: 40rem) {
     padding-left: $column-width;
   }
@@ -47,5 +86,81 @@ $max-page-width: 60rem !default;
       @include flex-child-fixed($basis: auto);
       margin-top: 0;
     }
+  }
+
+  // Modifications
+  &.not-allowed,
+  &.no-works,
+  &.make-reviews,
+  &.wait,
+  &.ready,
+  &.passed,
+  &.failded {
+    @include widget-colorize($background: #E7505A, $color: #FFF);
+    @include widget-colorize($background: #DC4437, $color: #FFF);
+    @include relative;
+
+    .text {
+      @include flex-child-fluid($basis: 50%);
+      font-size: 1.125rem;
+      text-align: center;
+      opacity: .9;
+    }
+
+    .sign {
+      @include flex-center;
+      font-size: $line-height;
+      align-self: center;
+      @include size($line-height * 2, $line-height * 2);
+      border-radius: 50%;
+      background: rgba(white, .15);
+      color: rgba(white, .9);
+      margin-right: 0;
+
+      &:after {
+        content: '';
+        @include absolute(50%, 0);
+        @include size($column-width * 5 + $line-height * 4, $column-width * 5 + $line-height * 4);
+        transform: translate(50%, -50%);
+        border-radius: 50%;
+        background: rgba(white, .1);
+      }
+    }
+  }
+
+  &.no-works {
+    @include widget-colorize($background: #36A7D7, $color: #FFF);
+  }
+
+  &.make-reviews {
+    @include widget-colorize($background: #FFBC70, $color: #FFF);
+  }
+
+  &.wait,
+  &.ready {
+    .sign {
+      color: rgba(black, .9);
+      background: rgba(black, .15);
+
+      &:after {
+        background: rgba(black, .1);
+      }
+    }
+  }
+
+  &.wait {
+    @include widget-colorize($background: #FFF433, $color: #000);
+  }
+
+  &.ready {
+    @include widget-colorize($background: #FFF, $color: #000);
+  }
+
+  &.passed {
+    @include widget-colorize($background: #8BCA76, $color: #FFF);
+  }
+
+  &.failded {
+    @include widget-colorize($background: #DC4437, $color: #FFF);
   }
 }
