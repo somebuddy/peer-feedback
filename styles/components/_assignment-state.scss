@@ -100,6 +100,15 @@ $max-page-width: 60rem !default;
     @include widget-colorize($background: #DC4437, $color: #FFF);
     @include relative;
 
+    .step-num {
+      @include absolute(0, null, 0, $column-width);
+      @include flex-center;
+      font-family: font-family(mono);
+      font-weight: 900;
+      font-size: $line-height * 3;
+      opacity: .1;
+    }
+
     .text {
       @include flex-child-fluid($basis: 50%);
       font-size: 1.125rem;
@@ -125,6 +134,12 @@ $max-page-width: 60rem !default;
         border-radius: 50%;
         background: rgba(white, .1);
       }
+
+      transition: all .5s ease;
+
+      &:hover {
+        transform: scale(1.5);
+      }
     }
   }
 
@@ -133,9 +148,10 @@ $max-page-width: 60rem !default;
   }
 
   &.make-reviews {
-    @include widget-colorize($background: #FFBC70, $color: #FFF);
+    @include widget-colorize($background: #FFBC70, $color: #000);
   }
 
+  &.make-reviews,
   &.wait,
   &.ready {
     .sign {
@@ -157,7 +173,7 @@ $max-page-width: 60rem !default;
   }
 
   &.passed {
-    @include widget-colorize($background: #8BCA76, $color: #FFF);
+    @include widget-colorize($background: #84BD6B, $color: #FFF);
   }
 
   &.failded {
