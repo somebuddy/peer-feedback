@@ -99,6 +99,7 @@ $max-page-width: 60rem !default;
     @include widget-colorize($background: #E7505A, $color: #FFF);
     @include widget-colorize($background: #DC4437, $color: #FFF);
     @include relative;
+    min-height: 4*$line-height;
 
     .step-num {
       @include absolute(0, null, 0, $column-width);
@@ -109,15 +110,17 @@ $max-page-width: 60rem !default;
       opacity: .1;
     }
 
-    .text {
+    .text, .title {
       @include flex-child-fluid($basis: 50%);
       font-size: 1.125rem;
       text-align: center;
       opacity: .9;
     }
 
-    .sign {
+    .sign, .action {
       @include flex-center;
+      @include absolute(50%, 1rem);
+      transform: translateY(-50%);
       font-size: $line-height;
       align-self: center;
       @include size($line-height * 2, $line-height * 2);
@@ -127,18 +130,19 @@ $max-page-width: 60rem !default;
       margin-right: 0;
 
       &:after {
-        content: '';
         @include absolute(50%, 0);
+        content: '';
         @include size($column-width * 5 + $line-height * 4, $column-width * 5 + $line-height * 4);
         transform: translate(50%, -50%);
         border-radius: 50%;
         background: rgba(white, .1);
+        transition: all .5s ease;
       }
 
-      transition: all .5s ease;
+      transition: all .8s cubic-bezier(0.85, 1.78, 0.63, 0.67);
 
       &:hover {
-        transform: scale(1.5);
+        transform: translateY(-50%) scale(1.5);
       }
     }
   }
@@ -154,7 +158,7 @@ $max-page-width: 60rem !default;
   &.make-reviews,
   &.wait,
   &.ready {
-    .sign {
+    .sign, .action {
       color: rgba(black, .9);
       background: rgba(black, .15);
 
