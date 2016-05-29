@@ -145,6 +145,62 @@ $max-page-width: 60rem !default;
         transform: translateY(-50%) scale(1.5);
       }
     }
+
+    &.active {
+      .step-num {
+        font-size: $line-height*2;
+        top: $line-height/2;
+        bottom: auto;
+      }
+
+      .header {
+        @include absolute(0, null, null, $column-width);
+        font-size: .75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .reviews-list {
+        @include flex-rows;
+        @include flex-child-fluid($basis: 100%);
+
+        > .review {
+          @include flex-center;
+          @include size($line-height*2, $line-height*2);
+          @include relative;
+          font-size: $line-height;
+          font-weight: 400;
+          background: rgba(white, .1);
+          border-radius: $line-height/8;
+          margin: $line-height/2 $column-width;
+
+          &.required {
+            border: 2px solid rgba(white, .4);
+          }
+
+          &.done {
+            &:before, &:after {
+              content: '';
+            }
+
+            &:before {
+              @include absolute(null, -$column-width/2, -$column-width/2);
+              @include size($column-width * 1.25, $column-width * 1.25);
+              background: darken(#C82AC1, 10%);
+              border-radius: 50%;
+            }
+
+            &:after {
+              @include absolute(null, -.2rem, -.3rem);
+              @include size($column-width*3/5, $column-width);
+              border-right: 3px solid rgba(white, .5);
+              border-bottom: 3px solid rgba(white, .5);
+              transform: rotate(40deg) scale(.5);
+            }
+          }
+        }
+      }
+    }
   }
 
   &.no-works {
@@ -152,7 +208,7 @@ $max-page-width: 60rem !default;
   }
 
   &.make-reviews {
-    @include widget-colorize($background: #FFBC70, $color: #000);
+    @include widget-colorize($background: #C82AC1, $color: #FFF);
   }
 
   &.make-reviews,
