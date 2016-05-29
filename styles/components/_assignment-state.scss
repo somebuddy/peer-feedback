@@ -2,6 +2,105 @@ $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $max-page-width: 60rem !default;
 
+.assignment-state2 {
+  font-family: font-family(sans);
+
+  > .step-widget {
+    @include widget-layout;
+    @include widget-colorize($background: rgba(white, .2), $color: #FFF);
+
+    @include row-container;
+    flex-wrap: wrap;
+
+    @include relative;
+    min-height: 4*$line-height;
+    padding-left: $column-width * 4;
+    padding-right: $column-width * 4;
+    border: none;
+    border-radius: $line-height/4;
+    overflow: hidden;
+    z-index: 0; // to fix chrome rounded border and overflow bug
+
+    // Component: indicator
+    .indicator {
+      @include absolute(0, null, 0, $column-width);
+      @include flex-center;
+      font-family: font-family(mono);
+      font-weight: 900;
+      font-size: $column-width * 4;
+      opacity: .1;
+    }
+
+    // Component: header and footer
+    > header, > footer {
+      @include flex-child-fluid($basis: 100%);
+      margin: $line-height/2 0;
+      font-size: $line-height/2;
+      line-height: $line-height/2;
+      font-weight: 600;
+      text-transform: uppercase;
+      opacity: $secondary-opacity;
+    }
+
+    // Component: content
+    .content {
+      @include flex-child-fluid($basis: 100%);
+      margin: $line-height/2 0;
+      max-width: 100%;
+
+      .message {
+        font-size: 1.125rem;
+        opacity: .9;
+      }
+    }
+
+    // Component: widget action
+    .action {
+      @include absolute(50%, 1rem);
+      @include size($line-height * 2, $line-height * 2);
+      @include flex-center;
+      transform: translateY(-50%);
+      font-size: $line-height;
+      border-radius: 50%;
+      background: rgba(white, .15);
+      color: rgba(white, .9);
+      margin-right: 0;
+
+      &:before, &:after {
+        content: '';
+        border-radius: 50%;
+        background: rgba(white, .1);
+        transition: all .5s ease;
+      }
+
+      &:before {
+        $action-zone-radius: 8*$column-width;
+        @include absolute(-$action-zone-radius + $line-height, $left: -1.5 * $column-width);
+        @include size($action-zone-radius * 2, $action-zone-radius * 2);
+      }
+
+      &:after {
+        $action-zone-radius: 10*$column-width;
+        @include absolute(-$action-zone-radius + $line-height, $left: -3 * $column-width);
+        @include size($action-zone-radius * 2, $action-zone-radius * 2);
+      }
+
+      transition: all .8s cubic-bezier(0.85, 1.78, 0.63, 0.67);
+
+      &:hover {
+        transform: translateY(-50%) scale(1.5);
+      }
+    }
+
+    &.make-reviews {
+      @include widget-colorize($background: #EA4819 linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)) , $color: #FFF);
+      transition: all 1s ease;
+
+      &:hover { background: darken(#EA4819, 5%) linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)); }
+    }
+  }
+}
+
 .assignment-state {
   @include widget-layout;
   @include row-container;
@@ -15,8 +114,6 @@ $max-page-width: 60rem !default;
 
   border-top: 2px solid rgba(255,255,255,.1);
   border-bottom: 2px solid rgba(255,255,255,.1);
-
-  font-family: font-family(sans);
 
   @media (min-width: 40rem) {
     padding-left: $column-width;
@@ -101,20 +198,8 @@ $max-page-width: 60rem !default;
     @include relative;
     min-height: 4*$line-height;
 
-    .step-num {
-      @include absolute(0, null, 0, $column-width);
-      @include flex-center;
-      font-family: font-family(mono);
-      font-weight: 900;
-      font-size: $line-height * 3;
-      opacity: .1;
-    }
-
     .text, .title {
       @include flex-child-fluid($basis: 50%);
-      font-size: 1.125rem;
-      text-align: center;
-      opacity: .9;
     }
 
     .sign, .action {
@@ -156,8 +241,6 @@ $max-page-width: 60rem !default;
       .header {
         @include absolute(0, null, null, $column-width);
         font-size: .75rem;
-        font-weight: 600;
-        text-transform: uppercase;
       }
 
       .reviews-list {
