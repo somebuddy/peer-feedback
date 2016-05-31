@@ -1,5 +1,5 @@
 <template name="assignment_state">
-  <div class="assignment-state2">
+  <div class="assignment-state">
     <article class="step-widget make-reviews">
       <div class="indicator">2</div>
       <header>reviews (1 / 5):</header>
@@ -11,31 +11,71 @@
       </footer>
       <div class="action"><i class="fa fa-eye"></i></div>
     </article>
+    <section class="step-widget not-allowed">
+      <div class="indicator"><i class="fa fa-lock"></i></div>
+      <div class="content">
+        <div class="message">You must login to submit your work.</div>
+      </div>
+      <div class="action"><i class="fa fa-sign-in" aria-hidden="true"></i></div>
+    </section>
+    <section class="step-widget no-works">
+      <div class="indicator">1</div>
+      <div class="content">
+        <div class="message">Submit your work before due date.</div>
+      </div>
+      <div class="action"><i class="fa fa-plus"></i></div>
+    </section>
+    <section class="step-widget wait">
+      <div class="indicator">3</div>
+      <div class="content">
+        <div class="message">Your work is evaluating...</div>
+      </div>
+      <div class="action"><i class="fa fa-hourglass-half"></i></div>
+    </section>
+    <section class="step-widget ready">
+      <div class="indicator">4</div>
+      <div class="content">
+        <div class="message">Evaluation is ready. Look at final report.</div>
+      </div>
+      <div class="action"><i class="fa fa-file-text"></i></div>
+    </section>
+    <section class="step-widget passed">
+      <div class="indicator"><i class="fa fa-trophy"></i></div>
+      <div class="content">
+        <div class="message">Congratulations! You pass the assignment.</div>
+      </div>
+      <div class="action"><i class="fa fa-trophy"></i></div>
+    </section>
+    <section class="step-widget failded">
+      <div class="indicator"><i class="fa fa-frown-o"></i></div>
+      <div class="content">
+        <div class="message">Sorry, you didn't get enouch points. Please, fix the errors and resubmit your work.</div>
+      </div>
+      <div class="action"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+    </section>
   </div>
 
-  <section class="assignment-state make-reviews">
-    <div class="step-num">2</div>
-    <div class="text">Review the works of other users.</div>
-    <div class="filler"></div>
-    <div class="action"><i class="fa fa-eye"></i></div>
-  </section>
-  <section class="assignment-state make-reviews active">
-    <div class="step-num">2</div>
-    <div class="header">reviews (1 / 5):</div>
-    <div class="reviews-list">
-      <div class="review required">8</div>
-      <div class="review required done">3</div>
-      <div class="review required">1</div>
-      <div class="review required"></div>
-      <div class="review required"></div>
-      <div class="review"></div>
-      <div class="review"></div>
-      <div class="review"></div>
+  <section class="assignment-state">
+    <div class="step-widget make-reviews">
+      <div class="indicator">2</div>
+      <header>reviews (1 / 5):</header>
+      <div class="content">
+        <div class="reviews-list">
+          <div class="review required">8</div>
+          <div class="review required done">3</div>
+          <div class="review required">1</div>
+          <div class="review required"></div>
+          <div class="review required"></div>
+          <div class="review"></div>
+          <div class="review"></div>
+          <div class="review"></div>
+        </div>
+      </div>
+      <div class="action"><i class="fa fa-eye"></i></div>
     </div>
-    <div class="action"><i class="fa fa-eye"></i></div>
   </section>
 
-  <section class="assignment-state">
+  <section class="assignment-state-old">
     {{#if lastWork }}
       <div class="filler work-data">
         <header>Last work:</header>
@@ -60,39 +100,6 @@
     {{else}}
       {{ > assignment_state_new }}
     {{/if}}
-  </section>
-  <section class="assignment-state not-allowed">
-    <div class="text">You must login to submit your work.</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-lock"></i></div>
-  </section>
-  <section class="assignment-state no-works">
-    <div class="step-num">1</div>
-    <div class="text">Submit your work before due date.</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-plus"></i></div>
-  </section>
-  <section class="assignment-state wait">
-    <div class="step-num">3</div>
-    <div class="text">Your work is evaluating...</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-hourglass-half"></i></div>
-  </section>
-  <section class="assignment-state ready">
-    <div class="step-num">4</div>
-    <div class="text">Evaluation is ready. Look at final report.</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-file-text"></i></div>
-  </section>
-  <section class="assignment-state passed">
-    <div class="text">Congratulations! You pass the assignment.</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-trophy"></i></div>
-  </section>
-  <section class="assignment-state failded">
-    <div class="text">Sorry, you didn't get enouch points. Please, fix the errors and resubmit your work.</div>
-    <div class="filler"></div>
-    <div class="sign"><i class="fa fa-frown-o"></i></div>
   </section>
 </template>
 
