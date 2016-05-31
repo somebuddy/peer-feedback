@@ -92,8 +92,65 @@ $max-page-width: 60rem !default;
       }
     }
 
+    // Media queries
+    @media (max-width: 25rem) {
+      padding: 0 $column-width;
+
+      > header {
+        font-size: 0.6875rem;
+        margin-left: $column-width * 2;
+      }
+
+      > footer {
+        font-size: 0.625rem;
+        margin-right: $column-width * 2;
+      }
+
+      .indicator {
+        @include absolute(.5*$line-height, auto, auto, $column-width/2);
+      }
+
+      .action {
+        @include absolute(auto, -$line-height/2, -$line-height/2, auto);
+        transform: translateY(0);
+
+        &:before {
+          $action-zone-radius: 2.5*$column-width;
+          $action-zone-offset: -1 * $column-width;
+          @include absolute($top: $action-zone-offset, $left: $action-zone-offset);
+          @include size($action-zone-radius * 2, $action-zone-radius * 2);
+        }
+
+        &:after {
+          $action-zone-radius: 3.5*$column-width;
+          $action-zone-offset: -2 * $column-width;
+          @include absolute($top: $action-zone-offset, $left: $action-zone-offset);
+          @include size($action-zone-radius * 2, $action-zone-radius * 2);
+        }
+
+        &:hover {
+          right: $line-height/2;
+          bottom: $line-height/2;
+          transform: scale(1.5);
+        }
+      }
+    }
+
+    // Steps modifications
     &.make-reviews {
       @include widget-colorize($background: #EA4819 linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)) , $color: #FFF);
+      .indicator {
+        color: rgba(black, .9);
+      }
+
+      .action {
+        background: rgba(black, .1);
+        color: rgba(black, .7);
+
+        &:before, &:after {
+          background: rgba(black, .05);
+        }
+      }
       transition: all 1s ease;
 
       &:hover { background: darken(#EA4819, 5%) linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)); }
