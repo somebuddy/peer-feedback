@@ -218,12 +218,12 @@ $max-page-width: 60rem !default;
       }
 
       &:hover {
-        background: rgba(white, .8);
+        background: rgba(#FCCA3D, .9);
         .score { color: black; }
       }
 
       &.required {
-        border: 1px solid rgba(white, .4);
+        border: 2px solid rgba(white, .4);
       }
 
       // States
@@ -249,14 +249,10 @@ $max-page-width: 60rem !default;
       }
 
       &.done {
-        &:before, &:after {
-          content: '';
-        }
-
         &:before {
           @include absolute(null, -$column-width/2, -$column-width/2);
           @include size($column-width * 1.25, $column-width * 1.25);
-          background: darken(#EA4819, 10%);
+          background: darken(#EA4819, 15%);
           border-radius: 50%;
         }
 
@@ -266,6 +262,27 @@ $max-page-width: 60rem !default;
           border-right: 3px solid rgba(white, .5);
           border-bottom: 3px solid rgba(white, .5);
           transform: rotate(40deg) scale(.5);
+        }
+
+        &.fixed:before {
+          background: darken(#84BD6B, 15%);
+        }
+
+        &.fixed:after {
+          border-color: white;
+        }
+
+        &.fixed:hover {
+          background: rgba(#5F7084, .9);
+          border-color: darken(#5F7084, 15%);
+
+          .score {
+            color: white;
+          }
+        }
+
+        &:before, &:after {
+          content: '';
         }
       }
     }
