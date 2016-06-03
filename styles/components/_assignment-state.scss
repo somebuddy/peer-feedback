@@ -196,6 +196,7 @@ $max-page-width: 60rem !default;
       background: rgba(white, .3);
       border-radius: 50%;
       transition: all .3s ease;
+      z-index: 1;
 
       // Components
       .user {
@@ -223,6 +224,28 @@ $max-page-width: 60rem !default;
 
       &.required {
         border: 1px solid rgba(white, .4);
+      }
+
+      // States
+      &:empty {
+        background: rgba(white, .1);
+
+        &:after {
+          content: '?';
+          @include absolute(0,0,0,0);
+          @include flex-center;
+          font-size: 1.5rem;
+          font-weight: 400;
+          transition: all .3s ease;
+        }
+
+        &:hover {
+          background: rgba(white, .4);
+
+          &:after {
+            color: black;
+          }
+        }
       }
 
       &.done {
