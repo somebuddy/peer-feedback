@@ -31,6 +31,18 @@ $max-page-width: 60rem !default;
       max-width: 100%;
     }
 
+    .content {
+      margin: 2*$line-height 0;
+    }
+
+    header ~ .content {
+      margin-top: $line-height/2;
+    }
+
+    .content + footer {
+      margin-top: -$line-height;
+    }
+
     // Component: header and footer
     > header, > footer {
       line-height: $line-height/2;
@@ -178,16 +190,39 @@ $max-page-width: 60rem !default;
 
     > .review {
       @include flex-center;
-      @include size($line-height*2, $line-height*2);
       @include relative;
-      font-size: $line-height;
-      font-weight: 400;
-      background: rgba(white, .1);
-      border-radius: $line-height/8;
-      margin: $line-height/2 $column-width;
+      @include size($line-height * 1.5, $line-height * 1.5);
+      margin: $line-height/2 $column-width/2;
+      background: rgba(white, .3);
+      border-radius: 50%;
+      transition: all .3s ease;
+
+      // Components
+      .user {
+        @include flex-center;
+        @include size($line-height * 1.5, $line-height * 1.5);
+        display: none;
+        margin-bottom: $line-height/2;
+        background: rgba(white, .3);
+        border-radius: 50%;
+        font-size: 1rem;
+      }
+
+      .score {
+        @include flex-center;
+        font-size: 1.25rem;
+        font-family: font-family(condensed);
+        font-weight: 400;
+        transition: all .3s ease;
+      }
+
+      &:hover {
+        background: rgba(white, .8);
+        .score { color: black; }
+      }
 
       &.required {
-        border: 2px solid rgba(white, .4);
+        border: 1px solid rgba(white, .4);
       }
 
       &.done {
@@ -198,7 +233,7 @@ $max-page-width: 60rem !default;
         &:before {
           @include absolute(null, -$column-width/2, -$column-width/2);
           @include size($column-width * 1.25, $column-width * 1.25);
-          background: darken(#C82AC1, 10%);
+          background: darken(#EA4819, 10%);
           border-radius: 50%;
         }
 

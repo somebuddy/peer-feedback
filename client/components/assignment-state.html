@@ -1,16 +1,5 @@
 <template name="assignment_state">
   <div class="assignment-state">
-    <article class="step-widget make-reviews">
-      <div class="indicator">2</div>
-      <header>reviews (1 / 5):</header>
-      <section class="content">
-        <div class="message">Review the works of other users.</div>
-      </section>
-      <footer>
-        The more reviews you make, the more you will get for your work
-      </footer>
-      <div class="action"><i class="fa fa-eye"></i></div>
-    </article>
     <section class="step-widget not-allowed">
       <div class="indicator"><i class="fa fa-lock"></i></div>
       <div class="content">
@@ -25,6 +14,17 @@
       </div>
       <div class="action"><i class="fa fa-plus"></i></div>
     </section>
+    <article class="step-widget make-reviews">
+      <div class="indicator">2</div>
+      <header>reviews (1 / 5):</header>
+      <section class="content">
+        <div class="message">Review the works of other users.</div>
+      </section>
+      <footer>
+        The more reviews you make, the more you will get for your work
+      </footer>
+      <div class="action"><i class="fa fa-eye"></i></div>
+    </article>
     <section class="step-widget wait">
       <div class="indicator">3</div>
       <div class="content">
@@ -61,11 +61,24 @@
       <header>reviews (1 / 5):</header>
       <div class="content">
         <div class="reviews-list">
-          <div class="review required">8</div>
-          <div class="review required done">3</div>
-          <div class="review required">1</div>
-          <div class="review required"></div>
-          <div class="review required"></div>
+          <div class="review required">
+            <div class="user">
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="score">8</div>
+          </div>
+          <div class="review required done">
+            <div class="user"></div>
+            <div class="score">4</div>
+          </div>
+          <div class="review required done fixed">
+            <div class="user"></div>
+            <div class="score">6</div>
+          </div>
+          <div class="review required">
+            <div class="user"></div>
+            <div class="score">1</div>
+          </div>
           <div class="review"></div>
           <div class="review"></div>
           <div class="review"></div>
