@@ -16,7 +16,7 @@ $max-page-width: 60rem !default;
 
     @include relative;
     min-height: 4*$line-height;
-    padding: 0 $column-width;
+    padding: $line-height/2 $column-width;
     margin: $line-height auto;
     border: none;
     border-radius: $line-height/4;
@@ -39,6 +39,7 @@ $max-page-width: 60rem !default;
       margin-top: $line-height/2;
     }
 
+    .content + .content,
     .content + footer {
       margin-top: -$line-height;
     }
@@ -63,19 +64,27 @@ $max-page-width: 60rem !default;
 
     // Component: content
     .content {
+      @include flex-rows;
+
       .message {
+        @include flex-child-fluid($basis: 100%);
         font-size: 1.125rem;
         opacity: .9;
+      }
+
+      .message + .message {
+        margin-top: $line-height;
       }
     }
 
     // Secondary component: indicator
     .indicator {
-      @include absolute(.5*$line-height, auto, auto, $column-width/2);
+      @include absolute(.25*$line-height, auto, auto, $column-width/2);
       @include flex-center;
       font-family: font-family(mono);
       font-weight: 900;
       font-size: $column-width * 4;
+      line-height: $line-height * 2;
       opacity: .1;
 
       .fa {
@@ -124,7 +133,7 @@ $max-page-width: 60rem !default;
     }
 
     // Media queries
-    @media (min-width: 25rem) {
+    @media (min-width: 30rem) {
       padding-left: $column-width * 4;
       padding-right: $column-width * 4;
 
@@ -187,12 +196,13 @@ $max-page-width: 60rem !default;
   .reviews-list {
     @include flex-rows;
     @include flex-child-fluid($basis: 100%);
+    margin: 0 (-$column-width/2);
 
     > .review {
       @include flex-center;
       @include relative;
       @include size($line-height * 1.5, $line-height * 1.5);
-      margin: $line-height/2 $column-width/2;
+      margin: 0 $column-width/2 $line-height;
       background: rgba(white, .3);
       border-radius: 50%;
       transition: all .3s ease;
