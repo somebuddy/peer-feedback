@@ -73,7 +73,7 @@ $max-page-width: 60rem !default;
       }
 
       .message + .message {
-        margin-top: $line-height;
+        margin-top: $line-height/2;
       }
     }
 
@@ -168,7 +168,7 @@ $max-page-width: 60rem !default;
     @mixin step-widget-colorize($cls: null, $background: #333, $main-color: white, $secondary-color: white) {
       $selector: if($cls, "&." + $cls, "&");
       #{$selector} {
-        @include widget-colorize($background: $background linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)), $color: $main-color);
+        @include widget-colorize($background: $background linear-gradient(to left, rgba(0,0,0,0) 40%, rgba(0,0,0,.2)), $color: $main-color);
         .indicator { color: rgba($secondary-color, .9); }
         .action {
           background: rgba($secondary-color, .1);
@@ -176,7 +176,7 @@ $max-page-width: 60rem !default;
           &:before, &:after { background: rgba($secondary-color, .05); }
         }
 
-        &:hover { background: darken($background, 5%) linear-gradient(to left, transparent 50%, rgba(0,0,0,.2)); }
+        &:hover { background: darken($background, 7%) linear-gradient(to left, rgba(0,0,0,0) 40%, rgba(0,0,0,.2)); }
       }
     }
 
@@ -186,7 +186,7 @@ $max-page-width: 60rem !default;
     @include step-widget-colorize(make-reviews, #EA4819, #FFF, #000);
     @include step-widget-colorize(wait, #FFF433, #000, #000);
     @include step-widget-colorize(ready, #FFF, #000, #000);
-    @include step-widget-colorize(passed, #84BD6B, #FFF, #000);
+    @include step-widget-colorize(passed, #8BCA76, #FFF, #000);
     @include step-widget-colorize(failded, #DC4437, #FFF, #FFF);
   }
 }

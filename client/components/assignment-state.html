@@ -7,6 +7,9 @@
       </div>
       <div class="action"><i class="fa fa-sign-in" aria-hidden="true"></i></div>
     </section>
+  </div>
+
+  <div class="assignment-state">
     <section class="step-widget no-works">
       <div class="indicator">1</div>
       <div class="content">
@@ -14,31 +17,46 @@
       </div>
       <div class="action"><i class="fa fa-plus"></i></div>
     </section>
+  </div>
+
+  <div class="assignment-state">
     <article class="step-widget make-reviews">
       <div class="indicator">2</div>
-      <header>reviews (1 / 5):</header>
+      <header>reviews</header>
       <section class="content">
         <div class="message">Review the works of other users.</div>
+        <div class="message">You have to review at least <strong>5</strong> works</div>
       </section>
-      <footer>
-        The more reviews you make, the more you will get for your work
-      </footer>
+      <footer>The more reviews you make, the more you will get for your work.</footer>
       <div class="action"><i class="fa fa-eye"></i></div>
     </article>
-    <section class="step-widget wait">
+  </div>
+
+  <section class="assignment-state">
+    <div class="step-widget wait">
       <div class="indicator">3</div>
-      <div class="content">
-        <div class="message">Your work is evaluating...</div>
-      </div>
+      <header>Evaluating...</header>
+      <section class="content">
+        <div class="message">Congratulations, you have completed enough reviews. But, your work is still evaluating.</div>
+        <div class="message">You could check the result later or you can keep doing reviews.</div>
+      </section>
       <div class="action"><i class="fa fa-hourglass-half"></i></div>
-    </section>
-    <section class="step-widget ready">
+    </div>
+  </section>
+
+  <section class="assignment-state">
+    <div class="step-widget ready">
       <div class="indicator">4</div>
-      <div class="content">
-        <div class="message">Evaluation is ready. Look at final report.</div>
-      </div>
+      <header>Evaluation is ready.</header>
+      <section class="content">
+        <div class="message">Congratulations, your work has been evaluated.</div>
+        <div class="message">Open summary report to look at your grade and to read feedback from peers.</div>
+      </section>
       <div class="action"><i class="fa fa-file-text"></i></div>
-    </section>
+    </div>
+  </section>
+
+  <div class="assignment-state">
     <section class="step-widget passed">
       <div class="indicator"><i class="fa fa-trophy"></i></div>
       <div class="content">
@@ -46,6 +64,9 @@
       </div>
       <div class="action"><i class="fa fa-trophy"></i></div>
     </section>
+  </div>
+
+  <div class="assignment-state">
     <section class="step-widget failded">
       <div class="indicator"><i class="fa fa-frown-o"></i></div>
       <div class="content">
@@ -55,84 +76,7 @@
     </section>
   </div>
 
-  <section class="assignment-state">
-    <div class="step-widget make-reviews">
-      <div class="indicator">2</div>
-      <header>reviews (1 / 5):</header>
-      <section class="content">
-        <div class="message">Review the works of other users.</div>
-      </section>
-      <div class="content">
-        <div class="reviews-list">
-          <div class="review required">
-            <div class="user">
-              <i class="fa fa-user"></i>
-            </div>
-            <div class="score">8</div>
-          </div>
-          <div class="review required done">
-            <div class="user"></div>
-            <div class="score">4</div>
-          </div>
-          <div class="review required done fixed">
-            <div class="user"></div>
-            <div class="score">6</div>
-          </div>
-          <div class="review required">
-            <div class="user"></div>
-            <div class="score">1</div>
-          </div>
-          <div class="review required"></div>
-          <div class="review"></div>
-          <div class="review"></div>
-        </div>
-      </div>
-      <footer>
-        The more reviews you make, the more you will get for your work
-      </footer>
-      <div class="action"><i class="fa fa-eye"></i></div>
-    </div>
-  </section>
-
-  <section class="assignment-state">
-    <div class="step-widget wait">
-      <div class="indicator">3</div>
-      <header>Your work is evaluating...</header>
-      <section class="content">
-        <div class="message">Congratulations, you have completed enough reviews.</div>
-        <div class="message">You could make more reviews if you want</div>
-      </section>
-      <div class="content">
-        <div class="reviews-list">
-          <div class="review required">
-            <div class="user">
-              <i class="fa fa-user"></i>
-            </div>
-            <div class="score">8</div>
-          </div>
-          <div class="review required done">
-            <div class="user"></div>
-            <div class="score">4</div>
-          </div>
-          <div class="review required done fixed">
-            <div class="user"></div>
-            <div class="score">6</div>
-          </div>
-          <div class="review required">
-            <div class="user"></div>
-            <div class="score">1</div>
-          </div>
-          <div class="review required"></div>
-          <div class="review"></div>
-          <div class="review"></div>
-        </div>
-      </div>
-      <footer>
-        The more reviews you make, the more you will get for your work
-      </footer>
-      <div class="action"><i class="fa fa-eye"></i></div>
-    </div>
-  </section>
+  {{ > assignment_done_reviews }}
 
   <section class="assignment-state-old">
     {{#if lastWork }}
@@ -168,5 +112,46 @@
   </div>
   <div class="block actions">
     <div class="button primary submit-button">Submit your work...</div>
+  </div>
+</template>
+
+<template name="assignment_done_reviews">
+  <div class="assignment-state">
+    <article class="step-widget make-reviews">
+      <div class="indicator"><i class="fa fa-eye"></i></div>
+      <header>reviews</header>
+      <section class="content">
+        <div class="message">Review the works of other users.</div>
+        <div class="message">You have to review at least <strong>5</strong> works</div>
+      </section>
+      <section class="content reviews-list">
+        <div class="review required">
+          <div class="user">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="score">8</div>
+        </div>
+        <div class="review required done">
+          <div class="user"></div>
+          <div class="score">4</div>
+        </div>
+        <div class="review required done fixed">
+          <div class="user"></div>
+          <div class="score">6</div>
+        </div>
+        <div class="review required">
+          <div class="user"></div>
+          <div class="score">1</div>
+        </div>
+        <div class="review required"></div>
+        <div class="review"></div>
+        <div class="review"></div>
+      </section>
+      <footer>The more reviews you make, the more you will get for your work.</footer>
+      <div class="action"><i class="fa fa-plus"></i></div>
+    </article>
+  </div>
+
+  <div class="reviews-list">
   </div>
 </template>
