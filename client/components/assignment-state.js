@@ -32,10 +32,16 @@ Template.assignment_state.helpers({
 });
 
 Template.assignment_state.events({
-  'click .submit-button': function (event) {
+  'click .no-works .action': function (event) {
     $('#submit-work-modal').addClass('show');
   },
-  'click .review-button': function (event) {
+  'click .reviews-step .action': function (event) {
     Router.go('/make-review/' + this._id);
   }
-})
+});
+
+Template.assignment_done_reviews.events({
+  'click .made-reviews .action': function (event) {
+    Router.go('/make-review/' + this._id);
+  }
+});

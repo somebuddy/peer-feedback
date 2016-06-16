@@ -20,7 +20,7 @@
   </div>
 
   <div class="assignment-state">
-    <article class="step-widget make-reviews">
+    <article class="step-widget reviews-step">
       <div class="indicator">2</div>
       <header>reviews</header>
       <section class="content">
@@ -117,41 +117,42 @@
 
 <template name="assignment_done_reviews">
   <div class="assignment-state">
-    <article class="step-widget make-reviews">
-      <div class="indicator"><i class="fa fa-eye"></i></div>
-      <header>reviews</header>
-      <section class="content">
-        <div class="message">Review the works of other users.</div>
-        <div class="message">You have to review at least <strong>5</strong> works</div>
-      </section>
-      <section class="content reviews-list">
-        <div class="review required">
-          <div class="user">
-            <i class="fa fa-user"></i>
-          </div>
-          <div class="score">8</div>
+    <article class="step-widget made-reviews">
+    <div class="indicator"><i class="fa fa-eye"></i></div>
+    <header>your reviews</header>
+    <section class="content reviews-list">
+      <div class="review-badge required">
+        <div class="user">
+          <i class="fa fa-user"></i>
         </div>
-        <div class="review required done">
-          <div class="user"></div>
-          <div class="score">4</div>
-        </div>
-        <div class="review required done fixed">
-          <div class="user"></div>
-          <div class="score">6</div>
-        </div>
-        <div class="review required">
-          <div class="user"></div>
-          <div class="score">1</div>
-        </div>
-        <div class="review required"></div>
-        <div class="review"></div>
-        <div class="review"></div>
-      </section>
-      <footer>The more reviews you make, the more you will get for your work.</footer>
-      <div class="action"><i class="fa fa-plus"></i></div>
-    </article>
-  </div>
-
-  <div class="reviews-list">
+        <div class="score">8</div>
+      </div>
+      <div class="review-badge required done">
+        <div class="user"></div>
+        <div class="score">4</div>
+      </div>
+      <div class="review-badge required done fixed">
+        <div class="user"></div>
+        <div class="score">6</div>
+      </div>
+      <div class="review-badge required">
+        <div class="user"></div>
+        <div class="score">1</div>
+      </div>
+      <div class="review-badge required"></div>
+      <div class="review-badge">
+        <div class="user"></div>
+        <div class="score">1</div>
+      </div>
+      <div class="review-badge done fixed">
+        <div class="user"></div>
+        <div class="score">5</div>
+      </div>
+      <div class="review-badge"></div>
+      <div class="review-badge"></div>
+    </section>
+    <footer>The more reviews you make, the more you will get for your work.</footer>
+    <div class="action"><i class="fa fa-plus"></i></div>
+  </article>
   </div>
 </template>
